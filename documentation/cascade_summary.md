@@ -1,0 +1,43 @@
+# Cascade Summary
+- Deleting from `datastream` may delete rows in:
+  - `observation`
+- Deleting from `observedproperty` may delete rows in:
+  - `datastream`
+- Deleting from `observingprocedure` may delete rows in:
+  - `obsprocedure_obsdproperty`
+  - `obsprocedure_sensor`
+- Deleting from `otherhorizonnotationtype` may delete rows in:
+  - `otherhorizon_profileelement`
+- Deleting from `profileelement` may delete rows in:
+  - `datastream`
+  - `faohorizonnotationtype`
+  - `otherhorizon_profileelement`
+- Deleting from `sensor` may delete rows in:
+  - `datastream`
+- Deleting from `soilbody` may delete rows in:
+  - `derivedprofilepresenceinsoilbody`
+  - `isbasedonsoilbody`
+  - `soilbody_geom`
+- Deleting from `soilderivedobject` may delete rows in:
+  - `datastream`
+  - `isbasedonobservedsoilprofile`
+  - `isbasedonsoilbody`
+  - `isbasedonsoilderivedobject`
+- Deleting from `soilplot` may delete rows in:
+  - `soilprofile`
+- Deleting from `soilprofile` may delete rows in:
+  - `datastream`
+  - `derivedprofilepresenceinsoilbody`
+  - `isbasedonobservedsoilprofile`
+  - `isderivedfrom`
+  - `othersoilnametype`
+  - `profileelement`
+  - `wrbqualifiergroup_profile`
+- Deleting from `soilsite` may delete rows in:
+  - `datastream`
+- Deleting from `thing` may delete rows in:
+  - `datastream`
+- Deleting from `unitofmeasure` may delete rows in:
+  - `datastream`
+- Deleting from `wrbqualifiergrouptype` may delete rows in:
+  - `wrbqualifiergroup_profile`
