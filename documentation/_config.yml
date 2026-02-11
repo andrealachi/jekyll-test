@@ -1,0 +1,8 @@
+title: "Jekyll Test"
+description: "Sito di prova"
+theme: minima   # tema standard
+
+# Impostazioni GitHub Pages
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
