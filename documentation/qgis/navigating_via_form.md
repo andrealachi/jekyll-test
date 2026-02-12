@@ -1,3 +1,17 @@
+---
+project: "SoilWise"               # variabile personalizzata per identificare il progetto
+tags:
+  - GeoPackage
+  - SQLite
+  - SQL
+  - SoilWise
+  - GIS
+  - geospatial
+  - GDAL
+  - OGR
+  - QGIS
+---
+
 # Navigating GeoPackage Tables via Forms
 
 
