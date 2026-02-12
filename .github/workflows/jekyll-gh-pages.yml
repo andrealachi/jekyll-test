@@ -1,4 +1,4 @@
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+name: Build & Deploy Jekyll (custom plugins)
 
 on:
   push:
@@ -21,30 +21,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      # Installa Ruby + Bundler e usa la cache delle gem
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./documentation          # <--- sposta la root del sito qui
-          destination: ./documentation/_site
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+
+      # Se il sito è in /documentation: builda lì dentro
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --source ./documentation --destination ./documentation/_site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./documentation/_site      # <--- deve combaciare con "destination"
-          name: jekyll-site                # <--- nome univoco per evitare conflitti
+          path: ./documentation/_site
+          name: jekyll-site
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: jekyll-site       # <--- usa l’artifact caricato sopra
+          artifact_name: jekyll-site
