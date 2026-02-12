@@ -1,3 +1,17 @@
+---
+project: "SoilWise"               # variabile personalizzata per identificare il progetto
+tags:
+  - GeoPackage
+  - SQLite
+  - SQL
+  - SoilWise
+  - GIS
+  - geospatial
+  - GDAL
+  - OGR
+  - QGIS
+---
+
 # Importing Geometric Features (QGIS‑only)
 
 This guide describes two **QGIS‑only** ways to load geometry into the *soilwise* GeoPackage:  
