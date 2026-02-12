@@ -3,15 +3,6 @@ description: "Sito di prova"
 #theme: minima   # tema standard
 remote_theme: pages-themes/primer
 
-# _config.yml
-defaults:
-  - scope:
-      path: ""          # tutto il sito (o "documentation" se vuoi limitarlo)
-      type: "pages"     # applica ai “pages”; usa "posts" per i post, o il nome di una collection
-    values:
-      layout: "default"
-      author: "Andrea Lachi"
-      project: "SoilWise"
 
 # Impostazioni GitHub Pages
 plugins:
@@ -21,7 +12,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-feed
   - jekyll-gfm-admonitions
-  - jekyll-optional-front-matter
+
 
 
 relative_links:
