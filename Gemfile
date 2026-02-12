@@ -11,4 +11,3 @@ gem "jekyll-seo-tag"
 gem "jekyll-feed"
 gem "jekyll-gfm-admonitions"
 
-gem "jekyll-optional-front-matter"
