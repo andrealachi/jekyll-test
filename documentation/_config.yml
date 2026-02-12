@@ -4,5 +4,9 @@ theme: minima   # tema standard
 
 # Impostazioni GitHub Pages
 plugins:
-  - jekyll-feed
+  - jekyll-remote-theme
+  - jekyll-relative-links
+  - jekyll-github-metadata
   - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-gfm-admonitions
