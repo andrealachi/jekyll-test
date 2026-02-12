@@ -11,6 +11,8 @@ plugins:
   - jekyll-seo-tag
   - jekyll-feed
   - jekyll-gfm-admonitions
+  - jekyll-optional-front-matter
+
 
 relative_links:
   enabled: true
