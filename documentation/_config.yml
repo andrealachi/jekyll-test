@@ -1,6 +1,7 @@
 title: "Jekyll Test"
 description: "Sito di prova"
-theme: minima   # tema standard
+#theme: minima   # tema standard
+remote_theme: pages-themes/primer
 
 # Impostazioni GitHub Pages
 plugins:
