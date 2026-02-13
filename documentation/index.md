@@ -155,7 +155,7 @@ It explains, clearly and in sequence:
 
 ## QGIS Manual
 
-[A practical guide](./qgis/README.md) to using QGIS to **read from and write to** the database (GeoPackage), supported by **custom Forms** that simplify data entry and updates.
+[A practical guide](./qgis/index.md) to using QGIS to **read from and write to** the database (GeoPackage), supported by **custom Forms** that simplify data entry and updates.
 
 ### Custom Forms
 The Forms are designed to guide users in filling fields correctly:
