@@ -5,45 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {%- comment -%}
-    Titolo pagina → page.title se esiste, altrimenti site.title.
-    Il plugin jekyll-seo-tag (se attivo) aggiungerà <title> definitivo + meta OG/Twitter.
+    Titolo di fallback: page.title > site.title. jekyll-seo-tag (se attivo) genererà <title> finale.
     {%- endcomment -%}
     <title>
       {%- if page.title -%}{{ page.title }}{%- else -%}{{ site.title | default: "Site" }}{%- endif -%}
     </title>
 
     {%- comment -%}
-    CSS del tema Primer: l’asset viene generato dal tuo assets/css/style.scss.
-    Usiamo relative_url per rispettare baseurl, e la build_revision (se disponibile) per cache-busting.
+    CSS principale: è lo SCSS compilato da documentation/assets/css/style.scss
+    Usiamo relative_url per rispettare baseurl su GitHub Pages.
     {%- endcomment -%}
     <link rel="stylesheet"
-          href="{{ '/assets/css/style.css' | relative_url }}{%- if site.github and site.github.build_revision -%}?v={{ site.github.build_revision }}{%- endif -%}">
+          href="{{ '/assets/css/style.css' | relative_url }}">
 
     {%- comment -%}
-    SEO e social metadata (se hai jekyll-seo-tag nel _config.yml).
+    Meta SEO/social (se hai il plugin jekyll-seo-tag abilitato nel _config.yml).
     {%- endcomment -%}
     {%- if site.plugins contains 'jekyll-seo-tag' -%}{% seo %}{%- endif -%}
   </head>
 
   <body>
-    {%- comment -%} Navbar personalizzata (il tuo include) {%- endcomment -%}
+    {# --- Navbar personalizzata (nostro include, NON del tema) --- #}
     {% include nav.html %}
 
-    {%- comment -%} Contenuto principale {%- endcomment -%}
     <main id="content" class="container-lg px-3 my-5" role="main">
       {{ content }}
     </main>
 
-    {%- comment -%} Footer standard del tema (facoltativo) {%- endcomment -%}
     <footer class="container-lg px-3 pb-6" role="contentinfo">
       <hr>
       <p>
-        {% if site.github and site.github.repository_url %}
-          Questo sito è pubblicato con <a href="https://pages.github.com/">GitHub Pages</a>.
-          <a href="{{ site.github.repository_url }}">Sorgenti su GitHub</a>.
-        {% else %}
-          Questo sito è pubblicato con Jekyll.
-        {% endif %}
+        {%- if site.github and site.github.repository_url -%}
+          Sorgenti: <a href="{{ site.github.repository_url }}">GitHub</a> · Pubblicato con Jekyll
+        {%- else -%}
+          Pubblicato con Jekyll
+        {%- endif -%}
       </p>
     </footer>
   </body>
