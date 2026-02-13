@@ -5,8 +5,8 @@ url: https://andrealachi.github.io
 baseurl: /jekyll-test 
 
 #theme: minima   # tema standard
-#remote_theme: pages-themes/primer
-remote_theme: pages-themes/minimal@v0.2.0
+remote_theme: pages-themes/primer
+#remote_theme: pages-themes/minimal@v0.2.0
 
 # _config.yml
 defaults:
