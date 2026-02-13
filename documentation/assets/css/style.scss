@@ -34,3 +34,14 @@
 
 .markdown-alert-caution { border-left-color: #cf222e; }
 .markdown-alert-caution .markdown-alert-title { color: #cf222e; }
+
+
+.site-nav {
+  background: #f6f8fa;
+  border-bottom: 1px solid #d0d7de;
+  padding: .5rem 1rem;
+}
+.site-nav__list { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.site-nav__link { text-decoration: none; color: #24292f; }
+.site-nav__link:hover { text-decoration: underline; }
+.site-nav__submenu { list-style: none; margin: .25rem 0 0 .75rem; padding: 0; }

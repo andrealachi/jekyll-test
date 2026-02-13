@@ -1,0 +1,16 @@
+# documentation/_data/nav.yml
+- title: "Introduzione"
+  path: index.md
+
+- title: "Data Loading & Modelling"
+  path: data_loading.md
+
+- title: "Tabelle principali"
+  children:
+    - title: "obsprocedure_sensor"
+      path: tables/obsprocedure_sensor.md
+    - title: "otherhorizon_profileelement"
+      path: tables/otherhorizon_profileelement.md
+
+- title: "Struttura DB (poster)"
+  asset: assets/db_structure.webp   # esempio asset

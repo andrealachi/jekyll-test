@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    {%- comment -%}
+      Usa l'include del tema per <head>, SEO, CSS del tema, ecc.
+      (Primer richiama qui dentro i metadati e lo stylesheet del tema)
+    {%- endcomment -%}
+    {% include head.html %}
+  </head>
+  <body>
+    {%- comment -%} Barra di navigazione personalizzata {%- endcomment -%}
+    {% include nav.html %}
+
+    {%- comment -%}
+      Contenuto principale. Le classi aiutano con il layout "GitHub-like".
+      Puoi cambiarle liberamente: Primer usa utility come container-lg, px-3…
+    {%- endcomment -%}
+    <main id="content" class="container-lg px-3 my-5" role="main">
+      {{ content }}
+
+      {%- comment -%} Footer del tema (se vuoi mantenerlo) {%- endcomment -%}
+      {% include footer.html %}
+    </main>
+  </body>
+</html>

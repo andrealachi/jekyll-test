@@ -1,0 +1,22 @@
+<nav class="site-nav" aria-label="Navigazione principale">
+  <ul class="site-nav__list">
+    {%- for item in site.data.nav -%}
+      <li class="site-nav__item">
+        {%- if item.path -%}
+          <a class="site-nav__link" href="{% link {{ item.path }} %}">{{ item.title }}</a>
+        {%- elsif item.asset -%}
+          <a class="site-nav__link" href="{{ item.asset | relative_url }}">{{ item.title }}</a>
+        {%- elsif item.children -%}
+          <details class="site-nav__dropdown">
+            <summary>{{ item.title }}</summary>
+            <ul class="site-nav__submenu">
+              {%- for child in item.children -%}
+                <li><a class="site-nav__link" href="{% link {{ child.path }} %}">{{ child.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </details>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
