@@ -1,25 +1,50 @@
 <!doctype html>
 <html lang="{{ site.lang | default: 'en-US' }}">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     {%- comment -%}
-      Usa l'include del tema per <head>, SEO, CSS del tema, ecc.
-      (Primer richiama qui dentro i metadati e lo stylesheet del tema)
+    Titolo pagina → page.title se esiste, altrimenti site.title.
+    Il plugin jekyll-seo-tag (se attivo) aggiungerà <title> definitivo + meta OG/Twitter.
     {%- endcomment -%}
-    {% include head.html %}
+    <title>
+      {%- if page.title -%}{{ page.title }}{%- else -%}{{ site.title | default: "Site" }}{%- endif -%}
+    </title>
+
+    {%- comment -%}
+    CSS del tema Primer: l’asset viene generato dal tuo assets/css/style.scss.
+    Usiamo relative_url per rispettare baseurl, e la build_revision (se disponibile) per cache-busting.
+    {%- endcomment -%}
+    <link rel="stylesheet"
+          href="{{ '/assets/css/style.css' | relative_url }}{%- if site.github and site.github.build_revision -%}?v={{ site.github.build_revision }}{%- endif -%}">
+
+    {%- comment -%}
+    SEO e social metadata (se hai jekyll-seo-tag nel _config.yml).
+    {%- endcomment -%}
+    {%- if site.plugins contains 'jekyll-seo-tag' -%}{% seo %}{%- endif -%}
   </head>
+
   <body>
-    {%- comment -%} Barra di navigazione personalizzata {%- endcomment -%}
+    {%- comment -%} Navbar personalizzata (il tuo include) {%- endcomment -%}
     {% include nav.html %}
 
-    {%- comment -%}
-      Contenuto principale. Le classi aiutano con il layout "GitHub-like".
-      Puoi cambiarle liberamente: Primer usa utility come container-lg, px-3…
-    {%- endcomment -%}
+    {%- comment -%} Contenuto principale {%- endcomment -%}
     <main id="content" class="container-lg px-3 my-5" role="main">
       {{ content }}
-
-      {%- comment -%} Footer del tema (se vuoi mantenerlo) {%- endcomment -%}
-      {% include footer.html %}
     </main>
+
+    {%- comment -%} Footer standard del tema (facoltativo) {%- endcomment -%}
+    <footer class="container-lg px-3 pb-6" role="contentinfo">
+      <hr>
+      <p>
+        {% if site.github and site.github.repository_url %}
+          Questo sito è pubblicato con <a href="https://pages.github.com/">GitHub Pages</a>.
+          <a href="{{ site.github.repository_url }}">Sorgenti su GitHub</a>.
+        {% else %}
+          Questo sito è pubblicato con Jekyll.
+        {% endif %}
+      </p>
+    </footer>
   </body>
 </html>
