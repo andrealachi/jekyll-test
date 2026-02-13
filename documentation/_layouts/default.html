@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {%- comment -%}
-    Titolo di fallback: page.title > site.title. jekyll-seo-tag (se attivo) genererà <title> finale.
+    Titolo di fallback: page.title > site.title.
+    Se usi jekyll-seo-tag, il <title> definitivo verrà generato da {% seo %}.
     {%- endcomment -%}
     <title>
       {%- if page.title -%}{{ page.title }}{%- else -%}{{ site.title | default: "Site" }}{%- endif -%}
     </title>
 
     {%- comment -%}
-    CSS principale: è lo SCSS compilato da documentation/assets/css/style.scss
+    Carica lo stylesheet generato da documentation/assets/css/style.scss
+    (come da README di Primer: creare style.scss e importare {{ site.theme }}).
     Usiamo relative_url per rispettare baseurl su GitHub Pages.
     {%- endcomment -%}
     <link rel="stylesheet"
-          href="{{ '/assets/css/style.css' | relative_url }}">
-
-    {%- comment -%}
-    Meta SEO/social (se hai il plugin jekyll-seo-tag abilitato nel _config.yml).
-    {%- endcomment -%}
+          href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.github.build_revision | default: site.time | date: '%s' }}">
+    
+    {%- comment -%} Meta SEO/social (se il plugin è attivo) {%- endcomment -%}
     {%- if site.plugins contains 'jekyll-seo-tag' -%}{% seo %}{%- endif -%}
   </head>
 
   <body>
-    {# --- Navbar personalizzata (nostro include, NON del tema) --- #}
+    {%- comment -%} Navbar personalizzata (nostro include, NON del tema) {%- endcomment -%}
     {% include nav.html %}
 
     <main id="content" class="container-lg px-3 my-5" role="main">
