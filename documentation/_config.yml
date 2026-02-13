@@ -1,5 +1,9 @@
 title: "Jekyll Test"
 description: "Sito di prova"
+
+url: https://andrealachi.github.io
+baseurl: /jekyll-test 
+
 #theme: minima   # tema standard
 #remote_theme: pages-themes/primer
 remote_theme: pages-themes/minimal@v0.2.0
