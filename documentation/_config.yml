@@ -1,7 +1,8 @@
 title: "Jekyll Test"
 description: "Sito di prova"
 #theme: minima   # tema standard
-remote_theme: pages-themes/primer
+#remote_theme: pages-themes/primer
+remote_theme: pages-themes/minimal@v0.2.0
 
 # _config.yml
 defaults:
