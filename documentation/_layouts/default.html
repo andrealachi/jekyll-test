@@ -23,38 +23,31 @@
     });
   });
   </script>
-  <body>
-    <div class="container-lg px-3 my-5 markdown-body">
-      {% if site.title and site.title != page.title %}
-        <h1><a href="{{ "/" | absolute_url }}">{{ site.title }}</a></h1>
-      {% endif %}
+  
+<!-- ▼▼▼ Unico blocco centrale: SIDEBAR a sinistra + CONTENUTO a destra ▼▼▼ -->
+    <div class="docs-shell">
+      <aside class="docs-sidebar" aria-label="Documentation navigation">
+        {% include sidebar.html %}
+      </aside>
 
-      <!-- ▼▼▼ UNICA modifica rispetto all’originale: sidebar + contenuto ▼▼▼ -->
-      <!-- <div class="docs-layout">
-        <aside class="docs-sidebar" aria-label="Navigazione documentazione">
-          {% include sidebar.html %}
-        </aside>
-        <section class="docs-main">
+      <div class="container-lg px-3 my-5">
+        {% if site.title and site.title != page.title %}
+          <h1><a href="{{ "/" | absolute_url }}">{{ site.title }}</a></h1>
+        {% endif %}
+
+        <section class="docs-main markdown-body">
           {{ content }}
         </section>
-      </div> -->
-      <!-- ▲▲▲ Fine modifica ▲▲▲ -->
 
-     <div class="docs-shell">
-        <aside class="docs-sidebar" aria-label="Navigazione documentazione">
-          {% include sidebar.html %}
-        </aside>
-
-        <!-- Colonna destra: contenuto (tipografia del tema applicata qui) -->
-        <div class="container-lg px-3 my-5">
-          {% if site.title and site.title != page.title %}
-            <h1>{{ site.title }}</h1>
-          {% endif %}
-          <section class="docs-main markdown-body">
-            {{ content }}
-          </section>
-        </div>
+        {% if site.github.private != true and site.github.license %}
+          <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+            This site is open source. {% github_edit_link "Improve this page" %}.
+          </div>
+        {% endif %}
       </div>
+    </div>
+    <!-- ▲▲▲ Fine blocco centrale ▲▲▲ -->
+
 
       {% if site.github.private != true and site.github.license %}
       <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">

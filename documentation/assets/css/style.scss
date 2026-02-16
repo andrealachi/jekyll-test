@@ -73,7 +73,7 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 
 
 
-/* --- [OPZIONALE] Vecchio layout con flex: non più necessario --- */
+/* --- COMMENTATO INIZIO--- */
 /* --- Layout documentazione con sidebar (scoped) --- */
 /*
 .docs-layout {
@@ -96,7 +96,7 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 } 
 */
 
-/* --- [OPZIONALE] Vecchio layout con flex: non più necessario --- */
+/* --- COMMENTATO FINE--- */
 
 
 /* Box ricerca */
@@ -137,7 +137,7 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 .docs-nav a { text-decoration: none; }
 .docs-nav a:hover { text-decoration: underline; }
 
-/* --- [OPZIONALE] Vecchio layout con flex: non più necessario --- */
+/* --- COMMENTATO INIZIO--- */
 /* Mobile: sidebar sotto al contenuto */
 /*
 @media (max-width: 960px) {
@@ -146,10 +146,10 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
   .docs-main { order: 1; }
 }
 */
-/* --- [OPZIONALE] Vecchio layout con flex: non più necessario --- */
+/* --- COMMENTATO FINE--- */
 
 
-
+/* --- PARTE NUOVA--- */
 /* --- Layout a 2 colonne: sidebar fissa a sinistra, documento a destra --- */
 .docs-shell {
   display: grid;
