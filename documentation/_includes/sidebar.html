@@ -19,7 +19,8 @@
       Collect site pages once, excluding items we never want in the nav.
       We also honor `nav_exclude: true` from page front matter.
     {%- endcomment -%}
-    {% assign all_pages = site.pages | where_exp: "p", "p.nav_exclude != true" %}
+    {% assign all_pages = site.html_pages | where_exp: "p", "p.nav_exclude != true" %}
+    <!--{% assign all_pages = site.pages | where_exp: "p", "p.nav_exclude != true" %} -->
     {% assign all_pages = all_pages
         | reject: "name", "search.json"
         | reject: "name", "feed.xml"

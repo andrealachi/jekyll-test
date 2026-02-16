@@ -1,6 +1,7 @@
 ---
 layout: null
 permalink: /search.json
+nav_exclude: true
 ---
 [
   {%- assign pages = site.pages
