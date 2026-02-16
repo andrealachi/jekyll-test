@@ -16,22 +16,28 @@
   <ul class="nav-root">
 
     {%- comment -%}
-      1) Root-level pages (inside the site source = 'documentation/')
-         Filter: page.dir == "/"
-         Exclude typical index/README
-         Support nav_order and nav_exclude
+      Collect site pages once, excluding items we never want in the nav.
+      We also honor `nav_exclude: true` from page front matter.
     {%- endcomment -%}
-    {% assign root_pages = site.pages | where: "dir", "/" %}
+    {% assign all_pages = site.pages | where_exp: "p", "p.nav_exclude != true" %}
+    {% assign all_pages = all_pages
+        | reject: "name", "search.json"
+        | reject: "name", "feed.xml"
+    %}
+
+    {%- comment -%}
+      1) Root-level pages (source is 'documentation/'): page.dir == "/"
+         Exclude index/README from the visible list.
+         Sort: first by nav_order (if present), then by title.
+    {%- endcomment -%}
+    {% assign root_pages = all_pages | where: "dir", "/" %}
     {% assign root_pages = root_pages
-        | reject: "name", "/feed"
         | reject: "name", "index.html"
         | reject: "name", "README.md"
     %}
 
-    {% assign root_with_order    = root_pages | where_exp: "p", "p.nav_order != nil" %}
-    {% assign root_without_order = root_pages | where_exp: "p", "p.nav_order == nil" %}
-    {% assign root_with_order    = root_with_order | sort: "nav_order" %}
-    {% assign root_without_order = root_without_order | sort: "title" %}
+    {% assign root_with_order    = root_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
+    {% assign root_without_order = root_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
     {% assign root_sorted        = root_with_order | concat: root_without_order %}
 
     {% if root_sorted.size > 0 %}
@@ -39,34 +45,28 @@
         <span class="nav-group-title">Documentation</span>
         <ul class="nav-group-list">
           {% for page in root_sorted %}
-            {% unless page.nav_exclude %}
-              {% assign label = page.title | default: page.name %}
-              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-              <li>
-                {{ page.url | relative_url }}{{ label }}</a>
-              </li>
-            {% endunless %}
+            {% assign label = page.title | default: page.name %}
+            {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+            <li>
+              <a href="{{ page.url | relative_url }}">{{ label }}</a>
+            </li>
           {% endfor %}
         </ul>
       </li>
     {% endif %}
 
     {%- comment -%}
-      2) Folder groups
-         Add here the folders you want to show in the sidebar.
-         (If you also want 'assetts', add it to the list below.)
+      2) Folder groups shown in the sidebar.
+         Add/remove folders here. If you want to include `assetts`, add it to the list.
     {%- endcomment -%}
-    {% assign all_pages = site.pages %}
     {% assign groups = "qgis,tables" | split: "," %}
 
     {% for g in groups %}
       {% assign group_prefix = g | append: "/" %}
       {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
 
-      {% assign gp_with_order    = group_pages | where_exp: "p", "p.nav_order != nil" %}
-      {% assign gp_without_order = group_pages | where_exp: "p", "p.nav_order == nil" %}
-      {% assign gp_with_order    = gp_with_order | sort: "nav_order" %}
-      {% assign gp_without_order = gp_without_order | sort: "title" %}
+      {% assign gp_with_order    = group_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
+      {% assign gp_without_order = group_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
       {% assign gp_sorted        = gp_with_order | concat: gp_without_order %}
 
       {% if gp_sorted.size > 0 %}
@@ -74,18 +74,26 @@
           <span class="nav-group-title">{{ g | upcase }}</span>
           <ul class="nav-group-list">
             {% for page in gp_sorted %}
-              {% unless page.nav_exclude %}
-                {% assign label = page.title | default: page.name %}
-                {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-                <li>
-                  {{ page.url | relative_url }}{{ label }}</a>
-                </li>
-              {% endunless %}
+              {% assign label = page.title | default: page.name %}
+              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+              <li>
+                <a href="{{ page.url | relative_url }}">{{ label }}</a>
+              </li>
             {% endfor %}
           </ul>
         </li>
       {% endif %}
     {% endfor %}
+
+    {%- comment -%}
+      3) Extras (static links)
+    {%- endcomment -%}
+    <li class="nav-group">
+      <span class="nav-group-title">Extras</span>
+      <ul class="nav-group-list">
+        <li><a href="{{ '/feed.xml' | relative_url }}">Feed</a></li>
+      </ul>
+    </li>
 
   </ul>
 </nav>
@@ -110,7 +118,7 @@
         data.forEach(function (doc) { this.add(doc); }, this);
       });
     })
-    .catch(() => { /* silent */ });
+    .catch(() => { /* no-op */ });
 
   // Render results
   input.addEventListener('input', function() {
