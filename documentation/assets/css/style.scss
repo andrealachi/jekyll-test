@@ -73,22 +73,31 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 
 
 
-
+/* --- [OPZIONALE] Vecchio layout con flex: non più necessario --- */
 /* --- Layout documentazione con sidebar (scoped) --- */
+/*
 .docs-layout {
   display: flex;
   gap: 1rem;
 }
+*/
 
 /* Larghezze fisse ma responsive */
+/*
 .docs-sidebar {
   flex: 0 0 260px;
 }
+*/
 
+/*
 .docs-main {
   flex: 1 1 auto;
-  min-width: 0; /* evita overflow dei contenuti */
-}
+  min-width: 0;
+} 
+*/
+
+/* --- [OPZIONALE] Vecchio layout con flex: non più necessario --- */
+
 
 /* Box ricerca */
 .search-box {
@@ -128,12 +137,18 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 .docs-nav a { text-decoration: none; }
 .docs-nav a:hover { text-decoration: underline; }
 
+/* --- [OPZIONALE] Vecchio layout con flex: non più necessario --- */
 /* Mobile: sidebar sotto al contenuto */
+/*
 @media (max-width: 960px) {
   .docs-layout { flex-direction: column; }
   .docs-sidebar { order: 2; }
   .docs-main { order: 1; }
 }
+*/
+/* --- [OPZIONALE] Vecchio layout con flex: non più necessario --- */
+
+
 
 /* --- Layout a 2 colonne: sidebar fissa a sinistra, documento a destra --- */
 .docs-shell {
