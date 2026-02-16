@@ -1,0 +1,17 @@
+---
+layout: null
+permalink: /documentation/search.json
+---
+[
+  {%- assign pages = site.pages
+      | where_exp: "p", "p.path contains 'documentation/'"
+      | where_exp: "p", "p.nav_exclude != true"
+  -%}
+  {%- for p in pages -%}
+  {
+    "title": {{ p.title | default: p.name | jsonify }},
+    "url": "{{ p.url | relative_url }}",
+    "content": {{ p.content | strip_html | strip_newlines | jsonify }}
+  }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]

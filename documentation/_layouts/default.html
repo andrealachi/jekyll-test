@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'it' }}">
+  <head>
+    {% include head.html %}
+  </head>
+  <body>
+    <a id="skip-to-content" class="sr-only" href="#content">Salta al contenuto</a>
+    {% include header.html %}
+
+    <!-- Contenitore principale conservando le classi Primer -->
+    <main id="content" class="main-content" role="main">
+      <div class="container-lg clearfix docs-layout">
+        <!-- Sidebar -->
+        <aside class="docs-sidebar" aria-label="Navigazione documentazione">
+          {% include sidebar.html %}
+        </aside>
+
+        <!-- Contenuto -->
+        <section class="docs-main">
+          {{ content }}
+          {% include footer.html %}
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

@@ -35,4 +35,65 @@
 .markdown-alert-caution { border-left-color: #cf222e; }
 .markdown-alert-caution .markdown-alert-title { color: #cf222e; }
 
+/* ----------------------------------------------------------------------------------------------*/
+/* --- Layout documentazione con sidebar (scoped) --- */
+.docs-layout {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Larghezze fisse ma responsive */
+.docs-sidebar {
+  flex: 0 0 260px;
+}
+
+.docs-main {
+  flex: 1 1 auto;
+  min-width: 0; /* evita overflow dei contenuti */
+}
+
+/* Box ricerca */
+.search-box {
+  position: sticky;
+  top: 0.5rem;
+  background: #fff;
+  padding: .5rem;
+  border: 1px solid rgba(27,31,36,.15);
+  border-radius: 6px;
+}
+
+.search-box input[type="search"] {
+  width: 100%;
+  padding: .35rem .5rem;
+  border: 1px solid rgba(27,31,36,.15);
+  border-radius: 6px;
+}
+
+.search-results {
+  margin-top: .5rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+.search-item + .search-item { margin-top: .25rem; }
+
+.sidebar-sep { margin: .75rem 0; }
+
+.docs-nav .nav-root { list-style: none; padding-left: 0; }
+.docs-nav .nav-group { margin-bottom: .75rem; }
+.docs-nav .nav-group-title {
+  font-weight: 600;
+  color: #57606a;
+  display: block;
+  margin-bottom: .25rem;
+}
+.docs-nav a { text-decoration: none; }
+.docs-nav a:hover { text-decoration: underline; }
+
+/* Mobile: sidebar sotto al contenuto */
+@media (max-width: 960px) {
+  .docs-layout { flex-direction: column; }
+  .docs-sidebar { order: 2; }
+  .docs-main { order: 1; }
+}
 
