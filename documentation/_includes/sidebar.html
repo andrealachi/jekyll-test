@@ -16,25 +16,25 @@
   <ul class="nav-root">
 
     {%- comment -%}
-      Collect HTML pages only (no JSON/XML), and honor nav_exclude.
-      Using site.html_pages avoids pulling in /feed.xml or /search.json by default.
+      Collect site pages once, excluding items we never want in the nav.
+      We also honor `nav_exclude: true` from page front matter.
     {%- endcomment -%}
     {% assign all_pages = site.html_pages | where_exp: "p", "p.nav_exclude != true" %}
-    {# extra safety (can be removed): #}
+    <!--{% assign all_pages = site.pages | where_exp: "p", "p.nav_exclude != true" %} -->
     {% assign all_pages = all_pages
         | reject: "name", "search.json"
         | reject: "name", "feed.xml"
     %}
 
     {%- comment -%}
-      1) Root-level pages: page.dir == "/"
+      1) Root-level pages (source is 'documentation/'): page.dir == "/"
          Exclude index/README from the visible list.
          Sort: first by nav_order (if present), then by title.
     {%- endcomment -%}
     {% assign root_pages = all_pages | where: "dir", "/" %}
     {% assign root_pages = root_pages
-        | reject: "name", "index.html"
         | reject: "name", "index.md"
+        | reject: "name", "index.html"
         | reject: "name", "README.md"
     %}
 
@@ -47,7 +47,6 @@
         <span class="nav-group-title">Documentation</span>
         <ul class="nav-group-list">
           {% for page in root_sorted %}
-            {%- comment -%} hard skip any feed-like URL/name {%- endcomment -%}
             {% unless page.name == "feed.xml" or page.url contains "/feed" or page.path contains "/feed" %}
               {% assign label = page.title | default: page.name %}
               {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
@@ -62,7 +61,7 @@
 
     {%- comment -%}
       2) Folder groups shown in the sidebar.
-         Add/remove folders here. If you also want `assetts`, add it to the list.
+         Add/remove folders here. If you want to include `assetts`, add it to the list.
     {%- endcomment -%}
     {% assign groups = "qgis,tables" | split: "," %}
 
@@ -96,7 +95,7 @@
 </nav>
 
 <!-- LUNR.JS (client-side search) -->
-<script src="https://unpkg.com/lunr/lunr.js"></script>
+https://unpkg.com/lunr/lunr.js</script>
 <script>
 (function() {
   const input   = document.getElementById('docs-search');
@@ -105,9 +104,10 @@
 
   // Helper: produce a clean label (no .md, dashes/underscores -> spaces)
   function prettifyLabel(title, url) {
+    // fallback: take the last path segment from the URL
     let label = (title && title.length) ? title : (url.split('/').pop() || url);
     label = label.replace(/\.md$/i, '');   // remove trailing ".md"
-    label = label.replace(/[-_]+/g, ' ');  // dashes/underscores -> spaces
+    label = label.replace(/[-_]+/g, ' ');  // turn dashes/underscores into spaces
     return label;
   }
 
@@ -136,7 +136,9 @@
       const item = docs.find(d => d.url === m.ref);
       if (!item) return;
 
+      // Use prettified label (no .md, nicer spacing)
       const label = prettifyLabel(item.title, item.url);
+
       const li = document.createElement('li');
       li.className = 'search-item';
       li.innerHTML = '<a href="' + item.url + '">' + label + '</a>';
