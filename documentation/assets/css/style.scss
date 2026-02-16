@@ -35,6 +35,45 @@
 .markdown-alert-caution { border-left-color: #cf222e; }
 .markdown-alert-caution .markdown-alert-title { color: #cf222e; }
 
+
+
+
+/* === Footnote refs in testo ============================================ */
+
+/* Aggiungi parentesi ai numeri dei riferimenti */
+sup[id^="fnref:"] a::before { content: "["; }
+sup[id^="fnref:"] a::after  { content: "]"; }
+
+/* Dimensione, allineamento e leggibilità del superscript */
+sup[id^="fnref:"] {
+  font-size: .8em;          /* un po' più piccolo del testo */
+  line-height: 0;           /* evita di “alzare” la riga */
+  vertical-align: super;    /* garantisce la posizione di apice */
+}
+
+/* Spazio tra footnote consecutive sulla stessa riga: [^6][^7] */
+sup[id^="fnref:"] + sup[id^="fnref:"] {
+  margin-left: .25em;       /* separa visivamente i numeri */
+}
+
+/* === Elenco delle note in fondo pagina (facoltativo) ==================== */
+
+.footnotes { font-size: .95em; }
+.footnotes ol { padding-left: 1.25rem; }
+.footnotes li { margin-bottom: .5rem; }
+
+/* Backlink “↩” vicino al testo della nota */
+.footnotes .reversefootnote {
+  margin-left: .25rem;
+  text-decoration: none;
+}
+
+
+
+
+
+
+
 /* --- Layout documentazione con sidebar (scoped) --- */
 .docs-layout {
   display: flex;
