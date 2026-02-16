@@ -183,4 +183,4 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 @media (min-width: 1012px) { .docs-shell { padding-left: 32px; } }
 
 /* Mobile: niente gutter per usare tutto lo spazio */
-@media (max-width: 960px)  { .docs-shell { padding-left: 0; } }
+@media (max-width: 960px)  { .docs-shell { padding-left: 12px; } }
