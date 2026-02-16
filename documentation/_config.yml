@@ -1,8 +1,8 @@
-title: "Jekyll Test"
-description: "Sito di prova"
+title: "SoilWise Geopackage"
+description: "SoilWise Geopackage Documentation"
 
-url: https://andrealachi.github.io
-baseurl: /jekyll-test 
+url: https://soilwise-he.github.io
+baseurl: /Geopackage-so
 
 #theme: minima   # tema standard
 remote_theme: pages-themes/primer@v0.6.0
