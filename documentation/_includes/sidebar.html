@@ -25,6 +25,7 @@
         | reject: "name", "feed.xml"
     %}
 
+
     {%- comment -%}
       1) Root-level pages (source is 'documentation/'): page.dir == "/"
          Exclude index/README from the visible list.
@@ -85,15 +86,16 @@
       {% endif %}
     {% endfor %}
 
-    {%- comment -%}
+<!--     {%- comment -%}
       3) Extras (static links)
-    {%- endcomment -%}
-    <li class="nav-group">
+    {%- endcomment -%} -->
+  
+    <!-- <li class="nav-group">
       <span class="nav-group-title">Extras</span>
       <ul class="nav-group-list">
         <li><a href="{{ '/feed.xml' | relative_url }}">Feed</a></li>
       </ul>
-    </li>
+    </li> -->
 
   </ul>
 </nav>
@@ -105,6 +107,15 @@
   const input   = document.getElementById('docs-search');
   const results = document.getElementById('docs-search-results');
   let idx = null, docs = [];
+
+  // Helper: produce a clean label (no .md, dashes/underscores -> spaces)
+  function prettifyLabel(title, url) {
+    // fallback: take the last path segment from the URL
+    let label = (title && title.length) ? title : (url.split('/').pop() || url);
+    label = label.replace(/\.md$/i, '');   // remove trailing ".md"
+    label = label.replace(/[-_]+/g, ' ');  // turn dashes/underscores into spaces
+    return label;
+  }
 
   // Load the index (works with baseurl thanks to relative_url)
   fetch('{{ "/search.json" | relative_url }}')
@@ -130,10 +141,13 @@
     matches.slice(0, 12).forEach(m => {
       const item = docs.find(d => d.url === m.ref);
       if (!item) return;
+
+      // Use prettified label (no .md, nicer spacing)
+      const label = prettifyLabel(item.title, item.url);
+
       const li = document.createElement('li');
       li.className = 'search-item';
-      const title = item.title && item.title.length ? item.title : item.url;
-      li.innerHTML = '<a href="' + item.url + '">' + title + '</a>';
+      li.innerHTML = '<a href="' + item.url + '">' + label + '</a>';
       results.appendChild(li);
     });
   });
