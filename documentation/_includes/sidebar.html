@@ -1,14 +1,31 @@
-<nav class="docs-nav" aria-label="Sezioni">
+<!-- ==========================
+     Sidebar (Search + Navigation)
+     ========================== -->
+
+<!-- SEARCH (English labels) -->
+<div class="search-box">
+  <label for="docs-search" class="sr-only">Search documentation</label>
+  <input id="docs-search" type="search" placeholder="Search..." autocomplete="off" />
+  <ul id="docs-search-results" class="search-results" aria-live="polite"></ul>
+</div>
+
+<hr class="sidebar-sep" />
+
+<!-- NAVIGATION -->
+<nav class="docs-nav" aria-label="Sections">
   <ul class="nav-root">
 
     {%- comment -%}
-      1) Pagine di root: page.dir == "/"
-         - esclude index/README e asset vari
+      1) Root-level pages (inside the site source = 'documentation/')
+         Filter: page.dir == "/"
+         Exclude typical index/README
+         Support nav_order and nav_exclude
     {%- endcomment -%}
     {% assign root_pages = site.pages | where: "dir", "/" %}
-    {% assign root_pages = root_pages 
-        | reject: "name", "index.html" 
-        | reject: "name", "README.md" 
+    {% assign root_pages = root_pages
+        | reject: "name", "/feed"
+        | reject: "name", "index.html"
+        | reject: "name", "README.md"
     %}
 
     {% assign root_with_order    = root_pages | where_exp: "p", "p.nav_order != nil" %}
@@ -19,13 +36,15 @@
 
     {% if root_sorted.size > 0 %}
       <li class="nav-group">
-        <span class="nav-group-title">Documentazione</span>
+        <span class="nav-group-title">Documentation</span>
         <ul class="nav-group-list">
           {% for page in root_sorted %}
             {% unless page.nav_exclude %}
               {% assign label = page.title | default: page.name %}
               {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-              <li><a href="{{ page.url | relative_url }}">{{ label }}</a></li>
+              <li>
+                {{ page.url | relative_url }}{{ label }}</a>
+              </li>
             {% endunless %}
           {% endfor %}
         </ul>
@@ -33,8 +52,9 @@
     {% endif %}
 
     {%- comment -%}
-      2) Gruppi principali (cartelle): QGIS e Tables
-         (escludo "assetts" perché di solito contiene file statici)
+      2) Folder groups
+         Add here the folders you want to show in the sidebar.
+         (If you also want 'assetts', add it to the list below.)
     {%- endcomment -%}
     {% assign all_pages = site.pages %}
     {% assign groups = "qgis,tables" | split: "," %}
@@ -57,7 +77,9 @@
               {% unless page.nav_exclude %}
                 {% assign label = page.title | default: page.name %}
                 {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-                <li><a href="{{ page.url | relative_url }}">{{ label }}</a></li>
+                <li>
+                  {{ page.url | relative_url }}{{ label }}</a>
+                </li>
               {% endunless %}
             {% endfor %}
           </ul>
@@ -67,3 +89,45 @@
 
   </ul>
 </nav>
+
+<!-- LUNR.JS (client-side search) -->
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script>
+(function() {
+  const input   = document.getElementById('docs-search');
+  const results = document.getElementById('docs-search-results');
+  let idx = null, docs = [];
+
+  // Load the index (works with baseurl thanks to relative_url)
+  fetch('{{ "/search.json" | relative_url }}')
+    .then(r => r.json())
+    .then(data => {
+      docs = data;
+      idx = lunr(function () {
+        this.ref('url');
+        this.field('title',   { boost: 10 });
+        this.field('content');
+        data.forEach(function (doc) { this.add(doc); }, this);
+      });
+    })
+    .catch(() => { /* silent */ });
+
+  // Render results
+  input.addEventListener('input', function() {
+    const q = this.value.trim();
+    results.innerHTML = '';
+    if (!idx || q.length < 2) return;
+
+    const matches = idx.search(q);
+    matches.slice(0, 12).forEach(m => {
+      const item = docs.find(d => d.url === m.ref);
+      if (!item) return;
+      const li = document.createElement('li');
+      li.className = 'search-item';
+      const title = item.title && item.title.length ? item.title : item.url;
+      li.innerHTML = '<a href="' + item.url + '">' + title + '</a>';
+      results.appendChild(li);
+    });
+  });
+})();
+</script>
