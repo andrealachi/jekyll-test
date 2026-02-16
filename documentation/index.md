@@ -98,50 +98,21 @@ The translation into GeoPackage follows widely adopted relational design rules, 
 
 
 
-[^1]: **SoilWise – project website** (Horizon Europe – Mission Soil).  
-https://soilwise-he.eu/
-
-[^2]: **Mission Soil Platform (EC) – SoilWise project page**.  
-https://mission-soil-platform.ec.europa.eu/project-hub/soilwise
-
-[^3]: **GeoPackage.org** – Overview and resources.  
-https://www.geopackage.org/
-
-[^4]: **OGC – GeoPackage Standard** (publications page).  
-https://www.ogc.org/standards/geopackage/
-
-[^5]: **INSPIRE Knowledge Base** – *GeoPackage encoding of INSPIRE datasets* (Good Practice).  
-https://knowledge-base.inspire.ec.europa.eu/geopackage-encoding-inspire-datasets_en
-
-[^6]: **INSPIRE‑MIF – gp‑geopackage‑encodings** (Good Practice repository).  
-https://github.com/INSPIRE-MIF/gp-geopackage-encodings
-
-[^7]: **EJP SOIL – INSPIRE Soil GeoPackage template** (GitHub).  
-https://github.com/ejpsoil/inspire_soil_gpkg_template
-
-[^8]: **Soil data guidance** – *INSPIRE Soil in a relational database* (recipe & workflow).  
-https://ejpsoil.github.io/soildata-assimilation-guidance/cookbook/glosis-db.html
-
-[^9]: **OGC – SensorThings API 2.0 (draft 23‑019)**.  
-https://hylkevds.github.io/23-019/23-019.html
-
-[^10]: **OGC Publications – SensorThings API** (Part 1/1.1 Sensing, Part 2 Tasking Core, STAplus).  
-https://www.ogc.org/standards/sensorthings/
-
-[^11]: **WMO/OGC** – *Integrating new OGC Standards* (slides).  
-https://wmo.int/sites/default/files/2024-02/Integration%20of%20new%20OGC%20Standards%20e.g%20SensorThings%20API.pdf
-
-[^12]: **BRGM HAL** – *SensorThings API and WaterML2.0* (slides).  
-https://brgm.hal.science/hal-04456540v2/file/SensorThings%20API%20and%20%20WaterML2.0%20.pdf
-
-[^13]: **QGIS Training Manual** – *Forms / Attribute Forms*.  
-https://docs.qgis.org/latest/en/docs/training_manual/create_vector_data/forms.html
-
-[^14]: **QField Documentation** – *Simple attribute form configuration*.  
-https://docs.qfield.org/how-to/project-setup/attributes-form/
-
-[^15]: **INSPIRE UML models — Approved (HTML view).**  
-https://inspire-mif.github.io/uml-models/approved/
+[^1]: [**SoilWise – project website** (Horizon Europe – Mission Soil).](https://soilwise-he.eu/)
+[^2]: [**Mission Soil Platform (EC) – SoilWise project page**.](https://mission-soil-platform.ec.europa.eu/project-hub/soilwise)
+[^3]: [**GeoPackage.org** – Overview and resources.](https://www.geopackage.org/)
+[^4]: [**OGC – GeoPackage Standard** (publications page).](https://www.ogc.org/standards/geopackage/)
+[^5]: [**INSPIRE Knowledge Base** – *GeoPackage encoding of INSPIRE datasets* (Good Practice).](https://knowledge-base.inspire.ec.europa.eu/geopackage-encoding-inspire-datasets_en)
+[^6]: [**INSPIRE‑MIF – gp‑geopackage‑encodings** (Good Practice repository).](https://github.com/INSPIRE-MIF/gp-geopackage-encodings)
+[^7]: [**EJP SOIL – INSPIRE Soil GeoPackage template** (GitHub).](https://github.com/ejpsoil/inspire_soil_gpkg_template)
+[^8]: [**Soil data guidance** – *INSPIRE Soil in a relational database* (recipe & workflow).](https://ejpsoil.github.io/soildata-assimilation-guidance/cookbook/glosis-db.html)
+[^9]: [**OGC – SensorThings API 2.0 (draft 23‑019)**.](https://hylkevds.github.io/23-019/23-019.html)
+[^10]: [**OGC Publications – SensorThings API** (Part 1/1.1 Sensing, Part 2 Tasking Core, STAplus).](https://www.ogc.org/standards/sensorthings/)
+[^11]: [**WMO/OGC** – *Integrating new OGC Standards* (slides).](https://wmo.int/sites/default/files/2024-02/Integration%20of%20new%20OGC%20Standards%20e.g%20SensorThings%20API.pdf)
+[^12]: [**BRGM HAL** – *SensorThings API and WaterML2.0* (slides).](https://brgm.hal.science/hal-04456540v2/file/SensorThings%20API%20and%20%20WaterML2.0%20.pdf)
+[^13]: [**QGIS Training Manual** – *Forms / Attribute Forms*.](https://docs.qgis.org/latest/en/docs/training_manual/create_vector_data/forms.html)
+[^14]: [**QField Documentation** – *Simple attribute form configuration*.](https://docs.qfield.org/how-to/project-setup/attributes-form/)
+[^15]: [**INSPIRE UML models — Approved (HTML view).**](https://inspire-mif.github.io/uml-models/approved/)
 
 ## Data Loading & Modelling Guide
 [Data Loading & Modelling Guide](./data_loading.md) document  is the practical guide for **populating (loading)** the GeoPackage.  
