@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
   <head>
@@ -15,7 +18,7 @@
       <h1><a href="{{ "/" | absolute_url }}">{{ site.title }}</a></h1>
       {% endif %}
 
-      <!-- ▼▼▼ Inserimento sidebar + contenuto ▼▼▼ -->
+      <!-- ▼▼▼ Sidebar + contenuto (UNICA modifica rispetto all'originale) ▼▼▼ -->
       <div class="docs-layout">
         <aside class="docs-sidebar" aria-label="Navigazione documentazione">
           {% include sidebar.html %}
@@ -32,12 +35,7 @@
       </div>
       {% endif %}
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"
-            integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg="
-            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
     <script>anchors.add();</script>
   </body>
 </html>
-
-
-

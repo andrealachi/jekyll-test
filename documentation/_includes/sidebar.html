@@ -9,50 +9,38 @@
 
 <!-- Navigazione -->
 <nav class="docs-nav" aria-label="Sezioni">
-  {% comment %}
-    Opzione A: navigazione generata automaticamente
-    - Elenca tutte le pagine sotto /documentation, esclude asset e pagine con 'nav_exclude: true'
-  {% endcomment %}
-  {% assign docs_pages = site.pages
-      | where_exp: "p", "p.path contains 'documentation/'"
-      | where_exp: "p", "p.url contains site.baseurl"
-      | where_exp: "p", "p.path contains '.md' or p.path contains '.html'"
-  %}
-
-  {% assign docs_pages = docs_pages
-      | reject: "path", "documentation/assets/index.html"
-      | reject: "path", "documentation/assetts/index.html"
-  %}
-
   <ul class="nav-root">
+    {%- comment -%}
+      Elenco sezioni noto: assetts, qgis, tables
+      Evitiamo pipe nelle stringhe di where_exp costruendo prima la substring.
+    {%- endcomment -%}
+    {% assign docs_pages = site.pages | where_exp: "p", "p.path contains 'documentation/'" %}
+
     {% assign groups = "assetts,qgis,tables" | split: "," %}
     {% for g in groups %}
-      {% assign group_pages = docs_pages | where_exp: "p", "p.path contains 'documentation/' | append: g | append: '/' " %}
+      {% assign group_path = 'documentation/' | append: g | append: '/' %}
+      {% assign group_pages = docs_pages | where_exp: "p", "p.path contains group_path" %}
+
       {% if group_pages.size > 0 %}
         <li class="nav-group">
           <span class="nav-group-title">{{ g | capitalize }}</span>
           <ul class="nav-group-list">
             {% assign sorted = group_pages | sort: "path" %}
             {% for page in sorted %}
-              {% if page.nav_exclude != true %}
+              {% unless page.nav_exclude %}
                 <li>
                   <a href="{{ page.url | relative_url }}">{{ page.title | default: page.name }}</a>
                 </li>
-              {% endif %}
+              {% endunless %}
             {% endfor %}
           </ul>
         </li>
       {% endif %}
     {% endfor %}
-
-    {%- comment -%}
-      Opzione B (alternativa): se vuoi controllo totale e ordine personalizzato,
-      crea documentation/_data/nav.yml e cicla su quello (vedi blocco più sotto).
-    {%- endcomment -%}
   </ul>
 </nav>
 
-<!-- Script ricerca (Lunr) -->
+<!-- Lunr.js -->
 <script src="https://unpkg.com/lunr/lunr.js"></script>
 <script>
 (function() {
@@ -60,8 +48,8 @@
   const results = document.getElementById('docs-search-results');
   let idx = null, docs = [];
 
-  // Carica indice
-  fetch('{{ site.baseurl }}/documentation/search.json')
+  // Carica indice JSON (usa relative_url per rispettare baseurl)
+  fetch('{{ "/documentation/search.json" | relative_url }}')
     .then(r => r.json())
     .then(data => {
       docs = data;
@@ -73,14 +61,14 @@
       });
     });
 
-  // Eventi di ricerca
+  // Ricerca
   input.addEventListener('input', function() {
     const q = this.value.trim();
     results.innerHTML = '';
     if (!idx || q.length < 2) return;
 
     const matches = idx.search(q);
-    matches.slice(0, 10).forEach(m => {
+    matches.slice(0, 12).forEach(m => {
       const item = docs.find(d => d.url === m.ref);
       if (!item) return;
       const li = document.createElement('li');
@@ -91,4 +79,3 @@
   });
 })();
 </script>
-``
