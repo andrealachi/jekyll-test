@@ -8,7 +8,7 @@ gem "jekyll-sass-converter", "~> 2.0"
 gem "faraday-retry"
 
 gem "jekyll-seo-tag"
-gem "jekyll-feed"
+
 gem "jekyll-gfm-admonitions"
 
 gem "jekyll-optional-front-matter"

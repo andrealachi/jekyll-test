@@ -26,6 +26,7 @@
         | reject: "name", "feed.xml"
     %}
 
+
     {%- comment -%}
       1) Root-level pages (source is 'documentation/'): page.dir == "/"
          Exclude index/README from the visible list.
@@ -33,7 +34,6 @@
     {%- endcomment -%}
     {% assign root_pages = all_pages | where: "dir", "/" %}
     {% assign root_pages = root_pages
-        | reject: "name", "index.md"
         | reject: "name", "index.html"
         | reject: "name", "README.md"
     %}
@@ -47,13 +47,11 @@
         <span class="nav-group-title">Documentation</span>
         <ul class="nav-group-list">
           {% for page in root_sorted %}
-            {% unless page.name == "feed.xml" or page.url contains "/feed" or page.path contains "/feed" %}
-              {% assign label = page.title | default: page.name %}
-              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-              <li>
-                {{ page.url | relative_url }}{{ label }}</a>
-              </li>
-            {% endunless %}
+            {% assign label = page.title | default: page.name %}
+            {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+            <li>
+              <a href="{{ page.url | relative_url }}">{{ label }}</a>
+            </li>
           {% endfor %}
         </ul>
       </li>
@@ -78,24 +76,33 @@
           <span class="nav-group-title">{{ g | upcase }}</span>
           <ul class="nav-group-list">
             {% for page in gp_sorted %}
-              {% unless page.name == "feed.xml" or page.url contains "/feed" or page.path contains "/feed" %}
-                {% assign label = page.title | default: page.name %}
-                {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-                <li>
-                  {{ page.url | relative_url }}{{ label }}</a>
-                </li>
-              {% endunless %}
+              {% assign label = page.title | default: page.name %}
+              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+              <li>
+                <a href="{{ page.url | relative_url }}">{{ label }}</a>
+              </li>
             {% endfor %}
           </ul>
         </li>
       {% endif %}
     {% endfor %}
 
+<!--     {%- comment -%}
+      3) Extras (static links)
+    {%- endcomment -%} -->
+  
+    <!-- <li class="nav-group">
+      <span class="nav-group-title">Extras</span>
+      <ul class="nav-group-list">
+        <li><a href="{{ '/feed.xml' | relative_url }}">Feed</a></li>
+      </ul>
+    </li> -->
+
   </ul>
 </nav>
 
 <!-- LUNR.JS (client-side search) -->
-https://unpkg.com/lunr/lunr.js</script>
+<script src="https://unpkg.com/lunr/lunr.js"></script>
 <script>
 (function() {
   const input   = document.getElementById('docs-search');
