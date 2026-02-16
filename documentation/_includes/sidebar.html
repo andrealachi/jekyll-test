@@ -10,16 +10,12 @@
 <!-- Navigazione -->
 <nav class="docs-nav" aria-label="Sezioni">
   <ul class="nav-root">
-    {%- comment -%}
-      Elenco sezioni noto: assetts, qgis, tables
-      Evitiamo pipe nelle stringhe di where_exp costruendo prima la substring.
-    {%- endcomment -%}
-    {% assign docs_pages = site.pages | where_exp: "p", "p.path contains 'documentation/'" %}
-
+    {% assign docs_pages = site.pages %}
     {% assign groups = "assetts,qgis,tables" | split: "," %}
+
     {% for g in groups %}
-      {% assign group_path = 'documentation/' | append: g | append: '/' %}
-      {% assign group_pages = docs_pages | where_exp: "p", "p.path contains group_path" %}
+      {% assign group_prefix = g | append: "/" %}
+      {% assign group_pages = docs_pages | where_exp: "p", "p.path contains group_prefix" %}
 
       {% if group_pages.size > 0 %}
         <li class="nav-group">
@@ -48,8 +44,8 @@
   const results = document.getElementById('docs-search-results');
   let idx = null, docs = [];
 
-  // Carica indice JSON (usa relative_url per rispettare baseurl)
-  fetch('{{ "/documentation/search.json" | relative_url }}')
+  // Carica indice JSON (rispetta baseurl)
+  fetch('{{ "/search.json" | relative_url }}')
     .then(r => r.json())
     .then(data => {
       docs = data;

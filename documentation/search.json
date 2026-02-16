@@ -1,10 +1,9 @@
 ---
 layout: null
-permalink: /documentation/search.json
+permalink: /search.json
 ---
 [
   {%- assign pages = site.pages
-      | where_exp: "p", "p.path contains 'documentation/'"
       | where_exp: "p", "p.nav_exclude != true"
   -%}
   {%- for p in pages -%}
