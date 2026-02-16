@@ -175,3 +175,12 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
   .docs-sidebar { position: static; max-height: none; order: 2; }
   .docs-main    { order: 1; }
 }
+
+/* Gutter a sinistra della sidebar (coerente con .px-3 di Primer) */
+.docs-shell { padding-left: 16px; }
+
+@media (min-width: 768px)  { .docs-shell { padding-left: 24px; } }
+@media (min-width: 1012px) { .docs-shell { padding-left: 32px; } }
+
+/* Mobile: niente gutter per usare tutto lo spazio */
+@media (max-width: 960px)  { .docs-shell { padding-left: 0; } }
