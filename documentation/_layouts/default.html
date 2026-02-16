@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
   </head>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var links = document.querySelectorAll('a[href^="http"]');
+    links.forEach(function (a) {
+      try {
+        var url = new URL(a.href, document.baseURI);
+        if (url.hostname !== location.hostname) {
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener noreferrer');
+        }
+      } catch (e) {}
+    });
+  });
+  </script>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
       {% if site.title and site.title != page.title %}
