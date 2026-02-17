@@ -16,7 +16,7 @@ Opening is **one‑click**: select the **embedded project** from the GeoPackage 
 Open Qgis.
 
 <p>
-  <img src="../assets/01_Qgis.webp"
+  <img src="../assets/01_Qgis.webp" target="_blank"
        alt="Fig.1" align="left" width="500">
 In the Browser Tab, right-click on the
 Geopackage icon ① and click on “New
@@ -26,7 +26,7 @@ Connection”. ②
 <br clear="all"><br>
 
 <p>
-  <img src="../assets/02_Qgis.webp"
+  <img src="../assets/02_Qgis.webp" target="_blank"
        alt="Fig.2" align="left" width="500">
 Search the file system for the Geopackage
 file you want to use.
