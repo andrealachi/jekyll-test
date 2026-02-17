@@ -37,9 +37,18 @@ Reduce the width of the left panel (the one showing the list of records) by drag
 <br clear="all"><br>
 
 ## Child‑to‑Parent Navigation
+
+
 <p>
-  <img src="../assets/nav_form_02.webp"
-       alt="Fig.1" align="left" width="500">
+<a href="#img01">
+  <img src="../assets/nav_form_02.webp" alt="Fig.1" width="500" align="left">
+</a>
+
+<div id="img01" class="lightbox">
+  <a href="#">
+    <img src=".../assets/nav_form_01.webp" alt="Fig.1">
+  </a>
+</div>
 Navigation to the parent record is performed through the button ⑥ associated with the foreign key field. 
   
 Clicking it opens the form ⑦  of the corresponding record.
