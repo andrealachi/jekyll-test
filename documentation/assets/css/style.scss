@@ -184,3 +184,39 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 
 /* Mobile: niente gutter per usare tutto lo spazio */
 @media (max-width: 960px)  { .docs-shell { padding-left: 12px; } }
+
+/* LIGHTBOX per le immagini*/
+<style>
+/* Sfondo scuro e centratura */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding: 2rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  text-align: center;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  margin-top: 3%;
+  border-radius: 6px;
+  box-shadow: 0 0 20px #000;
+  animation: fadein 0.3s ease;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Chiudi lightbox cliccando ovunque */
+.lightbox:target {
+  display: block;
+}
+</style>
