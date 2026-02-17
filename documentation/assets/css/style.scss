@@ -186,7 +186,6 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 @media (max-width: 960px)  { .docs-shell { padding-left: 12px; } }
 
 /* LIGHTBOX per le immagini*/
-<style>
 /* Sfondo scuro e centratura */
 .lightbox {
   display: none;
@@ -219,4 +218,3 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 .lightbox:target {
   display: block;
 }
-</style>
