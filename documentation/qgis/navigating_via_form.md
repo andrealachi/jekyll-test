@@ -19,6 +19,22 @@ In these cases, it is recommended to:
 Collapse unnecessary sections ④ to free up vertical space.
 Reduce the width of the left panel (the one showing the list of records) by dragging the divider ⑤, thus reclaiming horizontal space and improving field readability.
 </p>
+<br clear="all"><br>
+<p>
+  <a href="../assets/edit_01.webp" target="_blank">
+    <img src="../assets/edit_01.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
+
+  This button is available both in the QGIS <strong>Digitizing toolbar</strong> ①
+  and in the <strong>context menu</strong> of each layer ②.
+
+  In addition, the same button—along with other tools useful for editing—is also
+  available directly <strong>inside the forms</strong> ③ and within the
+  <strong>sub‑forms</strong> ④.
+</p>
+
+<br clear="all"><br>
 
 ## Child‑to‑Parent Navigation
 <p>
