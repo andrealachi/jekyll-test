@@ -23,10 +23,12 @@ The model works **exclusively on the SoilWise GeoPackage** and uses the followin
 5. **Join** with `observation` to bring `result_real` and time.
 6. **Compute `oc_0_30` (Field Calculator)**:
    - Per row, compute a weighted contribution:  
-     $$
-     w = \mathrm{result\_real} 	imes rac{\max\!\left(0,\, \min(30,\, \mathrm{low}) - \max(0,\, \mathrm{up})ight)}{\mathrm{low} - \mathrm{up}}
-     $$
-   - If a `guid_3` (datastream) is **unique** → `oc_0_30 = w`; if **repeated** → `oc_0_30 = mean(w)` for that `guid_3`.
+
+$$
+w = result\cdot\frac{\max(0,\min(30,low)-\max(0,up))}{low-up}
+$$
+
+   - If a `guid_3` (datastream) is **unique** → `oc_0_30 = w`; if **repeated** → see 5.2.
 7. **De‑duplicate** by `guid_3` (one row per datastream).
 8. **Statistics by soilplot** (`location`): use **sum** and **rename** to `soc_0_30`.
 9. **Join** result back to `soilplot` and apply the `CO_0_30.qml` style.
@@ -35,20 +37,26 @@ The model works **exclusively on the SoilWise GeoPackage** and uses the followin
 
 ## 5) Key Expressions
 ### 5.1 Row weight (depth‑weighted contribution)
+
 $$
-w = \mathrm{result\_real} 	imes rac{\max\!\left(0,\, \min(30,\, \mathrm{low}) - \max(0,\, \mathrm{up})ight)}{\mathrm{low} - \mathrm{up}}
+w = result\cdot\frac{\max(0,\min(30,low)-\max(0,up))}{low-up}
 $$
 
-### 5.2 Rule for the final per‑datastream value
+### 5.2 Rule for the final per‑datastream value (no restricted macros)
+
+- If `count(guid_3) = 1`:
+
 $$
-\mathrm{oc}_{0-30} =
-egin{cases}
-  w, & 	ext{if } \mathrm{count}(\mathrm{guid}_3)=1 \
-  \mathrm{mean}ig(w\;	ext{per }\mathrm{guid}_3ig), & 	ext{if } \mathrm{count}(\mathrm{guid}_3)>1
-\end{cases}
+oc_{0-30} = w
 $$
 
----
+- If `count(guid_3) > 1`:
+
+$$
+oc_{0-30} = \frac{1}{n}\sum_{i=1}^{n} w_i
+$$
+
+
 
 ## 6) Output
 - Final layer: **`soilplot`** with attribute **`soc_0_30`** (SOC 0–30 cm) and the **`CO_0_30.qml`** style applied.
@@ -56,6 +64,7 @@ $$
 ---
 
 ## 7) Operational Notes
+- On some GitHub instances, certain LaTeX macros (e.g. `\operatorname`) are blocked. The formulas above avoid these macros by design.
 - **NULL/decimals:** `result_real` decimals are normalized; consider excluding NULLs upstream if required.
 - **Depth edge cases:** to include layers that touch 0, change the filter to `lower >= 0`.
 - **Soilplot aggregation:** currently **sum**; switch to **mean** in the statistics step if needed.
