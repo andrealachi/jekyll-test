@@ -57,5 +57,8 @@ $$
 ## 6) Output
 - Final layer: **`soilplot`** with attribute **`soc_0_30`** (SOC 0–30 cm) and the **`CO_0_30.qml`** style applied.
 
-
+>[!WARNING]
+>**Model and style must be co‑located**.
+>
+>The model file and its corresponding style file must reside in the same folder. If either file is moved or the directory structure changes, relative references will break and the style will not be applied at >runtime/build time.
 
