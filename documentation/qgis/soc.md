@@ -4,6 +4,10 @@
 ## 1) Objective
 This document describes a QGIS model that computes **Soil Organic Carbon (SOC)** as a **depth‑weighted value in the top 0–30 cm**. The workflow integrates datastream selection, 0–30 cm layer filtering, hierarchical joins across profile tables, weighted value computation per datastream, and final aggregation per soil plot.
 
+> [!TIP]
+> For further information on model creation and execution, consult the **official QGIS documentation** for the [Model Designer](https://docs.qgis.org/3.40/en/docs/user_manual/processing/modeler.html).
+
+
 ## 2) Expected Inputs
 The model works **exclusively on the SoilWise GeoPackage** and uses the following tables/layers: `profileelement`, `soilprofile`, `datastream`, `observation`, `soilplot`. Expected relations: `profileelement.ispartof → soilprofile.guid`; `datastream.guid_profileelement → profileelement.guid`; `observation.guid_datastream → datastream.guid`; `soilprofile.location → soilplot.guid`.
 
