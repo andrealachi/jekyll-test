@@ -14,8 +14,8 @@ The model works **exclusively on the SoilWise GeoPackage** and uses the followin
 ## 3) Parameters / Constants
 - **Depth window:** `[0, 30]` cm.
 - **Datastream filter:**
-  - `guid_observedproperty = '6022fde8-d281-4d85-92ae-2279f6415245'`
-  - `guid_observingprocedure = '9c6f5f47-352e-463b-9c4e-6320a154040a'`.
+  - `guid_observedproperty = '09b9f784-0bee-49ee-aaae-9320e0e258f6'` - [Carorg](http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carorg) 
+  - `guid_observingprocedure = '9c6f5f47-352e-463b-9c4e-6320a154040a'` - [OrgC_wc-cro3-walkleyblack](http://w3id.org/glosis/model/procedure/carbonOrganicProcedure-OrgC_wc-cro3-walkleyblack)
 
 ## 4) Workflow (condensed)
 1. **Select datastreams** by observed property & observing procedure.
