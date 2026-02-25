@@ -1,7 +1,7 @@
 
 # Mean Profile pH — QGIS Model
 
-Download the [model file](../../model/soc/SoiWise_SP_CO_0_30.model3) and its corresponding [style](../../model/soc/CO_0_30.qml)
+Download the [model file](../../models/ph/SoilWise_SP_mean_pH.model3) and its corresponding [style](../../models/ph/pH_USDA.qml)
 
 >[!WARNING]
 >**Model and style must be co‑located**.
