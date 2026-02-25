@@ -5,6 +5,8 @@ Download the [model file](../../models/ph/SoilWise_SP_mean_pH.model3) and its co
 
 [model file](https://github.com/andrealachi/jekyll-test/blob/main/models/ph/SoilWise_SP_mean_pH.model3)
 
+[scarica](https://raw.githubusercontent.com/andrealachi/jekyll-test/refs/heads/main/models/ph/SoilWise_SP_mean_pH.model3)
+
 >[!WARNING]
 >**Model and style must be co‑located**.
 >
