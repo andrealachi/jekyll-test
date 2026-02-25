@@ -1,7 +1,7 @@
 
 # Soil Organic Carbon (SOC) 0–30 cm — QGIS Model
 
-Download the [model file](../../model/) and its corresponding [style](../../model/pH_USDA.qml)
+Download the [model file](../../models/soc/SoiWise_SP_CO_0_30.model3) and its corresponding [style](../../models/soc/CO_0_30.qml)
 
 >[!WARNING]
 >**Model and style must be co‑located**.
