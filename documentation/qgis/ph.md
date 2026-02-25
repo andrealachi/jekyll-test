@@ -3,6 +3,8 @@
 
 Download the [model file](../../models/ph/SoilWise_SP_mean_pH.model3) and its corresponding [style](../../models/ph/pH_USDA.qml)
 
+[model file](https://github.com/andrealachi/jekyll-test/blob/main/models/ph/SoilWise_SP_mean_pH.model3)
+
 >[!WARNING]
 >**Model and style must be co‑located**.
 >
