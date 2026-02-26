@@ -1,11 +1,7 @@
 
 # Mean Profile pH — QGIS Model
 
-Download the [model file](../../models/ph/SoilWise_SP_mean_pH.model3) and its corresponding [style](../../models/ph/pH_USDA.qml)
-
-[model file](https://github.com/andrealachi/jekyll-test/blob/main/models/ph/SoilWise_SP_mean_pH.model3)
-
-[scarica](https://raw.githubusercontent.com/andrealachi/jekyll-test/refs/heads/main/models/ph/SoilWise_SP_mean_pH.model3)
+Download the [model](https://github.com/andrealachi/jekyll-test/blob/main/models/ph/SoilWise_SP_mean_pH.model3) and its companion [style](https://github.com/andrealachi/jekyll-test/blob/main/models/ph/pH_USDA.qml) to reproduce the workflow exactly and ensure consistent symbology in QGIS
 
 >[!WARNING]
 >**Model and style must be co‑located**.
