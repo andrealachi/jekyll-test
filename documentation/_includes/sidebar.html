@@ -14,32 +14,40 @@
 <!-- NAVIGATION -->
 <nav class="docs-nav" aria-label="Sections">
   <ul class="nav-root">
-    <!-- Pagine HTML (niente nav_exclude e niente file tecnici) -->
+    {%- comment -%}
+      Raccogli pagine HTML generate, escludendo nav_exclude e file tecnici
+    {%- endcomment -%}
     {% assign all_pages = site.html_pages | where_exp: "p", "p.nav_exclude != true" %}
     {% assign all_pages = all_pages
        | reject: "name", "search.json"
        | reject: "name", "feed.xml" %}
 
-    <!-- =========================
-         1) Sezione root (dir == "/")
+    {%- comment -%}
+      1) Sezione root (dir == "/")
          - index per primo (se presente)
          - poi gli altri:
-             a) con nav_order -> sort nav_order
-             b) senza nav_order -> con title -> sort title
-                                  senza title -> sort name
-       ========================= -->
+           a) con nav_order -> sort nav_order
+           b) senza nav_order:
+                * con title -> sort title
+                * senza title -> sort url
+    {%- endcomment -%}
     {% assign root_pages = all_pages | where: "dir", "/" %}
 
-    {% assign root_index = root_pages | where: "name", "index.html" %}
-    {% assign root_others = root_pages | reject: "name", "index.html" %}
+    {% assign root_index      = root_pages  | where: "name", "index.html" %}
+    {% assign root_index_md   = root_pages  | where: "name", "index.md"   %}
+    {% assign root_index_all  = root_index | concat: root_index_md %}
+
+    {% assign root_others = root_pages
+       | reject: "name", "index.html"
+       | reject: "name", "index.md" %}
 
     {% assign root_with_order        = root_others | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
     {% assign root_without_order     = root_others | where_exp: "p", "p.nav_order == nil" %}
     {% assign root_wo_with_title     = root_without_order | where_exp: "p", "p.title != nil"  | sort: "title" %}
-    {% assign root_wo_without_title  = root_without_order | where_exp: "p", "p.title == nil"  | sort: "name" %}
+    {% assign root_wo_without_title  = root_without_order | where_exp: "p", "p.title == nil"  | sort: "url" %}
     {% assign root_tail              = root_wo_with_title | concat: root_wo_without_title %}
 
-    {% assign root_sorted = root_index | concat: root_with_order | concat: root_tail %}
+    {% assign root_sorted = root_index_all | concat: root_with_order | concat: root_tail %}
 
     {% if root_sorted.size > 0 %}
       <li class="nav-group">
@@ -48,25 +56,24 @@
           {% for page in root_sorted %}
             {% assign label = page.title | default: page.name %}
             {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-            <li><a href="{{ page.url | relative_url }}">{{ label }}</a></li>
+            <li>{{ page.url | relative_url }}{{ label }}</a></li>
           {% endfor %}
         </ul>
       </li>
     {% endif %}
 
-    <!-- ======================================================
-         2) Gruppi/cartelle auto-rilevati (primo segmento di p.dir)
-            - index della cartella in cima (solo /FOLDER/index.html)
-            - poi gli altri: nav_order -> title -> name
-            - escludo qualunque index dal resto (no duplicati)
-       ====================================================== -->
+    {%- comment -%}
+      2) Gruppi/cartelle auto-rilevati (primo segmento di p.dir)
+         - index della cartella al primo posto (SOLO /FOLDER/index.html)
+         - poi gli altri: nav_order -> title -> url
+         - escludo qualunque index dal resto (no duplicati)
+    {%- endcomment -%}
 
-    <!-- Lista delle cartelle di primo livello -->
-    {% assign folders = "" | split: "" %}
+    {%- assign folders = "" | split: "" -%}
     {% for p in all_pages %}
       {% assign segs = p.dir | split: "/" %}
       {% assign folder = segs[1] %}
-      {% if folder != "" %}
+      {% if folder and folder != "" %}
         {% assign folders = folders | push: folder %}
       {% endif %}
     {% endfor %}
@@ -75,22 +82,26 @@
     {% for g in folders %}
       {% assign dir_prefix = "/" | append: g | append: "/" %}
 
-      <!-- Pagine della cartella (anche sottocartelle) -->
+      {# tutte le pagine della cartella (anche sottocartelle) #}
       {% assign group_pages = all_pages | where_exp: "p", "p.dir contains dir_prefix" %}
 
-      <!-- index SOLO della cartella (non delle sottocartelle) -->
+      {# index SOLO della cartella (non delle sottocartelle) #}
       {% assign top_index = group_pages | where: "name", "index.html" | where: "dir", dir_prefix %}
+      {% assign top_index_md = group_pages | where: "name", "index.md" | where: "dir", dir_prefix %}
+      {% assign top_index_all = top_index | concat: top_index_md %}
 
-      <!-- Altri file (escludo TUTTI gli index.html) -->
-      {% assign other_pages = group_pages | reject: "name", "index.html" %}
+      {# altri file: escludo tutti gli index #}
+      {% assign other_pages = group_pages
+         | reject: "name", "index.html"
+         | reject: "name", "index.md" %}
 
       {% assign gp_with_order       = other_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
       {% assign gp_without_order    = other_pages | where_exp: "p", "p.nav_order == nil" %}
       {% assign gp_wo_with_title    = gp_without_order | where_exp: "p", "p.title != nil" | sort: "title" %}
-      {% assign gp_wo_without_title = gp_without_order | where_exp: "p", "p.title == nil" | sort: "name" %}
+      {% assign gp_wo_without_title = gp_without_order | where_exp: "p", "p.title == nil" | sort: "url" %}
       {% assign others_sorted       = gp_with_order | concat: gp_wo_with_title | concat: gp_wo_without_title %}
 
-      {% assign gp_sorted = top_index | concat: others_sorted %}
+      {% assign gp_sorted = top_index_all | concat: others_sorted %}
 
       {% if gp_sorted.size > 0 %}
         <li class="nav-group">
@@ -99,7 +110,7 @@
             {% for page in gp_sorted %}
               {% assign label = page.title | default: page.name %}
               {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-              <li><a href="{{ page.url | relative_url }}">{{ label }}</a></li>
+              <li>{{ page.url | relative_url }}{{ label }}</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -109,7 +120,7 @@
 </nav>
 
 <!-- LUNR.JS (client-side search) -->
-<script src="https://unpkg.com/lunr/lunr.js"></script>
+https://unpkg.com/lunr/lunr.js</script>
 <script>
 (function() {
   const input = document.getElementById('docs-search');
