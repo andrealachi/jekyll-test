@@ -20,14 +20,20 @@
        | reject: "name", "search.json"
        | reject: "name", "feed.xml" %}
 
-    <!-- 1) Pagine di root (dir == "/"): escludo index/README dalla lista visibile -->
+    <!-- =========================
+         1) Sezione root ("/")
+         - Index per primo (se c'è)
+         - Poi gli altri (nav_order -> title)
+         ========================= -->
     {% assign root_pages = all_pages | where: "dir", "/" %}
-    {% assign root_pages = root_pages
-       | reject: "name", "index.html"
-       | reject: "name", "README.md" %}
-    {% assign root_with_order    = root_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
-    {% assign root_without_order = root_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
-    {% assign root_sorted        = root_with_order | concat: root_without_order %}
+
+    <!-- individua l'index di root (solo /index.html) -->
+    {% assign root_index = root_pages | where: "name", "index.html" %}
+    <!-- escludi l'index dal resto -->
+    {% assign root_others = root_pages | reject: "name", "index.html" %}
+    {% assign root_with_order    = root_others | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
+    {% assign root_without_order = root_others | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
+    {% assign root_sorted        = root_index | concat: root_with_order | concat: root_without_order %}
 
     {% if root_sorted.size > 0 %}
       <li class="nav-group">
@@ -42,44 +48,47 @@
       </li>
     {% endif %}
 
-    <!--
-      2) Gruppi/cartelle nella sidebar.
-         - PRIMA voce: solo UNA variante di index (priorità index.md -> index.html -> README.md)
-         - Poi tutte le altre pagine, ordinate come prima (nav_order poi title)
-         - Gruppi attuali: qgis, tables
-    -->
-    {% assign groups = "qgis,tables" | split: "," %}
-    {% for g in groups %}
-      {% assign group_prefix = g | append: "/" %}
-      {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
+    <!-- ======================================================
+         2) Gruppi (cartelle) auto-rilevati
+            - Prendo il PRIMO segmento di p.dir (es. "/qgis/" -> "qgis")
+            - Per ogni cartella:
+                * metto per primo SOLO il suo index di livello 1 (dir == "/folder/")
+                * poi tutti gli altri (nav_order -> title)
+                * escludo index delle sottocartelle (niente doppioni)
+         ====================================================== -->
 
-      <!-- 2.1) Seleziona UNA sola pagina index per cartella -->
-      {% assign idx_md     = group_pages | where: "name", "index.md"    %}
-      {% assign idx_html   = group_pages | where: "name", "index.html"  %}
-      {% assign idx_readme = group_pages | where: "name", "README.md"   %}
-
-      {% assign gp_sorted = "" | split: "" %}  <!-- array vuoto -->
-
-      {% if idx_md.size > 0 %}
-        {% assign gp_sorted = gp_sorted | concat: idx_md %}
-      {% elsif idx_html.size > 0 %}
-        {% assign gp_sorted = gp_sorted | concat: idx_html %}
-      {% elsif idx_readme.size > 0 %}
-        {% assign gp_sorted = gp_sorted | concat: idx_readme %}
+    <!-- Costruisci la lista delle cartelle di primo livello -->
+    {% assign folders = "" | split: "" %}
+    {% for p in all_pages %}
+      {% assign segs = p.dir | split: "/" %}
+      {% assign folder = segs[1] %}
+      {% if folder != "" %}
+        {% assign folders = folders | push: folder %}
       {% endif %}
+    {% endfor %}
+    {% assign folders = folders | uniq | sort %}
 
-      <!-- 2.2) Tutte le altre pagine (escluse le varianti di index) -->
-      {% assign other_pages = group_pages
-         | reject: "name", "index.md"
-         | reject: "name", "index.html"
-         | reject: "name", "README.md" %}
+    <!-- Cicla su ogni cartella -->
+    {% for g in folders %}
+      {% assign dir_prefix = "/" | append: g | append: "/" %}
 
+      <!-- tutte le pagine sotto la cartella (anche sottocartelle) -->
+      {% assign group_pages = all_pages | where_exp: "p", "p.dir contains dir_prefix" %}
+
+      <!-- 2.1) Solo l'index della cartella di primo livello: /g/index.html -->
+      {% assign top_index = group_pages
+           | where: "name", "index.html"
+           | where: "dir",  dir_prefix %}
+
+      <!-- 2.2) Altri file: tutto tranne QUALSIASI index.html -->
+      {% assign other_pages = group_pages | reject: "name", "index.html" %}
+
+      <!-- Ordina "altri": nav_order poi title -->
       {% assign gp_with_order    = other_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
       {% assign gp_without_order = other_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
       {% assign others_sorted    = gp_with_order | concat: gp_without_order %}
 
-      <!-- 2.3) Concateno: index (se esiste) + altri -->
-      {% assign gp_sorted = gp_sorted | concat: others_sorted %}
+      {% assign gp_sorted = top_index | concat: others_sorted %}
 
       {% if gp_sorted.size > 0 %}
         <li class="nav-group">
@@ -88,7 +97,6 @@
             {% for page in gp_sorted %}
               {% assign label = page.title | default: page.name %}
               {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-              <!-- NOTA: non sovrascrivo più il label dell'index: rimane "index" se è il nome file -->
               <li><a href="{{ page.url | relative_url }}">{{ label }}</a></li>
             {% endfor %}
           </ul>
@@ -106,7 +114,6 @@
   const results = document.getElementById('docs-search-results');
   let idx = null, docs = [];
 
-  // Etichetta "pulita" (niente .md, sostituisce -/_ con spazi)
   function prettifyLabel(title, url) {
     let label = (title && title.length) ? title : (url.split('/').pop() || url);
     label = label.replace(/\.md$/i, '');      // rimuove ".md" finale
@@ -114,7 +121,6 @@
     return label;
   }
 
-  // Carica l'indice (funziona anche con baseurl grazie a relative_url)
   fetch('{{ "/search.json" | relative_url }}')
     .then(r => r.json())
     .then(data => {
@@ -128,7 +134,6 @@
     })
     .catch(() => { /* no-op */ });
 
-  // Render dei risultati
   input.addEventListener('input', function() {
     const q = this.value.trim();
     results.innerHTML = '';
