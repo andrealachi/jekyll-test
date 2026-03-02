@@ -14,19 +14,13 @@
 <!-- NAVIGATION -->
 <nav class="docs-nav" aria-label="Sections">
   <ul class="nav-root">
-    <!--
-      Raccogli le pagine del sito (HTML generate da Jekyll),
-      escludendo quelle marcate nav_exclude: true e alcuni file tecnici.
-    -->
+    <!-- Raccogli le pagine HTML generate, escludendo nav_exclude e file tecnici -->
     {% assign all_pages = site.html_pages | where_exp: "p", "p.nav_exclude != true" %}
     {% assign all_pages = all_pages
        | reject: "name", "search.json"
        | reject: "name", "feed.xml" %}
 
-    <!--
-      1) Pagine di root (documentation/), escluse index/README dalla lista visibile.
-         Ordinamento: nav_order, poi title.
-    -->
+    <!-- 1) Pagine di root (dir == "/"): escludo index/README dalla lista visibile -->
     {% assign root_pages = all_pages | where: "dir", "/" %}
     {% assign root_pages = root_pages
        | reject: "name", "index.html"
@@ -50,34 +44,42 @@
 
     <!--
       2) Gruppi/cartelle nella sidebar.
-         - Prima voce sempre l'index della cartella (index.html / index.md / README.md)
-         - Il resto come prima: nav_order poi title
-         - GRUPPI attuali: qgis, tables
+         - PRIMA voce: solo UNA variante di index (priorità index.md -> index.html -> README.md)
+         - Poi tutte le altre pagine, ordinate come prima (nav_order poi title)
+         - Gruppi attuali: qgis, tables
     -->
     {% assign groups = "qgis,tables" | split: "," %}
     {% for g in groups %}
       {% assign group_prefix = g | append: "/" %}
       {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
 
-      <!-- 2.1) Isola i possibili index della cartella -->
-      {% assign idx_html   = group_pages | where: "name", "index.html"  %}
+      <!-- 2.1) Seleziona UNA sola pagina index per cartella -->
       {% assign idx_md     = group_pages | where: "name", "index.md"    %}
+      {% assign idx_html   = group_pages | where: "name", "index.html"  %}
       {% assign idx_readme = group_pages | where: "name", "README.md"   %}
-      {% assign index_candidates = idx_html | concat: idx_md | concat: idx_readme %}
 
-      <!-- 2.2) Altre pagine (senza index/README) -->
+      {% assign gp_sorted = "" | split: "" %}  <!-- array vuoto -->
+
+      {% if idx_md.size > 0 %}
+        {% assign gp_sorted = gp_sorted | concat: idx_md %}
+      {% elsif idx_html.size > 0 %}
+        {% assign gp_sorted = gp_sorted | concat: idx_html %}
+      {% elsif idx_readme.size > 0 %}
+        {% assign gp_sorted = gp_sorted | concat: idx_readme %}
+      {% endif %}
+
+      <!-- 2.2) Tutte le altre pagine (escluse le varianti di index) -->
       {% assign other_pages = group_pages
-         | reject: "name", "index.html"
          | reject: "name", "index.md"
+         | reject: "name", "index.html"
          | reject: "name", "README.md" %}
 
-      <!-- 2.3) Ordina "altri": prima nav_order, poi title -->
       {% assign gp_with_order    = other_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
       {% assign gp_without_order = other_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
       {% assign others_sorted    = gp_with_order | concat: gp_without_order %}
 
-      <!-- 2.4) Lista finale: index in testa -->
-      {% assign gp_sorted = index_candidates | concat: others_sorted %}
+      <!-- 2.3) Concateno: index (se esiste) + altri -->
+      {% assign gp_sorted = gp_sorted | concat: others_sorted %}
 
       {% if gp_sorted.size > 0 %}
         <li class="nav-group">
@@ -86,12 +88,7 @@
             {% for page in gp_sorted %}
               {% assign label = page.title | default: page.name %}
               {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-
-              <!-- Etichetta speciale per l'index: nome cartella in maiuscolo -->
-              {% if page.name == 'index.html' or page.name == 'index.md' or page.name == 'README.md' %}
-                {% assign label = g | upcase %}
-              {% endif %}
-
+              <!-- NOTA: non sovrascrivo più il label dell'index: rimane "index" se è il nome file -->
               <li><a href="{{ page.url | relative_url }}">{{ label }}</a></li>
             {% endfor %}
           </ul>
@@ -109,7 +106,7 @@
   const results = document.getElementById('docs-search-results');
   let idx = null, docs = [];
 
-  // Helper: produce un'etichetta pulita (niente .md, sostituisce -/_ con spazi)
+  // Etichetta "pulita" (niente .md, sostituisce -/_ con spazi)
   function prettifyLabel(title, url) {
     let label = (title && title.length) ? title : (url.split('/').pop() || url);
     label = label.replace(/\.md$/i, '');      // rimuove ".md" finale
