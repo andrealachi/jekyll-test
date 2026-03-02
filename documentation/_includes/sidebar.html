@@ -1,8 +1,8 @@
 <!-- ==========================
-     Sidebar (Search + Navigation)
-     ========================== -->
+ Sidebar (Search + Navigation)
+========================== -->
 
-<!-- SEARCH (English labels) -->
+<!-- SEARCH -->
 <div class="search-box">
   <label for="docs-search" class="sr-only">Search documentation</label>
   <input id="docs-search" type="search" placeholder="Search..." autocomplete="off" />
@@ -14,30 +14,23 @@
 <!-- NAVIGATION -->
 <nav class="docs-nav" aria-label="Sections">
   <ul class="nav-root">
-
-    {%- comment -%}
-      Collect site pages once, excluding items we never want in the nav.
-      We also honor `nav_exclude: true` from page front matter.
-    {%- endcomment -%}
+    <!--
+      Raccogli le pagine del sito (HTML generate da Jekyll),
+      escludendo quelle marcate nav_exclude: true e alcuni file tecnici.
+    -->
     {% assign all_pages = site.html_pages | where_exp: "p", "p.nav_exclude != true" %}
-    <!--{% assign all_pages = site.pages | where_exp: "p", "p.nav_exclude != true" %} -->
     {% assign all_pages = all_pages
-        | reject: "name", "search.json"
-        | reject: "name", "feed.xml"
-    %}
+       | reject: "name", "search.json"
+       | reject: "name", "feed.xml" %}
 
-
-    {%- comment -%}
-      1) Root-level pages (source is 'documentation/'): page.dir == "/"
-         Exclude index/README from the visible list.
-         Sort: first by nav_order (if present), then by title.
-    {%- endcomment -%}
+    <!--
+      1) Pagine di root (documentation/), escluse index/README dalla lista visibile.
+         Ordinamento: nav_order, poi title.
+    -->
     {% assign root_pages = all_pages | where: "dir", "/" %}
     {% assign root_pages = root_pages
-        | reject: "name", "index.html"
-        | reject: "name", "README.md"
-    %}
-
+       | reject: "name", "index.html"
+       | reject: "name", "README.md" %}
     {% assign root_with_order    = root_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
     {% assign root_without_order = root_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
     {% assign root_sorted        = root_with_order | concat: root_without_order %}
@@ -49,43 +42,41 @@
           {% for page in root_sorted %}
             {% assign label = page.title | default: page.name %}
             {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-            <li>
-              <a href="{{ page.url | relative_url }}">{{ label }}</a>
-            </li>
+            <li><a href="{{ page.url | relative_url }}">{{ label }}</a></li>
           {% endfor %}
         </ul>
       </li>
     {% endif %}
 
-
     <!--
-      2) Folder groups shown in the sidebar (qgis, tables, ...)
-        - Metti sempre l'index (index.html / index.md / README.md) come PRIMA voce
-        - Le altre pagine restano ordinate come prima: nav_order poi title
+      2) Gruppi/cartelle nella sidebar.
+         - Prima voce sempre l'index della cartella (index.html / index.md / README.md)
+         - Il resto come prima: nav_order poi title
+         - GRUPPI attuali: qgis, tables
     -->
     {% assign groups = "qgis,tables" | split: "," %}
     {% for g in groups %}
       {% assign group_prefix = g | append: "/" %}
       {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
 
-      <!-- 2.1) Isola i possibili index -->
-      {% assign idx_html = group_pages | where: "name", "index.html" %}
-      {% assign idx_md   = group_pages | where: "name", "index.md"   %}
-      {% assign idx_readme = group_pages | where: "name", "README.md" %}
+      <!-- 2.1) Isola i possibili index della cartella -->
+      {% assign idx_html   = group_pages | where: "name", "index.html"  %}
+      {% assign idx_md     = group_pages | where: "name", "index.md"    %}
+      {% assign idx_readme = group_pages | where: "name", "README.md"   %}
       {% assign index_candidates = idx_html | concat: idx_md | concat: idx_readme %}
 
-      <!-- 2.2) Altre pagine escluse le varianti di index -->
+      <!-- 2.2) Altre pagine (senza index/README) -->
       {% assign other_pages = group_pages
-        | reject: "name", "index.html"
-        | reject: "name", "index.md"
-        | reject: "name", "README.md" %}
+         | reject: "name", "index.html"
+         | reject: "name", "index.md"
+         | reject: "name", "README.md" %}
 
-      <!-- 2.3) Ordina “altri” come prima: nav_order poi title -->
+      <!-- 2.3) Ordina "altri": prima nav_order, poi title -->
       {% assign gp_with_order    = other_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
       {% assign gp_without_order = other_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
       {% assign others_sorted    = gp_with_order | concat: gp_without_order %}
 
-      <!-- 2.4) Lista finale con index in testa -->
+      <!-- 2.4) Lista finale: index in testa -->
       {% assign gp_sorted = index_candidates | concat: others_sorted %}
 
       {% if gp_sorted.size > 0 %}
@@ -96,68 +87,17 @@
               {% assign label = page.title | default: page.name %}
               {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
 
-              <!-- Etichetta "speciale" per l'index: usa il nome della cartella -->
+              <!-- Etichetta speciale per l'index: nome cartella in maiuscolo -->
               {% if page.name == 'index.html' or page.name == 'index.md' or page.name == 'README.md' %}
                 {% assign label = g | upcase %}
               {% endif %}
 
-              <li>
-                <a href="{{ page.url | relative_url }}">{{ label }}</a>
-              </li>
+              <li><a href="{{ page.url | relative_url }}">{{ label }}</a></li>
             {% endfor %}
           </ul>
         </li>
       {% endif %}
     {% endfor %}
-
-
-
-<!--
-      2) Folder groups shown in the sidebar.
-         Add/remove folders here. If you want to include `assetts`, add it to the list.
-    {%- endcomment -%}
-    {% assign groups = "qgis,tables" | split: "," %}
-
-    {% for g in groups %}
-      {% assign group_prefix = g | append: "/" %}
-      {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
-
-      {% assign gp_with_order    = group_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
-      {% assign gp_without_order = group_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
-      {% assign gp_sorted        = gp_with_order | concat: gp_without_order %}
-
-      {% if gp_sorted.size > 0 %}
-        <li class="nav-group">
-          <span class="nav-group-title">{{ g | upcase }}</span>
-          <ul class="nav-group-list">
-            {% for page in gp_sorted %}
-              {% assign label = page.title | default: page.name %}
-              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-              <li>
-                <a href="{{ page.url | relative_url }}">{{ label }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </li>
-      {% endif %}
-    {% endfor %}
--->
-
-
-
-
-    
-<!--     {%- comment -%}
-      3) Extras (static links)
-    {%- endcomment -%} -->
-  
-    <!-- <li class="nav-group">
-      <span class="nav-group-title">Extras</span>
-      <ul class="nav-group-list">
-        <li><a href="{{ '/feed.xml' | relative_url }}">Feed</a></li>
-      </ul>
-    </li> -->
-
   </ul>
 </nav>
 
@@ -165,20 +105,19 @@
 <script src="https://unpkg.com/lunr/lunr.js"></script>
 <script>
 (function() {
-  const input   = document.getElementById('docs-search');
+  const input = document.getElementById('docs-search');
   const results = document.getElementById('docs-search-results');
   let idx = null, docs = [];
 
-  // Helper: produce a clean label (no .md, dashes/underscores -> spaces)
+  // Helper: produce un'etichetta pulita (niente .md, sostituisce -/_ con spazi)
   function prettifyLabel(title, url) {
-    // fallback: take the last path segment from the URL
     let label = (title && title.length) ? title : (url.split('/').pop() || url);
-    label = label.replace(/\.md$/i, '');   // remove trailing ".md"
-    label = label.replace(/[-_]+/g, ' ');  // turn dashes/underscores into spaces
+    label = label.replace(/\.md$/i, '');      // rimuove ".md" finale
+    label = label.replace(/[-_]+/g, ' ');     // trattini/underscore -> spazi
     return label;
   }
 
-  // Load the index (works with baseurl thanks to relative_url)
+  // Carica l'indice (funziona anche con baseurl grazie a relative_url)
   fetch('{{ "/search.json" | relative_url }}')
     .then(r => r.json())
     .then(data => {
@@ -192,20 +131,16 @@
     })
     .catch(() => { /* no-op */ });
 
-  // Render results
+  // Render dei risultati
   input.addEventListener('input', function() {
     const q = this.value.trim();
     results.innerHTML = '';
     if (!idx || q.length < 2) return;
-
     const matches = idx.search(q);
     matches.slice(0, 12).forEach(m => {
       const item = docs.find(d => d.url === m.ref);
       if (!item) return;
-
-      // Use prettified label (no .md, nicer spacing)
       const label = prettifyLabel(item.title, item.url);
-
       const li = document.createElement('li');
       li.className = 'search-item';
       li.innerHTML = '<a href="' + item.url + '">' + label + '</a>';
