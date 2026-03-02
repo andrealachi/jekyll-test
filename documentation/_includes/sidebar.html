@@ -57,31 +57,35 @@
       </li>
     {% endif %}
 
-    {%- comment -%}
-    2) Folder groups shown in the sidebar (qgis, tables, ...)
-        - Metti sempre l’index (index.html o index.md) come PRIMA voce
+
+    <!--
+      2) Folder groups shown in the sidebar (qgis, tables, ...)
+        - Metti sempre l'index (index.html / index.md / README.md) come PRIMA voce
         - Le altre pagine restano ordinate come prima: nav_order poi title
-    {%- endcomment -%}
+    -->
     {% assign groups = "qgis,tables" | split: "," %}
     {% for g in groups %}
       {% assign group_prefix = g | append: "/" %}
       {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
 
-      {%- comment -%} 2.1) Isola l’index della cartella (prima voce) {%- endcomment -%}
-      {% assign index_candidates = group_pages | where: "name", "index.html" %}
-      {% assign index_candidates = index_candidates | concat: (group_pages | where: "name", "index.md") %}
+      <!-- 2.1) Isola i possibili index -->
+      {% assign idx_html = group_pages | where: "name", "index.html" %}
+      {% assign idx_md   = group_pages | where: "name", "index.md"   %}
+      {% assign idx_readme = group_pages | where: "name", "README.md" %}
+      {% assign index_candidates = idx_html | concat: idx_md | concat: idx_readme %}
 
-      {%- comment -%} 2.2) Altre pagine (senza index) {%- endcomment -%}
+      <!-- 2.2) Altre pagine escluse le varianti di index -->
       {% assign other_pages = group_pages
         | reject: "name", "index.html"
-        | reject: "name", "index.md" %}
+        | reject: "name", "index.md"
+        | reject: "name", "README.md" %}
 
-      {%- comment -%} 2.3) Ordina “altri” come prima: nav_order poi title {%- endcomment -%}
-      {% assign gp_with_order = other_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
+      <!-- 2.3) Ordina “altri” come prima: nav_order poi title -->
+      {% assign gp_with_order    = other_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
       {% assign gp_without_order = other_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
-      {% assign others_sorted = gp_with_order | concat: gp_without_order %}
+      {% assign others_sorted    = gp_with_order | concat: gp_without_order %}
 
-      {%- comment -%} 2.4) Costruisci la lista finale con index in testa {%- endcomment -%}
+      <!-- 2.4) Lista finale con index in testa -->
       {% assign gp_sorted = index_candidates | concat: others_sorted %}
 
       {% if gp_sorted.size > 0 %}
@@ -91,6 +95,12 @@
             {% for page in gp_sorted %}
               {% assign label = page.title | default: page.name %}
               {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+
+              <!-- Etichetta "speciale" per l'index: usa il nome della cartella -->
+              {% if page.name == 'index.html' or page.name == 'index.md' or page.name == 'README.md' %}
+                {% assign label = g | upcase %}
+              {% endif %}
+
               <li>
                 <a href="{{ page.url | relative_url }}">{{ label }}</a>
               </li>
@@ -99,8 +109,6 @@
         </li>
       {% endif %}
     {% endfor %}
-
-
 
 
 
