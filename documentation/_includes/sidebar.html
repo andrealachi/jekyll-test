@@ -14,26 +14,32 @@
 <!-- NAVIGATION -->
 <nav class="docs-nav" aria-label="Sections">
   <ul class="nav-root">
-    <!-- Raccogli le pagine HTML generate, escludendo nav_exclude e file tecnici -->
+    <!-- Pagine HTML (niente nav_exclude e niente file tecnici) -->
     {% assign all_pages = site.html_pages | where_exp: "p", "p.nav_exclude != true" %}
     {% assign all_pages = all_pages
        | reject: "name", "search.json"
        | reject: "name", "feed.xml" %}
 
     <!-- =========================
-         1) Sezione root ("/")
-         - Index per primo (se c'è)
-         - Poi gli altri (nav_order -> title)
-         ========================= -->
+         1) Sezione root (dir == "/")
+         - index per primo (se presente)
+         - poi gli altri:
+             a) con nav_order -> sort nav_order
+             b) senza nav_order -> con title -> sort title
+                                  senza title -> sort name
+       ========================= -->
     {% assign root_pages = all_pages | where: "dir", "/" %}
 
-    <!-- individua l'index di root (solo /index.html) -->
     {% assign root_index = root_pages | where: "name", "index.html" %}
-    <!-- escludi l'index dal resto -->
     {% assign root_others = root_pages | reject: "name", "index.html" %}
-    {% assign root_with_order    = root_others | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
-    {% assign root_without_order = root_others | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
-    {% assign root_sorted        = root_index | concat: root_with_order | concat: root_without_order %}
+
+    {% assign root_with_order        = root_others | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
+    {% assign root_without_order     = root_others | where_exp: "p", "p.nav_order == nil" %}
+    {% assign root_wo_with_title     = root_without_order | where_exp: "p", "p.title != nil"  | sort: "title" %}
+    {% assign root_wo_without_title  = root_without_order | where_exp: "p", "p.title == nil"  | sort: "name" %}
+    {% assign root_tail              = root_wo_with_title | concat: root_wo_without_title %}
+
+    {% assign root_sorted = root_index | concat: root_with_order | concat: root_tail %}
 
     {% if root_sorted.size > 0 %}
       <li class="nav-group">
@@ -49,15 +55,13 @@
     {% endif %}
 
     <!-- ======================================================
-         2) Gruppi (cartelle) auto-rilevati
-            - Prendo il PRIMO segmento di p.dir (es. "/qgis/" -> "qgis")
-            - Per ogni cartella:
-                * metto per primo SOLO il suo index di livello 1 (dir == "/folder/")
-                * poi tutti gli altri (nav_order -> title)
-                * escludo index delle sottocartelle (niente doppioni)
-         ====================================================== -->
+         2) Gruppi/cartelle auto-rilevati (primo segmento di p.dir)
+            - index della cartella in cima (solo /FOLDER/index.html)
+            - poi gli altri: nav_order -> title -> name
+            - escludo qualunque index dal resto (no duplicati)
+       ====================================================== -->
 
-    <!-- Costruisci la lista delle cartelle di primo livello -->
+    <!-- Lista delle cartelle di primo livello -->
     {% assign folders = "" | split: "" %}
     {% for p in all_pages %}
       {% assign segs = p.dir | split: "/" %}
@@ -68,25 +72,23 @@
     {% endfor %}
     {% assign folders = folders | uniq | sort %}
 
-    <!-- Cicla su ogni cartella -->
     {% for g in folders %}
       {% assign dir_prefix = "/" | append: g | append: "/" %}
 
-      <!-- tutte le pagine sotto la cartella (anche sottocartelle) -->
+      <!-- Pagine della cartella (anche sottocartelle) -->
       {% assign group_pages = all_pages | where_exp: "p", "p.dir contains dir_prefix" %}
 
-      <!-- 2.1) Solo l'index della cartella di primo livello: /g/index.html -->
-      {% assign top_index = group_pages
-           | where: "name", "index.html"
-           | where: "dir",  dir_prefix %}
+      <!-- index SOLO della cartella (non delle sottocartelle) -->
+      {% assign top_index = group_pages | where: "name", "index.html" | where: "dir", dir_prefix %}
 
-      <!-- 2.2) Altri file: tutto tranne QUALSIASI index.html -->
+      <!-- Altri file (escludo TUTTI gli index.html) -->
       {% assign other_pages = group_pages | reject: "name", "index.html" %}
 
-      <!-- Ordina "altri": nav_order poi title -->
-      {% assign gp_with_order    = other_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
-      {% assign gp_without_order = other_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
-      {% assign others_sorted    = gp_with_order | concat: gp_without_order %}
+      {% assign gp_with_order       = other_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
+      {% assign gp_without_order    = other_pages | where_exp: "p", "p.nav_order == nil" %}
+      {% assign gp_wo_with_title    = gp_without_order | where_exp: "p", "p.title != nil" | sort: "title" %}
+      {% assign gp_wo_without_title = gp_without_order | where_exp: "p", "p.title == nil" | sort: "name" %}
+      {% assign others_sorted       = gp_with_order | concat: gp_wo_with_title | concat: gp_wo_without_title %}
 
       {% assign gp_sorted = top_index | concat: others_sorted %}
 
