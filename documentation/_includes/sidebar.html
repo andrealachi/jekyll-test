@@ -23,12 +23,11 @@
       | reject: "name", "feed.xml" %}
 
     {%- comment -%}
-    1) Root-level pages (source is 'documentation/'): page.dir == "/"
-       Mostra l'index della radice in testa, poi le altre.
+    1) Root-level pages (page.dir == "/"). Index in testa, poi il resto.
     {%- endcomment -%}
     {% assign root_pages = all_pages | where: "dir", "/" %}
 
-    {%- comment -%} Index della radice (html/md) -> prendi SOLO il primo trovato {%- endcomment -%}
+    {%- comment -%} Index della radice (html/md) -> prendi SOLO il primo {%- endcomment -%}
     {% assign root_index_candidates = root_pages | where: "name", "index.html" | concat: (root_pages | where: "name", "index.md") %}
     {% assign root_index = root_index_candidates | first %}
 
@@ -42,7 +41,7 @@
     {% assign root_with_order = root_non_index | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
     {% assign root_without_order = root_non_index | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
 
-    {%- comment -%} Costruisci la lista finale: index (se esiste) + resto {%- endcomment -%}
+    {%- comment -%} Lista finale grezza {%- endcomment -%}
     {% assign root_sorted = '' | split: '' %}
     {% if root_index %}
       {% assign root_sorted = root_sorted | push: root_index %}
@@ -53,67 +52,65 @@
       <li class="nav-group">
         <span class="nav-group-title">Documentation</span>
         <ul class="nav-group-list">
+          {%- assign seen_urls = '' -%}
+          {%- assign index_rendered = false -%}
           {% for page in root_sorted %}
             {%- assign basename = page.name | split:'.' | first | downcase -%}
-            {%- assign skip = false -%}
-            {%- if basename == 'index' -%}
-              {%- if root_index and page.url != root_index.url -%}
-                {%- assign skip = true -%}
-              {%- elsif root_index == nil -%}
-                {%- assign skip = true -%}
-              {%- endif -%}
+            {%- assign norm_url = page.url | replace: 'index.html','' -%}
+            {%- assign key = '|' | append: norm_url | append: '|' -%}
+            {%- if seen_urls contains key -%}
+              {%- continue -%}
             {%- endif -%}
-            {% unless skip %}
-              {% assign label = page.title | default: page.name %}
-              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-              <li>
-                <a href="{{ page.url | relative_url }}">{{ label }}</a>
-              </li>
-            {% endunless %}
+            {%- assign seen_urls = seen_urls | append: key -%}
+
+            {%- comment -%} Mostra un solo index: quello canonico (se esiste) {%- endcomment -%}
+            {%- if basename == 'index' -%}
+              {%- if root_index -%}
+                {%- assign idx_norm_url = root_index.url | replace: 'index.html','' -%}
+                {%- if norm_url != idx_norm_url -%}
+                  {%- continue -%}
+                {%- endif -%}
+              {%- else -%}
+                {%- if index_rendered -%}
+                  {%- continue -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- assign index_rendered = true -%}
+            {%- endif -%}
+
+            {% assign label = page.title | default: page.name %}
+            {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+            <li>
+              <a href="{{ page.url | relative_url }}">{{ label }}</a>
+            </li>
           {% endfor %}
         </ul>
       </li>
     {% endif %}
 
     {%- comment -%}
-    2) Folder groups shown in the sidebar.
-       Index della radice del gruppo in cima; escludi gli index delle sottocartelle e duplicati.
-       Aggiungi/rimuovi nomi di cartelle nella variabile `groups`.
+    2) Folder groups shown in the sidebar (qgis, tables, ...)
+       Index del gruppo in cima; escludi index delle sottocartelle e dedup per URL normalizzato.
     {%- endcomment -%}
     {% assign groups = "qgis,tables" | split: "," %}
     {% for g in groups %}
       {% assign group_prefix = g | append: "/" %}
-      {% assign group_dir = "/" | append: group_prefix %}  {%- comment -%} es. "/qgis/" {%- endcomment -%}
+      {% assign group_dir = "/" | append: group_prefix %}
 
-      {%- comment -%} Tutte le pagine del gruppo (radice + sottocartelle) {%- endcomment -%}
       {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
-
-      {%- comment -%} Pagine nella radice del gruppo {%- endcomment -%}
       {% assign group_root_pages = group_pages | where: "dir", group_dir %}
 
-      {%- comment -%} Index della radice del gruppo (html/md) -> prendi SOLO il primo {%- endcomment -%}
       {% assign group_index_candidates = group_root_pages | where: "name", "index.html" | concat: (group_root_pages | where: "name", "index.md") %}
       {% assign group_index = group_index_candidates | first %}
 
-      {%- comment -%} Altre pagine della radice (no index) {%- endcomment -%}
-      {% assign root_non_index = group_root_pages
-        | reject: "name", "index.html"
-        | reject: "name", "index.md" %}
-
-      {%- comment -%} Pagine nelle sottocartelle (escludi i loro index) {%- endcomment -%}
+      {% assign root_non_index = group_root_pages | reject: "name", "index.html" | reject: "name", "index.md" %}
       {% assign deeper_pages = group_pages | where_exp: "p", "p.dir != group_dir" %}
-      {% assign deeper_non_index = deeper_pages
-        | reject: "name", "index.html"
-        | reject: "name", "index.md" %}
-
-      {%- comment -%} Non-index complessivo {%- endcomment -%}
+      {% assign deeper_non_index = deeper_pages | reject: "name", "index.html" | reject: "name", "index.md" %}
       {% assign non_index = root_non_index | concat: deeper_non_index %}
 
-      {%- comment -%} Ordine: nav_order poi alfabetico {%- endcomment -%}
       {% assign gp_with_order = non_index | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
       {% assign gp_without_order = non_index | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
 
-      {%- comment -%} Index del gruppo in testa, poi il resto {%- endcomment -%}
       {% assign gp_sorted = '' | split: '' %}
       {% if group_index %}
         {% assign gp_sorted = gp_sorted | push: group_index %}
@@ -124,38 +121,41 @@
         <li class="nav-group">
           <span class="nav-group-title">{{ g | upcase }}</span>
           <ul class="nav-group-list">
+            {%- assign seen_urls = '' -%}
+            {%- assign index_rendered = false -%}
             {% for page in gp_sorted %}
               {%- assign basename = page.name | split:'.' | first | downcase -%}
-              {%- assign skip = false -%}
-              {%- if basename == 'index' -%}
-                {%- if group_index and page.url != group_index.url -%}
-                  {%- assign skip = true -%}
-                {%- elsif group_index == nil -%}
-                  {%- assign skip = true -%}
-                {%- endif -%}
+              {%- assign norm_url = page.url | replace: 'index.html','' -%}
+              {%- assign key = '|' | append: norm_url | append: '|' -%}
+              {%- if seen_urls contains key -%}
+                {%- continue -%}
               {%- endif -%}
-              {% unless skip %}
-                {% assign label = page.title | default: page.name %}
-                {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-                <li>
-                  <a href="{{ page.url | relative_url }}">{{ label }}</a>
-                </li>
-              {% endunless %}
+              {%- assign seen_urls = seen_urls | append: key -%}
+
+              {%- if basename == 'index' -%}
+                {%- if group_index -%}
+                  {%- assign idx_norm_url = group_index.url | replace: 'index.html','' -%}
+                  {%- if norm_url != idx_norm_url -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                {%- else -%}
+                  {%- if index_rendered -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                {%- endif -%}
+                {%- assign index_rendered = true -%}
+              {%- endif -%}
+
+              {% assign label = page.title | default: page.name %}
+              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+              <li>
+                <a href="{{ page.url | relative_url }}">{{ label }}</a>
+              </li>
             {% endfor %}
           </ul>
         </li>
       {% endif %}
     {% endfor %}
-
-    <!-- 3) Extras (static links) - opzionale -->
-    {%- comment -%}
-    <li class="nav-group">
-      <span class="nav-group-title">Extras</span>
-      <ul class="nav-group-list">
-        <li><a href="{{ '/feed.xml' | relative_url }}">Feed</a></li>
-      </ul>
-    </li>
-    {%- endcomment -%}
 
   </ul>
 </nav>
@@ -172,12 +172,11 @@
   function prettifyLabel(title, url) {
     // fallback: take the last path segment from the URL
     let label = (title && title.length) ? title : (url.split('/').pop() || url);
-    label = label.replace(/\.md$/i, ''); // remove trailing ".md"
-    label = label.replace(/[-_]+/g, ' '); // turn dashes/underscores into spaces
+    label = label.replace(/\.md$/i, '');
+    label = label.replace(/[-_]+/g, ' ');
     return label;
   }
 
-  // Load the index (works with baseurl thanks to relative_url)
   fetch('{{ "/search.json" | relative_url }}')
     .then(r => r.json())
     .then(data => {
@@ -191,7 +190,6 @@
     })
     .catch(() => { /* no-op */ });
 
-  // Render results
   input.addEventListener('input', function() {
     const q = this.value.trim();
     results.innerHTML = '';
@@ -200,7 +198,6 @@
     matches.slice(0, 12).forEach(m => {
       const item = docs.find(d => d.url === m.ref);
       if (!item) return;
-      // Use prettified label (no .md, nicer spacing)
       const label = prettifyLabel(item.title, item.url);
       const li = document.createElement('li');
       li.className = 'search-item';
