@@ -28,12 +28,11 @@
     {%- endcomment -%}
     {% assign root_pages = all_pages | where: "dir", "/" %}
 
-    {%- comment -%} Index della radice (html/md) {%- endcomment -%}
-    {% assign root_index_html = root_pages | where: "name", "index.html" %}
-    {% assign root_index_md   = root_pages | where: "name", "index.md" %}
-    {% assign root_index = root_index_html | concat: root_index_md %}
+    {%- comment -%} Index della radice (html/md) -> prendi SOLO il primo trovato {%- endcomment -%}
+    {% assign root_index_candidates = root_pages | where: "name", "index.html" | concat: (root_pages | where: "name", "index.md") %}
+    {% assign root_index = root_index_candidates | first %}
 
-    {%- comment -%} Altre pagine root (escludi index e README) {%- endcomment -%}
+    {%- comment -%} Altre pagine root (escludi tutti gli index e README) {%- endcomment -%}
     {% assign root_non_index = root_pages
       | reject: "name", "index.html"
       | reject: "name", "index.md"
@@ -42,18 +41,28 @@
     {%- comment -%} Ordine: nav_order poi alfabetico {%- endcomment -%}
     {% assign root_with_order = root_non_index | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
     {% assign root_without_order = root_non_index | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
-    {% assign root_sorted = root_index | concat: root_with_order | concat: root_without_order %}
+
+    {%- comment -%} Costruisci la lista finale: index (se esiste) + resto {%- endcomment -%}
+    {% assign root_sorted = '' | split: '' %}
+    {% if root_index %}
+      {% assign root_sorted = root_sorted | push: root_index %}
+    {% endif %}
+    {% assign root_sorted = root_sorted | concat: root_with_order | concat: root_without_order %}
 
     {% if root_sorted.size > 0 %}
       <li class="nav-group">
         <span class="nav-group-title">Documentation</span>
         <ul class="nav-group-list">
           {% for page in root_sorted %}
-            {% assign label = page.title | default: page.name %}
-            {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-            <li>
-              <a href="{{ page.url | relative_url }}">{{ label }}</a>
-            </li>
+            {%- assign basename = page.name | split:'.' | first | downcase -%}
+            {%- comment -%} Ulteriore sicurezza: non renderizzare altri index.* {%- endcomment -%}
+            {% unless basename == 'index' and page.dir != '/' %}
+              {% assign label = page.title | default: page.name %}
+              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+              <li>
+                <a href="{{ page.url | relative_url }}">{{ label }}</a>
+              </li>
+            {% endunless %}
           {% endfor %}
         </ul>
       </li>
@@ -75,10 +84,9 @@
       {%- comment -%} Pagine nella radice del gruppo {%- endcomment -%}
       {% assign group_root_pages = group_pages | where: "dir", group_dir %}
 
-      {%- comment -%} Index della radice del gruppo (html/md) {%- endcomment -%}
-      {% assign index_html = group_root_pages | where: "name", "index.html" %}
-      {% assign index_md   = group_root_pages | where: "name", "index.md" %}
-      {% assign group_index = index_html | concat: index_md %}
+      {%- comment -%} Index della radice del gruppo (html/md) -> prendi SOLO il primo {%- endcomment -%}
+      {% assign group_index_candidates = group_root_pages | where: "name", "index.html" | concat: (group_root_pages | where: "name", "index.md") %}
+      {% assign group_index = group_index_candidates | first %}
 
       {%- comment -%} Altre pagine della radice (no index) {%- endcomment -%}
       {% assign root_non_index = group_root_pages
@@ -99,24 +107,26 @@
       {% assign gp_without_order = non_index | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
 
       {%- comment -%} Index del gruppo in testa, poi il resto {%- endcomment -%}
-      {% assign gp_sorted = group_index | concat: gp_with_order | concat: gp_without_order %}
+      {% assign gp_sorted = '' | split: '' %}
+      {% if group_index %}
+        {% assign gp_sorted = gp_sorted | push: group_index %}
+      {% endif %}
+      {% assign gp_sorted = gp_sorted | concat: gp_with_order | concat: gp_without_order %}
 
       {% if gp_sorted.size > 0 %}
         <li class="nav-group">
           <span class="nav-group-title">{{ g | upcase }}</span>
           <ul class="nav-group-list">
             {% for page in gp_sorted %}
-              {% assign label = page.title | default: page.name %}
-
-              {%- comment -%}
-              Se in futuro volessi mostrare gli index delle sottocartelle, rimuovi i due `reject` più su
-              e qui calcola l'etichetta come nome della cartella per le pagine `index.*`.
-              {%- endcomment -%}
-
-              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
-              <li>
-                <a href="{{ page.url | relative_url }}">{{ label }}</a>
-              </li>
+              {%- assign basename = page.name | split:'.' | first | downcase -%}
+              {%- comment -%} NON renderizzare gli index.* che non sono l'index della radice del gruppo {%- endcomment -%}
+              {% unless basename == 'index' and page.dir != group_dir %}
+                {% assign label = page.title | default: page.name %}
+                {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
+                <li>
+                  <a href="{{ page.url | relative_url }}">{{ label }}</a>
+                </li>
+              {% endunless %}
             {% endfor %}
           </ul>
         </li>
