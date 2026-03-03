@@ -64,25 +64,29 @@
     {% assign groups = "qgis,tables" | split: "," %}
     {% for g in groups %}
       {% assign group_prefix = g | append: "/" %}
-      {% assign group_dir = "/" | append: group_prefix %}  {# -> "/qgis/" #}
+      {% assign group_dir = "/" | append: group_prefix %}  {%- comment -%} es. "/qgis/" {%- endcomment -%}
+
+      {%- comment -%} Tutte le pagine del gruppo (sottocartelle incluse) {%- endcomment -%}
       {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
 
-      {# 1) Prendi SOLO l'index della radice del gruppo (es. "/qgis/index.html") #}
-      {% assign group_index = group_pages | where: "dir", group_dir | where: "name", "index.html" %}
+      {%- comment -%} 1) Index SOLO della radice del gruppo (compatibile .html e .md) {%- endcomment -%}
+      {% assign index_html = group_pages | where: "dir", group_dir | where: "name", "index.html" %}
+      {% assign index_md   = group_pages | where: "dir", group_dir | where: "name", "index.md" %}
+      {% assign group_index = index_html | concat: index_md %}
 
-      {# 2) Il resto delle pagine (tutto tranne quell'index.html) #}
+      {%- comment -%} 2) Tutto il resto, escludendo quell'index della radice {%- endcomment -%}
       {% assign non_index = group_pages
-        | where_exp: "p", "p.dir != group_dir or p.name != 'index.html'" %}
+          | where_exp: "p", "p.dir != group_dir or (p.name != 'index.html' and p.name != 'index.md')" %}
 
-      {# 3) Mantieni la logica corrente: prima nav_order, poi alfabetico per titolo #}
+      {%- comment -%} 3) Mantieni l'ordinamento attuale: nav_order poi alfabetico {%- endcomment -%}
       {% assign gp_with_order = non_index
-        | where_exp: "p", "p.nav_order != nil"
-        | sort: "nav_order" %}
+          | where_exp: "p", "p.nav_order != nil"
+          | sort: "nav_order" %}
       {% assign gp_without_order = non_index
-        | where_exp: "p", "p.nav_order == nil"
-        | sort: "title" %}
+          | where_exp: "p", "p.nav_order == nil"
+          | sort: "title" %}
 
-      {# 4) Index del gruppo in testa, poi il resto #}
+      {%- comment -%} 4) Index del gruppo in testa, poi il resto {%- endcomment -%}
       {% assign gp_sorted = group_index | concat: gp_with_order | concat: gp_without_order %}
 
       {% if gp_sorted.size > 0 %}
@@ -101,7 +105,7 @@
           </ul>
         </li>
       {% endif %}
-    {% endfor %}
+{% endfor %}
 
 
 <!--     {%- comment -%}
