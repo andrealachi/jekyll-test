@@ -55,8 +55,15 @@
         <ul class="nav-group-list">
           {% for page in root_sorted %}
             {%- assign basename = page.name | split:'.' | first | downcase -%}
-            {%- comment -%} Ulteriore sicurezza: non renderizzare altri index.* {%- endcomment -%}
-            {% unless basename == 'index' and page.dir != '/' %}
+            {%- assign skip = false -%}
+            {%- if basename == 'index' -%}
+              {%- if root_index and page.url != root_index.url -%}
+                {%- assign skip = true -%}
+              {%- elsif root_index == nil -%}
+                {%- assign skip = true -%}
+              {%- endif -%}
+            {%- endif -%}
+            {% unless skip %}
               {% assign label = page.title | default: page.name %}
               {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
               <li>
@@ -70,7 +77,7 @@
 
     {%- comment -%}
     2) Folder groups shown in the sidebar.
-       Index della radice del gruppo in cima; escludi gli index delle sottocartelle.
+       Index della radice del gruppo in cima; escludi gli index delle sottocartelle e duplicati.
        Aggiungi/rimuovi nomi di cartelle nella variabile `groups`.
     {%- endcomment -%}
     {% assign groups = "qgis,tables" | split: "," %}
@@ -119,8 +126,15 @@
           <ul class="nav-group-list">
             {% for page in gp_sorted %}
               {%- assign basename = page.name | split:'.' | first | downcase -%}
-              {%- comment -%} NON renderizzare gli index.* che non sono l'index della radice del gruppo {%- endcomment -%}
-              {% unless basename == 'index' and page.dir != group_dir %}
+              {%- assign skip = false -%}
+              {%- if basename == 'index' -%}
+                {%- if group_index and page.url != group_index.url -%}
+                  {%- assign skip = true -%}
+                {%- elsif group_index == nil -%}
+                  {%- assign skip = true -%}
+                {%- endif -%}
+              {%- endif -%}
+              {% unless skip %}
                 {% assign label = page.title | default: page.name %}
                 {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
                 <li>
