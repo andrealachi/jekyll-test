@@ -1,14 +1,12 @@
 <!-- ==========================
-     Sidebar (Search + Navigation)
-     ========================== -->
-
+ Sidebar (Search + Navigation)
+ ========================== -->
 <!-- SEARCH (English labels) -->
 <div class="search-box">
   <label for="docs-search" class="sr-only">Search documentation</label>
   <input id="docs-search" type="search" placeholder="Search..." autocomplete="off" />
   <ul id="docs-search-results" class="search-results" aria-live="polite"></ul>
 </div>
-
 <hr class="sidebar-sep" />
 
 <!-- NAVIGATION -->
@@ -16,31 +14,35 @@
   <ul class="nav-root">
 
     {%- comment -%}
-      Collect site pages once, excluding items we never want in the nav.
-      We also honor `nav_exclude: true` from page front matter.
+    Collect site pages once, excluding items we never want in the nav.
+    We also honor `nav_exclude: true` from page front matter.
     {%- endcomment -%}
     {% assign all_pages = site.html_pages | where_exp: "p", "p.nav_exclude != true" %}
-    <!--{% assign all_pages = site.pages | where_exp: "p", "p.nav_exclude != true" %} -->
     {% assign all_pages = all_pages
-        | reject: "name", "search.json"
-        | reject: "name", "feed.xml"
-    %}
-
+      | reject: "name", "search.json"
+      | reject: "name", "feed.xml" %}
 
     {%- comment -%}
-      1) Root-level pages (source is 'documentation/'): page.dir == "/"
-         Exclude index/README from the visible list.
-         Sort: first by nav_order (if present), then by title.
+    1) Root-level pages (source is 'documentation/'): page.dir == "/"
+       Mostra l'index della radice in testa, poi le altre.
     {%- endcomment -%}
     {% assign root_pages = all_pages | where: "dir", "/" %}
-    {% assign root_pages = root_pages
-        | reject: "name", "index.html"
-        | reject: "name", "README.md"
-    %}
 
-    {% assign root_with_order    = root_pages | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
-    {% assign root_without_order = root_pages | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
-    {% assign root_sorted        = root_with_order | concat: root_without_order %}
+    {%- comment -%} Index della radice (html/md) {%- endcomment -%}
+    {% assign root_index_html = root_pages | where: "name", "index.html" %}
+    {% assign root_index_md   = root_pages | where: "name", "index.md" %}
+    {% assign root_index = root_index_html | concat: root_index_md %}
+
+    {%- comment -%} Altre pagine root (escludi index e README) {%- endcomment -%}
+    {% assign root_non_index = root_pages
+      | reject: "name", "index.html"
+      | reject: "name", "index.md"
+      | reject: "name", "README.md" %}
+
+    {%- comment -%} Ordine: nav_order poi alfabetico {%- endcomment -%}
+    {% assign root_with_order = root_non_index | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
+    {% assign root_without_order = root_non_index | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
+    {% assign root_sorted = root_index | concat: root_with_order | concat: root_without_order %}
 
     {% if root_sorted.size > 0 %}
       <li class="nav-group">
@@ -57,10 +59,10 @@
       </li>
     {% endif %}
 
-
     {%- comment -%}
     2) Folder groups shown in the sidebar.
-    Add/remove folders here. If you want to include `assetts`, add it to the list.
+       Index della radice del gruppo in cima; escludi gli index delle sottocartelle.
+       Aggiungi/rimuovi nomi di cartelle nella variabile `groups`.
     {%- endcomment -%}
     {% assign groups = "qgis,tables" | split: "," %}
     {% for g in groups %}
@@ -70,24 +72,29 @@
       {%- comment -%} Tutte le pagine del gruppo (radice + sottocartelle) {%- endcomment -%}
       {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
 
-      {%- comment -%} Pagine nella radice del gruppo (dir == "/<gruppo>/") {%- endcomment -%}
+      {%- comment -%} Pagine nella radice del gruppo {%- endcomment -%}
       {% assign group_root_pages = group_pages | where: "dir", group_dir %}
 
-      {%- comment -%} Index della radice del gruppo (compatibile .html e .md) {%- endcomment -%}
+      {%- comment -%} Index della radice del gruppo (html/md) {%- endcomment -%}
       {% assign index_html = group_root_pages | where: "name", "index.html" %}
       {% assign index_md   = group_root_pages | where: "name", "index.md" %}
       {% assign group_index = index_html | concat: index_md %}
 
-      {%- comment -%} Pagine della radice del gruppo ESCLUSA l'index {%- endcomment -%}
-      {% assign root_non_index = group_root_pages | reject: "name", "index.html" | reject: "name", "index.md" %}
+      {%- comment -%} Altre pagine della radice (no index) {%- endcomment -%}
+      {% assign root_non_index = group_root_pages
+        | reject: "name", "index.html"
+        | reject: "name", "index.md" %}
 
-      {%- comment -%} Pagine nelle sottocartelle del gruppo (dir != "/<gruppo>/") {%- endcomment -%}
+      {%- comment -%} Pagine nelle sottocartelle (escludi i loro index) {%- endcomment -%}
       {% assign deeper_pages = group_pages | where_exp: "p", "p.dir != group_dir" %}
+      {% assign deeper_non_index = deeper_pages
+        | reject: "name", "index.html"
+        | reject: "name", "index.md" %}
 
-      {%- comment -%} Non-index = sottocartelle + root senza l'index {%- endcomment -%}
-      {% assign non_index = deeper_pages | concat: root_non_index %}
+      {%- comment -%} Non-index complessivo {%- endcomment -%}
+      {% assign non_index = root_non_index | concat: deeper_non_index %}
 
-      {%- comment -%} Mantieni la logica corrente: nav_order poi alfabetico per titolo {%- endcomment -%}
+      {%- comment -%} Ordine: nav_order poi alfabetico {%- endcomment -%}
       {% assign gp_with_order = non_index | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
       {% assign gp_without_order = non_index | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
 
@@ -100,9 +107,13 @@
           <ul class="nav-group-list">
             {% for page in gp_sorted %}
               {% assign label = page.title | default: page.name %}
-              {% assign label = label
-                | split:'.' | first
-                | replace:'-',' ' | replace:'_',' ' %}
+
+              {%- comment -%}
+              Se in futuro volessi mostrare gli index delle sottocartelle, rimuovi i due `reject` più su
+              e qui calcola l'etichetta come nome della cartella per le pagine `index.*`.
+              {%- endcomment -%}
+
+              {% assign label = label | split:'.' | first | replace:'-',' ' | replace:'_',' ' %}
               <li>
                 <a href="{{ page.url | relative_url }}">{{ label }}</a>
               </li>
@@ -112,17 +123,15 @@
       {% endif %}
     {% endfor %}
 
-
-<!--     {%- comment -%}
-      3) Extras (static links)
-    {%- endcomment -%} -->
-  
-    <!-- <li class="nav-group">
+    <!-- 3) Extras (static links) - opzionale -->
+    {%- comment -%}
+    <li class="nav-group">
       <span class="nav-group-title">Extras</span>
       <ul class="nav-group-list">
         <li><a href="{{ '/feed.xml' | relative_url }}">Feed</a></li>
       </ul>
-    </li> -->
+    </li>
+    {%- endcomment -%}
 
   </ul>
 </nav>
@@ -131,7 +140,7 @@
 <script src="https://unpkg.com/lunr/lunr.js"></script>
 <script>
 (function() {
-  const input   = document.getElementById('docs-search');
+  const input = document.getElementById('docs-search');
   const results = document.getElementById('docs-search-results');
   let idx = null, docs = [];
 
@@ -139,8 +148,8 @@
   function prettifyLabel(title, url) {
     // fallback: take the last path segment from the URL
     let label = (title && title.length) ? title : (url.split('/').pop() || url);
-    label = label.replace(/\.md$/i, '');   // remove trailing ".md"
-    label = label.replace(/[-_]+/g, ' ');  // turn dashes/underscores into spaces
+    label = label.replace(/\.md$/i, ''); // remove trailing ".md"
+    label = label.replace(/[-_]+/g, ' '); // turn dashes/underscores into spaces
     return label;
   }
 
@@ -151,7 +160,7 @@
       docs = data;
       idx = lunr(function () {
         this.ref('url');
-        this.field('title',   { boost: 10 });
+        this.field('title', { boost: 10 });
         this.field('content');
         data.forEach(function (doc) { this.add(doc); }, this);
       });
@@ -163,15 +172,12 @@
     const q = this.value.trim();
     results.innerHTML = '';
     if (!idx || q.length < 2) return;
-
     const matches = idx.search(q);
     matches.slice(0, 12).forEach(m => {
       const item = docs.find(d => d.url === m.ref);
       if (!item) return;
-
       // Use prettified label (no .md, nicer spacing)
       const label = prettifyLabel(item.title, item.url);
-
       const li = document.createElement('li');
       li.className = 'search-item';
       li.innerHTML = '<a href="' + item.url + '">' + label + '</a>';
