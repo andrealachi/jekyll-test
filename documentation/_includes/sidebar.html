@@ -57,6 +57,7 @@
       </li>
     {% endif %}
 
+
     {%- comment -%}
     2) Folder groups shown in the sidebar.
     Add/remove folders here. If you want to include `assetts`, add it to the list.
@@ -66,27 +67,31 @@
       {% assign group_prefix = g | append: "/" %}
       {% assign group_dir = "/" | append: group_prefix %}  {%- comment -%} es. "/qgis/" {%- endcomment -%}
 
-      {%- comment -%} Tutte le pagine del gruppo (sottocartelle incluse) {%- endcomment -%}
+      {%- comment -%} Tutte le pagine del gruppo (radice + sottocartelle) {%- endcomment -%}
       {% assign group_pages = all_pages | where_exp: "p", "p.path contains group_prefix" %}
 
-      {%- comment -%} 1) Index SOLO della radice del gruppo (compatibile .html e .md) {%- endcomment -%}
-      {% assign index_html = group_pages | where: "dir", group_dir | where: "name", "index.html" %}
-      {% assign index_md   = group_pages | where: "dir", group_dir | where: "name", "index.md" %}
+      {%- comment -%} Pagine nella radice del gruppo (dir == "/<gruppo>/") {%- endcomment -%}
+      {% assign group_root_pages = group_pages | where: "dir", group_dir %}
+
+      {%- comment -%} Index della radice del gruppo (compatibile .html e .md) {%- endcomment -%}
+      {% assign index_html = group_root_pages | where: "name", "index.html" %}
+      {% assign index_md   = group_root_pages | where: "name", "index.md" %}
       {% assign group_index = index_html | concat: index_md %}
 
-      {%- comment -%} 2) Tutto il resto, escludendo quell'index della radice {%- endcomment -%}
-      {% assign non_index = group_pages
-          | where_exp: "p", "p.dir != group_dir or (p.name != 'index.html' and p.name != 'index.md')" %}
+      {%- comment -%} Pagine della radice del gruppo ESCLUSA l'index {%- endcomment -%}
+      {% assign root_non_index = group_root_pages | reject: "name", "index.html" | reject: "name", "index.md" %}
 
-      {%- comment -%} 3) Mantieni l'ordinamento attuale: nav_order poi alfabetico {%- endcomment -%}
-      {% assign gp_with_order = non_index
-          | where_exp: "p", "p.nav_order != nil"
-          | sort: "nav_order" %}
-      {% assign gp_without_order = non_index
-          | where_exp: "p", "p.nav_order == nil"
-          | sort: "title" %}
+      {%- comment -%} Pagine nelle sottocartelle del gruppo (dir != "/<gruppo>/") {%- endcomment -%}
+      {% assign deeper_pages = group_pages | where_exp: "p", "p.dir != group_dir" %}
 
-      {%- comment -%} 4) Index del gruppo in testa, poi il resto {%- endcomment -%}
+      {%- comment -%} Non-index = sottocartelle + root senza l'index {%- endcomment -%}
+      {% assign non_index = deeper_pages | concat: root_non_index %}
+
+      {%- comment -%} Mantieni la logica corrente: nav_order poi alfabetico per titolo {%- endcomment -%}
+      {% assign gp_with_order = non_index | where_exp: "p", "p.nav_order != nil" | sort: "nav_order" %}
+      {% assign gp_without_order = non_index | where_exp: "p", "p.nav_order == nil" | sort: "title" %}
+
+      {%- comment -%} Index del gruppo in testa, poi il resto {%- endcomment -%}
       {% assign gp_sorted = group_index | concat: gp_with_order | concat: gp_without_order %}
 
       {% if gp_sorted.size > 0 %}
@@ -105,7 +110,7 @@
           </ul>
         </li>
       {% endif %}
-{% endfor %}
+    {% endfor %}
 
 
 <!--     {%- comment -%}
