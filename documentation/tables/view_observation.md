@@ -50,3 +50,142 @@ The `view_observation` definition starts from the `observation` table and **enri
 | `boolean_value`  | Boolean Result                 | `BOOLEAN`  | nullable     | Boolean result of the observation (for Boolean‑type datastreams). |
 | `quantity_value` | Quantity Result                | `REAL`     | nullable     | Numeric result of the observation (for Quantity‑type datastreams). |
 | `count_value`    | Count Result                   | `REAL`     | nullable     | Integer‑valued result of the observation (for Count‑type datastreams). |
+
+
+## SQL Code
+
+```Sql
+CREATE VIEW view_observation AS
+SELECT
+    ------------------------------------------------------------------
+    -- PARENTS (traced back using soilplot as an intermediate node)
+    ------------------------------------------------------------------
+    COALESCE(
+        pe_parent_site.inspireid_localid,
+        sp_parent_site.inspireid_localid,
+        soilsite.inspireid_localid
+    ) AS ssLocalid,
+
+    COALESCE(
+        pe_parent_profile.inspireid_localid,
+        soilprofile.inspireid_localid
+    ) AS spLocalid,
+
+    profileelement.inspireid_localid AS peLocalid,
+
+    ------------------------------------------------------------------
+    -- isderived (label) right after peLocalid
+    ------------------------------------------------------------------
+    CASE
+        WHEN datastream.guid_profileelement IS NOT NULL THEN
+            CASE pe_parent_profile.isderived
+                WHEN 1 THEN 'Derived'
+                WHEN 0 THEN 'Observed'
+            END
+        WHEN datastream.guid_soilprofile IS NOT NULL THEN
+            CASE soilprofile.isderived
+                WHEN 1 THEN 'Derived'
+                WHEN 0 THEN 'Observed'
+            END
+        ELSE NULL
+    END AS isderived,
+
+    ------------------------------------------------------------------
+    -- FOI type
+    ------------------------------------------------------------------
+    CASE
+        WHEN datastream.guid_profileelement    IS NOT NULL THEN 'Profile Element'
+        WHEN datastream.guid_soilprofile       IS NOT NULL THEN 'Soil Profile'
+        WHEN datastream.guid_soilsite          IS NOT NULL THEN 'Soil Site'
+        WHEN datastream.guid_soilderivedobject IS NOT NULL THEN 'Soil Derived Object'
+        ELSE 'None'
+    END AS FOIType,
+
+    ------------------------------------------------------------------
+    -- Depth fields (PE only)
+    ------------------------------------------------------------------
+    profileelement.profileelementdepthrange_uppervalue AS upperLimit,
+    profileelement.profileelementdepthrange_lowervalue AS lowerLimit,
+
+    ------------------------------------------------------------------
+    -- Observation info
+    ------------------------------------------------------------------
+    observation.phenomenontime_start AS time,
+
+    -- CHANGE #1: property from observedproperty
+    observedproperty.name AS property,
+
+    -- CHANGE #2: right after, the unit-of-measure symbol
+    unitofmeasure.symbol AS uom,
+
+    observingprocedure.name          AS procedure,
+    observation.result_text          AS category_value,
+    observation.result_boolean       AS boolean_value,
+
+    ------------------------------------------------------------------
+    -- Numeric values split by type
+    ------------------------------------------------------------------
+    CASE WHEN datastream.type = 'Quantity'
+         THEN observation.result_real
+         ELSE NULL
+    END AS quantity_value,
+
+    CASE WHEN datastream.type = 'Count'
+         THEN observation.result_real
+         ELSE NULL
+    END AS count_value
+
+FROM observation
+JOIN datastream
+     ON observation.guid_datastream = datastream.guid
+
+-- new JOIN (NOT NULL in schema, so we can use INNER JOIN)
+JOIN observedproperty
+     ON datastream.guid_observedproperty = observedproperty.guid
+
+-- unit of measure: present only for type='Quantity' → LEFT JOIN
+LEFT JOIN unitofmeasure
+     ON datastream.code_unitofmeasure = unitofmeasure.code
+
+LEFT JOIN observingprocedure
+     ON datastream.guid_observingprocedure = observingprocedure.guid
+
+------------------------------------------------------------------
+-- Direct FOIs
+------------------------------------------------------------------
+LEFT JOIN soilsite
+     ON datastream.guid_soilsite = soilsite.guid
+
+LEFT JOIN soilprofile
+     ON datastream.guid_soilprofile = soilprofile.guid
+
+LEFT JOIN profileelement
+     ON datastream.guid_profileelement = profileelement.guid
+
+LEFT JOIN soilderivedobject
+     ON datastream.guid_soilderivedobject = soilderivedobject.guid
+
+------------------------------------------------------------------
+-- Parents of profileelement → soilprofile
+------------------------------------------------------------------
+LEFT JOIN soilprofile AS pe_parent_profile
+     ON profileelement.ispartof = pe_parent_profile.guid
+
+------------------------------------------------------------------
+-- Parents of soilprofile → soilplot
+------------------------------------------------------------------
+LEFT JOIN soilplot AS pe_parent_plot
+     ON pe_parent_profile.location = pe_parent_plot.guid
+
+LEFT JOIN soilplot AS sp_parent_plot
+     ON soilprofile.location = sp_parent_plot.guid
+
+------------------------------------------------------------------
+-- Parents of soilplot → soilsite
+------------------------------------------------------------------
+LEFT JOIN soilsite AS pe_parent_site
+     ON pe_parent_plot.locatedon = pe_parent_site.guid
+
+LEFT JOIN soilsite AS sp_parent_site
+     ON sp_parent_plot.locatedon = sp_parent_site.guid;
+```
