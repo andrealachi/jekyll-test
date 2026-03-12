@@ -45,12 +45,12 @@ Customized forms are used to:
 <p>
   <img src="../assets/form_01.webp"
        alt="Fig.1" align="left" width="500">
-On the left side of the interface, a panel ① lists all the records belonging to the layer.  
-Selecting a record from this list displays its attribute content on the right-hand side ②, using the associated customized form.
+On the left side of the interface, a panel ① lists all the records belonging to the layer.  <br>
+Selecting a record from this list displays its attribute content on the right-hand side ②, using the associated customized form.<br>
 
 The attribute toolbar provides two main viewing modes ③:
 <strong>Form View</strong>  Displays the attribute form for a single record at a time.
-<strong>Table View</strong> Shows the attributes in tabular mode, useful for multi-record inspection and quick selection operations.
+<strong>Table View</strong> Shows the attributes in tabular mode, useful for multi-record inspection and quick selection operations.<br>
 
 Selection tools ④ ⑤ determine which records can be opened or edited through the form.  
 </p>

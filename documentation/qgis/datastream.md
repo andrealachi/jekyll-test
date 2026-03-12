@@ -14,7 +14,7 @@ Unlike most attribute‑only tables, **Datastream** includes an **optional geome
 <p>
   <img src="../assets/datas_01.webp"
        alt="Fig.1" align="left" width="500">
-Right-click in the "Layers" panel on the "datastream", ① and from the menu, select "Toggle Editing" ②.
+Right-click in the "Layers" panel on the "datastream", ① and from the menu, select "Toggle Editing" ②.<br>
   
 Alternatively, select only the “datastream” layer ① and click the “Toggle Editing” button ③ in the toolbar.
 </p>
@@ -24,7 +24,7 @@ Alternatively, select only the “datastream” layer ① and click the “Toggl
 <p>
   <img src="../assets/datas_02.webp"
        alt="Fig.1" align="left" width="500">
-A small pencil icon ④ will appear, indicating that the feature is in edit mode.
+A small pencil icon ④ will appear, indicating that the feature is in edit mode.<br>
   
 In the toolbar, select the "Add Polygon Feature" icon ⑤ and draw the geometry of the new "Datastream". ⑥
 </p>
@@ -33,7 +33,7 @@ In the toolbar, select the "Add Polygon Feature" icon ⑤ and draw the geometry 
 <p>
   <img src="../assets/datas_03.webp"
        alt="Fig.1" align="left" width="500">
-Right-click to close the geometry, and the data entry form will appear. ⑦
+Right-click to close the geometry, and the data entry form will appear. ⑦<br>
 
 Use the widgets provided by the form to modify data.
 </p>
@@ -43,7 +43,7 @@ Use the widgets provided by the form to modify data.
 <p>
   <img src="../assets/datas_04.webp"
        alt="Fig.1" align="left" width="500">
-A small pencil icon ④ will appear, indicating that the feature is in edit mode.
+A small pencil icon ④ will appear, indicating that the feature is in edit mode.<br>
   
 Right-click in the "Layers" panel on the "datastream", and from the menu, select "Open Attribute Table" ⑤
 </p>
@@ -52,7 +52,7 @@ Right-click in the "Layers" panel on the "datastream", and from the menu, select
 <p>
   <img src="../assets/datas_05.webp"
        alt="Fig.1" align="left" width="500">
-Click the "Add Feature" buttn; ⑥ a new data‑entry form will appear on the right. ⑦
+Click the "Add Feature" buttn; ⑥ a new data‑entry form will appear on the right. ⑦<br>
 
 Use the widgets provided by the form to modify data.
 </p>
