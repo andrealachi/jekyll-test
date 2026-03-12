@@ -1,4 +1,4 @@
-# Export to Excle
+# Export to Excel
 
 
 QGIS supports exporting layers to a wide range of formats to help you share, analyze, and report your data beyond the GIS environment. This short guide focuses specifically on **exporting to Microsoft Excel (XLSX)** using the project view **`view_observation`** as the working example. The same workflow applies—often with only minor differences—to **most vector layers and database views** you might have in your project.
