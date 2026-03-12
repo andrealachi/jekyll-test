@@ -55,11 +55,11 @@ Click the <strong>Open Data Source Manager</strong> button ① in the QGIS toolb
        alt="Fig.1" align="left" width="500">
   In the window that opens, you can choose from various data sources to import.
   In our example, select <strong>CSV</strong> ② as the source format and proceed with importing the desired file ③.<br>
-   
+  <br> 
   Check the <strong>geometry type</strong> (e.g., WKT or coordinates separated into latitude/longitude) ④.<br>
-  
+  <br>
   Set the correct <strong>Coordinate Reference System (CRS)</strong> ⑤.<br>
-  
+  <br>
   Click <strong>Add</strong> ⑥ to create the layer (in this case, a point layer) in the project.
 </p>
 <br clear="all"><br>
@@ -79,7 +79,7 @@ Click the <strong>Open Data Source Manager</strong> button ① in the QGIS toolb
   <img src="../assets/geom_03.webp"
        alt="Fig.1" align="left" width="500">
 Import the newly created layer (if it is not already present in the project).<br>
-   
+<br>   
 Right‑click the layer name ⑦ and, from the context menu, select <strong>Open Attribute Table</strong> ⑧ to view its data.
 </p>
 <br clear="all"><br>
@@ -89,7 +89,7 @@ Right‑click the layer name ⑦ and, from the context menu, select <strong>Open
   <img src="../assets/geom_04.webp"
        alt="Fig.1" align="left" width="500">
 <strong>Select all</strong> geometries ⑨
-   
+<br>  
 <strong>Copy</strong> the geometries ⑩.
 </p>
 <br clear="all"><br>
@@ -100,9 +100,9 @@ Right‑click the layer name ⑦ and, from the context menu, select <strong>Open
   <img src="../assets/geom_05.webp"
        alt="Fig.1" align="left" width="500">
 Enable <strong>editing mode</strong> on the destination GeoPackage layer using the <strong>Toggle Editing</strong> button ⑪.  <br>
-   
+<br>   
 <strong>Paste</strong> the geometries. ⑫<br>
-
+<br>
 <strong>Save</strong> the changes.
 </p>
 <br clear="all"><br>

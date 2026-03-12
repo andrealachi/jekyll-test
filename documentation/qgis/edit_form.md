@@ -8,7 +8,7 @@
   <img src="../assets/edit_01.webp"
        alt="Fig.1" align="left" width="500">
 This button is available both in the QGIS <strong>Digitizing toolbar</strong> ① and in the <strong>context menu</strong> of each layer ②.<br>
-
+<br>
 In addition, the same button—along with other tools useful for editing—is also available directly <strong>inside the forms</strong> ③ and within the <strong>sub‑forms</strong> ④.  
 </p>
 <br clear="all"><br>

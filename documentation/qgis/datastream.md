@@ -15,7 +15,7 @@ Unlike most attribute‑only tables, **Datastream** includes an **optional geome
   <img src="../assets/datas_01.webp"
        alt="Fig.1" align="left" width="500">
 Right-click in the "Layers" panel on the "datastream", ① and from the menu, select "Toggle Editing" ②.<br>
-  
+<br>
 Alternatively, select only the “datastream” layer ① and click the “Toggle Editing” button ③ in the toolbar.
 </p>
 <br clear="all"><br>
@@ -25,7 +25,7 @@ Alternatively, select only the “datastream” layer ① and click the “Toggl
   <img src="../assets/datas_02.webp"
        alt="Fig.1" align="left" width="500">
 A small pencil icon ④ will appear, indicating that the feature is in edit mode.<br>
-  
+<br>  
 In the toolbar, select the "Add Polygon Feature" icon ⑤ and draw the geometry of the new "Datastream". ⑥
 </p>
 <br clear="all"><br>
@@ -34,7 +34,7 @@ In the toolbar, select the "Add Polygon Feature" icon ⑤ and draw the geometry 
   <img src="../assets/datas_03.webp"
        alt="Fig.1" align="left" width="500">
 Right-click to close the geometry, and the data entry form will appear. ⑦<br>
-
+<br>
 Use the widgets provided by the form to modify data.
 </p>
 <br clear="all"><br>
@@ -44,7 +44,7 @@ Use the widgets provided by the form to modify data.
   <img src="../assets/datas_04.webp"
        alt="Fig.1" align="left" width="500">
 A small pencil icon ④ will appear, indicating that the feature is in edit mode.<br>
-  
+<br>  
 Right-click in the "Layers" panel on the "datastream", and from the menu, select "Open Attribute Table" ⑤
 </p>
 <br clear="all"><br>
@@ -53,7 +53,7 @@ Right-click in the "Layers" panel on the "datastream", and from the menu, select
   <img src="../assets/datas_05.webp"
        alt="Fig.1" align="left" width="500">
 Click the "Add Feature" buttn; ⑥ a new data‑entry form will appear on the right. ⑦<br>
-
+<br>
 Use the widgets provided by the form to modify data.
 </p>
 <br clear="all"><br>
