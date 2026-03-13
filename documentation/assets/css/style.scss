@@ -185,8 +185,10 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
 /* Mobile: niente gutter per usare tutto lo spazio */
 @media (max-width: 960px)  { .docs-shell { padding-left: 12px; } }
 
+/
 /* LIGHTBOX per le immagini*/
 /* Sfondo scuro e centratura */
+/*
 .lightbox {
   display: none;
   position: fixed;
@@ -213,8 +215,10 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+*/
 
 /* Chiudi lightbox cliccando ovunque */
+/*
 .lightbox:target {
   display: block;
 }
@@ -223,3 +227,5 @@ sup[id^="fnref:"] + sup[id^="fnref:"] {
   float: left;
   margin: 0 1rem 1rem 0;
 }
+
+*/

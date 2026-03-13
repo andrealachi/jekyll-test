@@ -44,15 +44,19 @@ Let’s look at each step in detail.
 QGIS allows the import of geometries from various formats, such as CSV, Shapefile, or other GeoPackages. In this example, we will import data from a CSV file.
 
 <p>
-  <img src="../assets/geom_01.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/geom_01.webp" target="_blank">
+    <img src="../assets/geom_01.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 Click the <strong>Open Data Source Manager</strong> button ① in the QGIS toolbar.
 </p>
 <br clear="all"><br>
 
 <p>
-  <img src="../assets/geom_02.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/geom_02.webp" target="_blank">
+    <img src="../assets/geom_02.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
   In the window that opens, you can choose from various data sources to import.
   In our example, select <strong>CSV</strong> ② as the source format and proceed with importing the desired file ③.<br>
   <br> 
