@@ -9,8 +9,10 @@ QGIS supports exporting layers to a wide range of formats to help you share, ana
 
 
 <p>
-  <img src="../assets/exp_exc_01.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/exp_exc_01.webp" target="_blank">
+    <img src="../assets/exp_exc_01.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 ① <strong>Select the object to export</strong> (in this case, your view) and <strong>right‑click</strong> to open the **context menu**.  <br>
  <br>  
 ② Choose <strong>Export</strong>.  <br>
@@ -21,8 +23,10 @@ QGIS supports exporting layers to a wide range of formats to help you share, ana
 <br clear="all"><br>
 
 <p>
-  <img src="../assets/exp_exc_02.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/exp_exc_02.webp" target="_blank">
+    <img src="../assets/exp_exc_02.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
   ④ In the <strong>Export</strong> dialog, select the <strong>output format</strong> you need (for Excel: `MS Office Open XML spreadsheet [XLSX]`).  
 </p>
 <br clear="all"><br>
@@ -30,7 +34,11 @@ QGIS supports exporting layers to a wide range of formats to help you share, ana
 
 <p>
   <img src="../assets/exp_exc_03.webp"
-       alt="Fig.1" align="left" width="500"> 
+       alt="Fig.1" align="left" width="500">
+  <a href="../assets/exp_exc_03.webp" target="_blank">
+    <img src="../assets/exp_exc_03.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 ⑤ Set the <strong>output file name</strong> and <strong>location</strong>. If needed, choose <strong>which fields to export</strong> ⑥ (by default, **all fields** are exported).  <br>
  <br>
 ⑦ <strong>By flagging "Use aliases for exported name"</strong>: column headers are exported using the <strong>field aliases</strong> (or the <strong>Export name</strong> set in the field mapping) instead of the raw database field names. This is useful when the file is intended for <strong>non‑technical users</strong> or when you need <strong>translated headers</strong> If the option is not selected, the <strong>original field names</strong> will be used.<br>
