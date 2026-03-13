@@ -7,6 +7,7 @@ The parent–child relationship is fundamental for modeling complex data in an o
 
 You can explore the GeoPackage tables using [forms](./custom_form.md). 
 ## Parent‑to‑Child Navigation
+
 <p>
   <img src="../assets/nav_form_01.webp"
        alt="Fig.1" align="left" width="500">
@@ -20,6 +21,8 @@ Collapse unnecessary sections ④ to free up vertical space.
 Reduce the width of the left panel (the one showing the list of records) by dragging the divider ⑤, thus reclaiming horizontal space and improving field readability.
 </p>
 <br clear="all"><br>
+
+
 <p>
   <a href="../assets/edit_01.webp" target="_blank">
     <img src="../assets/edit_01.webp"
@@ -34,6 +37,19 @@ Reduce the width of the left panel (the one showing the list of records) by drag
   <strong>sub‑forms</strong> ④.
 </p>
 
+<br clear="all"><br>
+
+
+
+
+<p>
+  <a href="{{ '/assets/edit_01.webp' | relative_url }}" target="_blank" rel="noopener">
+    <img src="{{ '/assets/edit_01.webp' | relative_url }}"
+         alt="Fig.1" class="img-left" width="500">
+  </a>
+  This button is available both in the QGIS <strong>Digitizing toolbar</strong> ①
+  and in the <strong>context menu</strong> of each layer ②.
+</p>
 <br clear="all"><br>
 
 ## Child‑to‑Parent Navigation
