@@ -76,8 +76,10 @@ Click the <strong>Open Data Source Manager</strong> button ① in the QGIS toolb
 
 
 <p>
-  <img src="../assets/geom_03.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/geom_03.webp" target="_blank">
+    <img src="../assets/geom_03.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 Import the newly created layer (if it is not already present in the project).<br>
 <br>   
 Right‑click the layer name ⑦ and, from the context menu, select <strong>Open Attribute Table</strong> ⑧ to view its data.
@@ -86,9 +88,11 @@ Right‑click the layer name ⑦ and, from the context menu, select <strong>Open
 
 
 <p>
-  <img src="../assets/geom_04.webp"
-       alt="Fig.1" align="left" width="500">
-<strong>Select all</strong> geometries ⑨
+  <a href="../assets/geom_04.webp" target="_blank">
+    <img src="../assets/geom_04.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
+<strong>Select all</strong> geometries ⑨ <br>
 <br>  
 <strong>Copy</strong> the geometries ⑩.
 </p>
@@ -97,8 +101,10 @@ Right‑click the layer name ⑦ and, from the context menu, select <strong>Open
 ### 3) Pasting geometries
 
 <p>
-  <img src="../assets/geom_05.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/geom_05.webp" target="_blank">
+    <img src="../assets/geom_05.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 Enable <strong>editing mode</strong> on the destination GeoPackage layer using the <strong>Toggle Editing</strong> button ⑪.  <br>
 <br>   
 <strong>Paste</strong> the geometries. ⑫<br>
@@ -122,17 +128,20 @@ The plugin includes two geoprocessing tools:
 - **ETL_LOAD** — allows easy matching of the source table with the destination geometry table.
 
 <p>
-<img src="../assets/geom_06.webp"
-     alt="Fig.1" align="left" width="500">
-</p>
+  <a href="../assets/geom_06.webp" target="_blank">
+    <img src="../assets/geom_06.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 
 <br clear="all"><br>
 
 
 - **Append Feature To Layer** — handles the copy–paste operation with additional advanced options.
 <p>
-<img src="../assets/geom_07.webp"
-     alt="Fig.1" align="left" width="500">
+  <a href="../assets/geom_07.webp" target="_blank">
+    <img src="../assets/geom_07.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 </p>
 
 <br clear="all"><br>
