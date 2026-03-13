@@ -136,7 +136,7 @@ The plugin includes two geoprocessing tools:
     <img src="../assets/geom_06.webp"
          alt="Fig.1" align="left" width="500">
   </a>
-
+</p>
 <br clear="all"><br>
 
 
