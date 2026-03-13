@@ -33,8 +33,6 @@ QGIS supports exporting layers to a wide range of formats to help you share, ana
 
 
 <p>
-  <img src="../assets/exp_exc_03.webp"
-       alt="Fig.1" align="left" width="500">
   <a href="../assets/exp_exc_03.webp" target="_blank">
     <img src="../assets/exp_exc_03.webp"
          alt="Fig.1" align="left" width="500">
