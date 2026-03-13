@@ -18,14 +18,13 @@ In the <strong>"Soil Profile"</strong> form, you can select the classification y
 </p>
 <br clear="all"><br>
 
+As an example, to follow the workflow, let's take the following classification from the 2006 World Reference Base:
+
 <p>
   <a href="../assets/wrb_00.webp" target="_blank">
     <img src="../assets/wrb_00.webp"
          alt="Fig.1" align="left" width="500">
   </a>
-As an example, to follow the workflow, let's take the following classification from the 2006 World Reference Base: <br>
-<br>
-<br>
 - Indicate the <strong>"Reference Soil Groups"</strong>, which has already been described in the <strong>"Soil Profile"</strong>. <br>
 <br>
 - Specify the <strong>"Qualifier"</strong>, and where applicable, the <strong>"Specifier"</strong>. <br>
