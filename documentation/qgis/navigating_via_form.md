@@ -43,8 +43,8 @@ Reduce the width of the left panel (the one showing the list of records) by drag
 
 
 <p>
-  <a href="{{ '/assets/edit_01.webp' | relative_url }}" target="_blank" rel="noopener">
-    <img src="{{ '/assets/edit_01.webp' | relative_url }}"
+  <a href="{{ '../assets/edit_01.webp' | relative_url }}" target="_blank" rel="noopener">
+    <img src="{{ '../assets/edit_01.webp' | relative_url }}"
          alt="Fig.1" class="img-left" width="500">
   </a>
   This button is available both in the QGIS <strong>Digitizing toolbar</strong> ①
