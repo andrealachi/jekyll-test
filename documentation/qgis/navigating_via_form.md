@@ -29,9 +29,9 @@ Reduce the width of the left panel (the one showing the list of records) by drag
          alt="Fig.1" align="left" width="500">
   </a>
 
-  This button is available both in the QGIS <strong>Digitizing toolbar</strong> ①
-  and in the <strong>context menu</strong> of each layer ②.
-
+  This button is available both in the QGIS <strong>Digitizing toolbar</strong> ① 
+  and in the <strong>context menu</strong> of each layer ②. <br>
+  <br>
   In addition, the same button—along with other tools useful for editing—is also
   available directly <strong>inside the forms</strong> ③ and within the
   <strong>sub‑forms</strong> ④.
@@ -39,20 +39,6 @@ Reduce the width of the left panel (the one showing the list of records) by drag
 
 <br clear="all"><br>
 
-
-
-
-<p>
-  
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <img id="../assets/edit_01.webp" alt="">
-</div>
-
-  </a>
-  This button is available both in the QGIS <strong>Digitizing toolbar</strong> ①
-  and in the <strong>context menu</strong> of each layer ②.
-</p>
-<br clear="all"><br>
 
 ## Child‑to‑Parent Navigation
 
