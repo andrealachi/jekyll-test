@@ -9,12 +9,12 @@ The goal is to provide a simple and reliable workflow that helps the user avoid 
 
 <p>
   <a href="../assets/wrb_01.webp" target="_blank">
-    <img src=".../assets/wrb_01.webp"
+    <img src="../assets/wrb_01.webp"
          alt="Fig.1" align="left" width="500">
   </a>
-Among the attributes of a "Soil Profile", whether it is of type "Observed" or "Derived", there is the option to insert the "World Reference Base" classification ①. <br>
+Among the attributes of a "Soil Profile", whether it is of type <strong>"Observed"</strong>strong> or <strong>"Derived"</strong>strong>, there is the option to insert the <strong>"World Reference Base"</strong>strong> classification ①. <br>
 <br>
-In the "Soil Profile" form, you can select the classification year ② and the "Reference Soil Groups". ③  <br>
+In the <strong>"Soil Profile"</strong>strong> form, you can select the classification year ② and the <strong>"Reference Soil Groups"</strong>strong>. ③  <br>
 </p>
 <br clear="all"><br>
 
@@ -26,13 +26,13 @@ In the "Soil Profile" form, you can select the classification year ② and the "
 As an example, to follow the workflow, let's take the following classification from the 2006 World Reference Base: <br>
 <br>
 <br>
-- Indicate the "Reference Soil Groups", which has already been described in the "Soil Profile". <br>
+- Indicate the <strong>"Reference Soil Groups"</strong>strong>, which has already been described in the <strong>"Soil Profile"</strong>strong>. <br>
 <br>
-- Specify the "Qualifier", and where applicable, the "Specifier". <br>
+- Specify the <strong>"Qualifier"</strong>strong>, and where applicable, the <strong>"Specifier"</strong>strong>. <br>
 <br>
-- Specify the "Qualifier Place", whether it is a prefix or a suffix. <br>
+- Specify the <strong>"Qualifier Place"</strong>strong>, whether it is a prefix or a suffix. <br>
 <br>
-- Finally, define the "Position" of the qualifier within the classification.< br>
+- Finally, define the <strong>"Position"</strong>strong> of the qualifier within the classification.< br>
 </p>
 <br clear="all"><br>
 
@@ -128,7 +128,7 @@ Click the "Save Layer Edits" button ⑤ to save the edits, and then the "Toggle 
     <img src="../assets/wrb_08.webp"
          alt="Fig.1" align="left" width="500">
   </a>
-You can now complete the classification by adding the newly created suffix by returning to the "Soil Profile" form.
+You can now complete the classification by adding the newly created suffix ⑥ by returning to the "Soil Profile" form.
 </p>
 <br clear="all"><br>
 
