@@ -37,7 +37,13 @@ The **Soilwise** GeoPackage is **natively supported by QGIS**, enabling editing,
 
 # Relational Structure of the GeoPackage (INSPIRE UML + STA2 Transposition)
 
-![structure poster](assets/db_structure.webp)
+<p>
+  <a href="assets/db_structure.webp" target="_blank">
+    <img src="assets/db_structure.webp"
+         alt="Fig.1"
+         style="width: 100%; height: auto; display: block;">
+  </a>
+</p>
 
 > [!TIP]
 > Click the image to see it full‑size for better viewing.
