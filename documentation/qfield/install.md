@@ -20,8 +20,10 @@ Installing **QField** is simple and varies depending on the operating system use
 ## Android
 
 <p>
-  <img src="../assets/qfield_01.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/qfield_01.webp" target="_blank">
+    <img src="../assets/qfield_01.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 ① Open <strong>Google Play Store</strong>. <br>
 <br>
 ② Search for <strong>QField</strong>.<br>
@@ -38,8 +40,10 @@ Installing **QField** is simple and varies depending on the operating system use
 ## iOS (iPhone/iPad)
 
 <p>
-  <img src="../assets/qfield_02.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/qfield_02.webp" target="_blank">
+    <img src="../assets/qfield_02.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 ① Open the <strong>App Store</strong>.<br>
 <br>
 ② Search for <strong>QField</strong>.<br>
@@ -57,8 +61,10 @@ Installing **QField** is simple and varies depending on the operating system use
 QField is also available for Windows through the Microsoft Store, ideal for rugged tablets, 2‑in‑1 devices, and laptops used for fieldwork.
 
 <p>
-  <img src="../assets/qfield_03.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/qfield_03.webp" target="_blank">
+    <img src="../assets/qfield_03.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 ①  Open the Microsoft Store on your Windows device.<br>
 <br> 
 ②  Type <strong>"QField”</strong> into the search bar.<br>
