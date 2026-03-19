@@ -13,7 +13,7 @@ This short guide briefly describes:
 
 ### Step‑by‑step procedure
 <p>
-  <img src="../assets/qfield_01.webp"
+  <img src="../assets/qfield_04.webp"
        alt="Fig.1" align="left" width="500">
 <strong>Open QGIS</strong> (Desktop).<br>
 <br>   
@@ -40,7 +40,7 @@ Select <strong>QFieldSync</strong> ③ and click <strong>Install Plugin</strong>
 The provided GeoPackage contains **two different QGIS projects** that point to the **same data source** (the same layers/tables in the same `.gpkg`):
 
 <p>
-  <img src="../assets/qfield_01.webp"
+  <img src="../assets/qfield_05.webp"
        alt="Fig.1" align="left" width="500">
 ① <strong>Project `_PRJ_SO` for QGIS – Optimized for desktop*</strong> use (full symbology, views, and tools for office work).<br>
 <br>
@@ -60,7 +60,7 @@ Both projects use **the same GeoPackage** as their data source; this ensures con
 ## Exporting/Packaging the QGIS project for QField
 
 <p>
-  <img src="../assets/qfield_01.webp"
+  <img src="../assets/qfield_06.webp"
        alt="Fig.1" align="left" width="500">
 From the <strong>QFieldSync</strong> menu or toolbar, choose <strong>Export/Package for QField</strong>. ①<br>
 <br>   
@@ -87,13 +87,15 @@ Select the <strong>destination folder</strong>. ② <br>
 ### Typical resulting structure:
 
 <p>
-  <img src="../assets/qfield_01.webp"
+  <img src="../assets/qfield_07.webp"
        alt="Fig.1" align="left" width="500">
 /Project_QField/<br>
-├─ <strong><project>.qgs </strong>        # QGIS/QField project file<br>
-├─ <strong><database>.gpkg </strong>      # Data store (GeoPackage)<br>
-├─ <strong><image>.png   </strong>        # Image used by the project (see notes below)<br>
-└─ <strong><package>.zip </strong>        # Archive for distribution/transfer/Project_QField/
+├─ <strong><project>.qgs </strong>        # ① QGIS/QField project file<br>
+├─ <strong><image>.png   </strong>        # ② Image used by the project (see notes below)<br>
+├─ <strong><package>.zip </strong>        # ③ Archive for distribution/transfer/Project_QField/<br>
+└─ <strong><database>.gpkg </strong>      # ④ Data store (GeoPackage)
+
+
 <br clear="all"><br> 
 
 
