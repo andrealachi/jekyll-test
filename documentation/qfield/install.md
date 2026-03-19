@@ -65,15 +65,15 @@ QField is also available for Windows through the Microsoft Store, ideal for rugg
 <br>  
 ③  Select the official <strong>"QField”</strong> for Windowsapp developed by OPENGIS.ch.<br>
 <br>
-④ Click<strong>Install</strong> to start the download and automatic installation.
+④ Click <strong>Install</strong> to start the download and automatic installation.
 </p>
 <br clear="all"><br> 
 
 
 >[!NOTE]
 > The app can be installed without administrative privileges (depending on company policies).  
-
+>
 > Once installed, QField will appear in the Start menu like any other Windows app.  
-
+>
 > It is particularly suitable for tablets with integrated GPS or rugged devices used for fieldwork.
 
