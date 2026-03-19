@@ -90,12 +90,12 @@ Select the <strong>destination folder</strong>. ② <br>
   <img src="../assets/qfield_07.webp"
        alt="Fig.1" align="left" width="500">
 /Project_QField/<br>
-├─ <strong><project>.qgs </strong>        # ① QGIS/QField project file<br>
-├─ <strong><image>.png   </strong>        # ② Image used by the project (see notes below)<br>
-├─ <strong><package>.zip </strong>        # ③ Archive for distribution/transfer/Project_QField/<br>
-└─ <strong><database>.gpkg </strong>      # ④ Data store (GeoPackage)
-
-
+├─ <strong>project.qgs </strong> ① QGIS/QField project file.<br>
+├─ <strong>image.png   </strong> ② Image used by the project (see notes below).<br>
+├─ <strong>package.zip </strong> ③ Archive for distribution/transfer/Project_QField/<br>
+└─ <strong>database.gpkg </strong> ④ Data store (GeoPackage).
+</p> 
+  
 <br clear="all"><br> 
 
 
