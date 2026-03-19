@@ -13,8 +13,10 @@ This short guide briefly describes:
 
 ### Step‑by‑step procedure
 <p>
-  <img src="../assets/qfield_04.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/qfield_04.webp" target="_blank">
+    <img src="../assets/qfield_04.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 <strong>Open QGIS</strong> (Desktop).<br>
 <br>   
 ① Go to <strong>Plugins → Manage and Install Plugins…</strong> <br>
@@ -40,8 +42,10 @@ Select <strong>QFieldSync</strong> ③ and click <strong>Install Plugin</strong>
 The provided GeoPackage contains **two different QGIS projects** that point to the **same data source** (the same layers/tables in the same `.gpkg`):
 
 <p>
-  <img src="../assets/qfield_05.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/qfield_05.webp" target="_blank">
+    <img src="../assets/qfield_05.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 ① <strong>Project `_PRJ_SO` for QGIS – Optimized for desktop*</strong> use (full symbology, views, and tools for office work).<br>
 <br>
 ②  <strong>Project `_PRJ_SO_QField` for QField – Optimized for mobile devices</strong> with <strong>custom forms</strong>, pre‑filled fields, simplified widgets, and constraints for field data capture.<br>
@@ -60,8 +64,10 @@ Both projects use **the same GeoPackage** as their data source; this ensures con
 ## Exporting/Packaging the QGIS project for QField
 
 <p>
-  <img src="../assets/qfield_06.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/qfield_06.webp" target="_blank">
+    <img src="../assets/qfield_06.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 From the <strong>QFieldSync</strong> menu or toolbar, choose <strong>Export/Package for QField</strong>. ①<br>
 <br>   
 Select the <strong>destination folder</strong>. ② <br>
@@ -87,8 +93,10 @@ Select the <strong>destination folder</strong>. ② <br>
 ### Typical resulting structure:
 
 <p>
-  <img src="../assets/qfield_07.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/qfield_07.webp" target="_blank">
+    <img src="../assets/qfield_07.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
 /Project_QField/<br>
 ├─ <strong>project.qgs </strong> ① QGIS/QField project file.<br>
 ├─ <strong>image.png   </strong> ② Image used by the project (see notes below).<br>
