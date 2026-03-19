@@ -46,7 +46,7 @@ The provided GeoPackage contains **two different QGIS projects** that point to t
     <img src="../assets/qfield_05.webp"
          alt="Fig.1" align="left" width="500">
   </a>
-① <strong>Project `_PRJ_SO` for QGIS – Optimized for desktop*</strong> use (full symbology, views, and tools for office work).<br>
+① <strong>Project `_PRJ_SO` for QGIS – Optimized for desktop</strong> use (full symbology, views, and tools for office work).<br>
 <br>
 ②  <strong>Project `_PRJ_SO_QField` for QField – Optimized for mobile devices</strong> with <strong>custom forms</strong>, pre‑filled fields, simplified widgets, and constraints for field data capture.<br>
 </p>
