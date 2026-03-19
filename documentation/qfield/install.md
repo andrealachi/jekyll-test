@@ -1,81 +1,79 @@
 
-# Cos’è QField
-**QField** è un’applicazione mobile sviluppata da *OPENGIS.ch* progettata per portare sul campo la potenza e la flessibilità dei progetti GIS creati in **QGIS**. L’obiettivo principale di QField è permettere a tecnici, ricercatori e operatori sul territorio di raccogliere, consultare ed aggiornare dati geografici direttamente da smartphone o tablet, mantenendo una **piena interoperabilità** con l’ambiente QGIS desktop.
+# What is QField
+**QField** is a mobile application developed by *OPENGIS.ch* designed to bring the power and flexibility of GIS projects created in **QGIS** directly into the field. The main goal of QField is to allow technicians, researchers, and field operators to collect, view, and update geographic data directly from a smartphone or tablet, while maintaining **full interoperability** with the QGIS desktop environment.
 
-Grazie a un’interfaccia intuitiva, ottimizzata per dispositivi touch e per l’uso in condizioni operative reali, QField riduce al minimo le operazioni manuali e offre strumenti rapidi per la compilazione di form, la geolocalizzazione e l’acquisizione di foto e media.
+Thanks to an intuitive interface optimized for touch devices and real-world working conditions, QField minimizes manual operations and provides fast tools for form filling, geolocation, and the acquisition of photos and media.
 
-#### Caratteristiche principali
-- **Editing offline/online** – Permette di lavorare anche in assenza di connessione, salvando le modifiche localmente con sincronizzazione successiva.
-- **Moduli personalizzati** – QField interpreta e utilizza le form configurate in QGIS (regole, widget, campi obbligatori, valori predefiniti).
-- **Gestione dati tramite GeoPackage** – Un unico contenitore per dati vettoriali, raster, allegati e configurazioni.
-- **Interfaccia touch ottimizzata** – Strumenti facilmente utilizzabili anche con una mano.
-- **Sincronizzazione con QGIS tramite QFieldSync** – Consente preparazione, esportazione e importazione dei progetti.
-- **Supporto QFieldCloud (opzionale)** – Per collaborazione multi‑utente in tempo reale.
+#### Main features
+- **Offline/online editing** – Allows work even without a connection, saving changes locally with later synchronization.
+- **Custom forms** – QField interprets and uses forms configured in QGIS (rules, widgets, required fields, default values).
+- **Data management via GeoPackage** – A single container for vector data, raster files, attachments, and configurations.
+- **Optimized touch interface** – Tools that can be easily used even with one hand.
+- **Synchronization with QGIS through QFieldSync** – Enables preparation, export, and import of projects.
+- **QFieldCloud support (optional)** – For real-time multi-user collaboration.
 
 
 
-## Installazione di QField (Android, iOS, Windows)
-L’installazione di **QField** è semplice e varia a seconda del sistema operativo utilizzato. L’app è disponibile per **Android**, **iOS** e **Windows**, con funzionalità coerenti e adattate ai diversi dispositivi.
+## Installing QField (Android, iOS, Windows)
+Installing **QField** is simple and varies depending on the operating system used. The app is available for **Android**, **iOS**, and **Windows**, with consistent functionality adapted to different devices.
 
 ## Android
 
 <p>
   <img src="../assets/qfield_01.webp"
        alt="Fig.1" align="left" width="500">
-① Aprire <strong>Google Play Store.</strong> <br>
+① Open <strong>Google Play Store</strong>. <br>
 <br>
-② Cercare <strong>QField</strong>.<br>
+② Search for <strong>QField</strong>.<br>
 <br>
-③ Selezionare l’app ufficiale <strong>OPENGIS.ch.</strong> <br>
+③ Select the official <strong>OPENGIS.ch</strong> app.<br>
 <br>
-④ Toccare <strong>Installa</strong>.
+④ Tap <strong>Install</strong>.
 </p>
 <br clear="all"><br> 
 
 >[!NOTE]
-> Compatibile con smartphone, tablet e dispositivi rugged utilizzati in ambienti operativi.
+> Compatible with smartphones, tablets, and rugged devices used in field operations.
 
 ## iOS (iPhone/iPad)
 
 <p>
   <img src="../assets/qfield_02.webp"
        alt="Fig.1" align="left" width="500">
-① Aprire <strong>App Store</strong>.<br>
+① Open the <strong>App Store</strong>.<br>
 <br>
-② Cercare <strong>QField</strong>.<br>
+② Search for <strong>QField</strong>.<br>
 <br>
-③ Toccare <strong>Ottieni</strong>.
+③ Tap <strong>Get</strong>.
 </p>
 <br clear="all"><br> 
 
 
 >[!NOTE]
->Su iOS il trasferimento dei file può richiedere l’uso dell’app File o servizi cloud.
+>On iOS, file transfer may require the Files app or cloud services.
 
 
 ## Windows (tablet rugged, Surface, laptop)
-QField è disponibile anche per Windows tramite il Microsoft Store, ideale per tablet rugged, dispositivi 2‑in‑1 e portatili utilizzati per attività sul campo.
-Installazione
+QField is also available for Windows through the Microsoft Store, ideal for rugged tablets, 2‑in‑1 devices, and laptops used for fieldwork.
 
 <p>
   <img src="../assets/qfield_03.webp"
        alt="Fig.1" align="left" width="500">
-①  Aprire il Microsoft Store sul dispositivo Windows.<br>
+①  Open the Microsoft Store on your Windows device.<br>
 <br> 
-②  Nella barra di ricerca digitare <strong>"QField”</strong>.<br>
+②  Type <strong>"QField”</strong> into the search bar.<br>
 <br>  
-③  Selezionare l’app ufficiale QField for Windows sviluppata da OPENGIS.ch.<br>
+③  Select the official <strong>"QField”</strong> for Windowsapp developed by OPENGIS.ch.<br>
 <br>
-④ Fare clic su <strong>Installa</strong> per avviare il download e l’installazione automatica.
+④ Click<strong>Install</strong> to start the download and automatic installation.
 </p>
 <br clear="all"><br> 
 
 
 >[!NOTE]
->L’app può essere installata senza privilegi amministrativi (a seconda delle policy aziendali).
->
->Una volta installata, QField comparirà nel menu Start come qualsiasi altra app Windows.
->
->È particolarmente indicata per tablet con GPS integrato o dispositivi rugged per lavori sul campo.
+> The app can be installed without administrative privileges (depending on company policies).  
 
+> Once installed, QField will appear in the Start menu like any other Windows app.  
+
+> It is particularly suitable for tablets with integrated GPS or rugged devices used for fieldwork.
 
