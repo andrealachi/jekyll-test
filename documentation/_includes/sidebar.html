@@ -89,10 +89,10 @@
     {% endif %}
 
     {%- comment -%}
-    2) Folder groups shown in the sidebar (qgis, tables, ...)
+    2) Folder groups shown in the sidebar (qgis,qfield, tables, ...)
        Index del gruppo in cima; escludi index delle sottocartelle e dedup per URL normalizzato.
     {%- endcomment -%}
-    {% assign groups = "qgis,tables" | split: "," %}
+    {% assign groups = "qgis,qfield,tables" | split: "," %}
     {% for g in groups %}
       {% assign group_prefix = g | append: "/" %}
       {% assign group_dir = "/" | append: group_prefix %}
