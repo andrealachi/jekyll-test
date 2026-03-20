@@ -132,8 +132,8 @@ Select the <strong>destination folder</strong>. ② <br>
 ## Synchronization of the QField‑edited project in the SoilWise Geopackage
 
 <p>
-  <a href="../assets/qfield_06.webp" target="_blank">
-    <img src="../assets/qfield_06.webp"
+  <a href="../assets/qfield_10.webp" target="_blank">
+    <img src="../assets/qfield_10.webp"
          alt="Fig.1" align="left" width="500">
   </a>
 From the <strong>QFieldSync</strong> menu or toolbar, choose <strong>Sinchronize from QField</strong>. ①<br>
