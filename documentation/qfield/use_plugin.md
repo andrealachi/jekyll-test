@@ -127,3 +127,19 @@ Select the <strong>destination folder</strong>. ② <br>
 >[!WARNING]
 >  **Write errors:** make sure layers are not read‑only and that the device allows writing to the project folder.  
 > **Heavy rasters:** consider **resampling** or using lighter tiles for better performance on mobile.
+
+
+## Synchronization of the QField‑edited project in the SoilWise Geopackage
+
+<p>
+  <a href="../assets/qfield_06.webp" target="_blank">
+    <img src="../assets/qfield_06.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
+From the <strong>QFieldSync</strong> menu or toolbar, choose <strong>Sinchronize from QField</strong>. ①<br>
+<br>   
+Select the <strong>folder containing </strong> ②  the QField project that you have copied back to your computer after the editing session, or directly access the project folder on the device if it is still connected. <br>
+<br>   
+③ <strong>Sinchronize</strong> <br>
+</p>
+<br clear="all"><br> 
