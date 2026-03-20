@@ -2,8 +2,8 @@
 
 ## Open Soilwise Project
 <p>
-  <a href="../assets/qfield_05.webp" target="_blank">
-    <img src="../assets/qfield_05.webp"
+  <a href="../assets/qfield_08.webp" target="_blank">
+    <img src="../assets/qfield_08.webp"
          alt="Fig.1" align="left" width="500">
   </a>
 Start <strong>QField</strong>.<br>
@@ -28,8 +28,8 @@ Wait for layers and styles to load.
 
 ### Layer Panel
 <p>
-  <a href="../assets/qfield_05.webp" target="_blank">
-    <img src="../assets/qfield_05.webp"
+  <a href="../assets/qfield_09.webp" target="_blank">
+    <img src="../assets/qfield_09.webp"
          alt="Fig.1" align="left" width="500">
   </a>
 Visibility ① <strong>on</strong> - ② <strong>off</strong> <br>
