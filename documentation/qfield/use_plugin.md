@@ -7,7 +7,8 @@ This short guide briefly describes:
 - how to **transfer the data to the device** for use with QField (Android, iOS, Windows).
 
 > [!IMPORTANT]
-> This is an introductory guide; for more details on using QField and its plugin, please refer to the [official documentation]( https://docs.qfield.org/).
+> This is an introductory guide; for more details on using QField and its plugin, please refer to the  official [QFieldSync for Cable Packaging](https://docs.qfield.org/get-started/tutorials/get-started-qfs/) documentation.
+
 
 ## Install the QField plugin from QGIS
 
