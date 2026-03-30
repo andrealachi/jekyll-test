@@ -47,7 +47,7 @@ Double-click on it, and the project will open.
 > Loading only a subset of layers may prevent records from being saved: QGIS cannot display or manage related objects if their corresponding layers are not loaded, and due to **relationships and internal database triggers**, this can lead to errors or failed save operations. 
 
 > [!CAUTION]
-The GeoPackage contains two separate QGIS project files: one customized specifically for desktop use, named **_PRJ_SO**, and another configured for mobile data collection with QField, named **_PRJ_SO_Qfield**. Although both projects can be opened and used in QGIS, the **_PRJ_SO** project has been explicitly designed to take full advantage of QGIS capabilities, including advanced layer configurations, customized forms, validation rules, and all desktop-oriented functionalities described in this document.
+>The GeoPackage contains two separate QGIS project files: one customized specifically for desktop use, named **_PRJ_SO**, and another configured for mobile data collection with QField, named **_PRJ_SO_Qfield**. Although both projects can be opened and used in QGIS, the **_PRJ_SO** project has been explicitly designed to take full advantage of QGIS capabilities, including advanced layer configurations, customized forms, validation rules, and all desktop-oriented functionalities described in this document.
 > 
 > For this reason, users are strongly advised to work with the **_PRJ_SO** project **when operating in QGIS**, ensuring optimal performance and full access to the project’s intended features.
 
