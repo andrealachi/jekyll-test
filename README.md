@@ -55,7 +55,7 @@ The SoilWise GeoPackage is designed to be:
 
 ---
 ## Installation / Access
-No installation is required. A GeoPackage is a single, portable file (.gpkg) that you simply download and open. GeoPackage is an SQLite database container, so its content can be accessed and updated directly without intermediate format conversions.
+No installation is required. A GeoPackage is a single, portable file (.gpkg) that you simply [download](geopackage/SoilWise_empty/) and open. GeoPackage is an SQLite database container, so its content can be accessed and updated directly without intermediate format conversions.
 
 ### Recommended usage (GIS)
 The GeoPackage can be used in any GIS that supports the GeoPackage format. We recommend QGIS as the reference GIS, and this repository provides custom QGIS forms and styles to facilitate data entry and visualization. 
@@ -81,7 +81,8 @@ Execute the SQL instructions using the provided SQL files (located in geopackage
 ---
 
 ## Usage
-This repository is meant to be used together with its online technical documentation, - https://soilwise-he.github.io/Geopackage-so/ - which explains how the GeoPackage is structured and how it behaves as a database, before you start editing or importing data. The documentation (published as GitHub Pages) provides an overview of the SoilWise GeoPackage design, the INSPIRE‑derived relational model, and the practical guidance needed to populate the database correctly—especially where constraints, triggers, and cross‑table dependencies matter. 
+This repository is meant to be used together with its online technical documentation, - https://soilwise-he.github.io/Geopackage-so/ - which explains how the GeoPackage is structured and how it behaves as a database, before you start editing or importing data. The documentation (published as GitHub Pages) provides an overview of the SoilWise GeoPackage design, the INSPIRE‑derived relational model, and the practical guidance needed to populate the database correctly—especially where constraints, triggers, and cross‑table dependencies matter.
+
 In particular, the Data Loading & Modelling Guide describes a deterministic loading order and data‑entry rules (e.g., the logical flow Site → Plot → Profile → Elements, observed vs derived objects, horizon vs layer behavior, and STA2 integration), and points you to the authoritative SQL/DDL definition for constraints and triggers. 
 Complementary summaries (e.g., cascade behavior) help you understand what happens when rows are deleted or updated across related tables—useful when maintaining integrity in a relational GeoPackage. 
 
