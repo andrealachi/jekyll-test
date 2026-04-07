@@ -2,23 +2,18 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Zenodo DOI](https://zenodo.org/badge/doi/10.5281/zenodo.18246824.svg)](https://doi.org/10.5281/zenodo.18246824)
+![QGIS](https://img.shields.io/badge/QGIS-3.44%2B-589632?logo=qgis&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite3-3-003B57?logo=sqlite&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/soilwise-he/soil-health-knowledge-graph)
+![R](https://img.shields.io/badge/R-4.0%2B-276DC3?logo=r&logoColor=white)
 
 
-<p>
-<a href="http://oops.linkeddata.es">
-<img src="https://oops.linkeddata.es/images/conformance/oops_free.png"
-alt="free pitfalls were found" height="69.6" width="100" /></a>
-</p>
-
-
-## ✨ Abstract
+## Abstract
 This repository delivers a streamlined **INSPIRE‑aligned soil database** in **GeoPackage (SQLite)** format, designed to improve interoperability and usability of soil datasets across Europe. Building on the EJP SOIL INSPIRE‑SO template, SoilWise provides an updated logical model that remains faithful to the INSPIRE Soil conceptual model while being practical for GIS workflows. A key novelty is the integration pathway toward **OGC SensorThings API 2.0 (STA2)** to complement “data‑at‑rest” soil datasets with “data‑in‑motion” observation time series, enabling near‑real‑time interoperability for soil monitoring networks and services. Overall, the combined approach supports **FAIR** soil information sharing by reducing provider burden and improving consumer usability in support of EU soil policies and monitoring needs.
 
 ---
 
-## 📚 Knowledge Sources
+## Knowledge Sources
 This work is based on the following primary normative and technical resources:
 
 - INSPIRE Soil theme: conceptual model (UML), feature catalogue, and implementation guidance (INSPIRE Soil Technical Guidelines).
@@ -30,7 +25,7 @@ This work is based on the following primary normative and technical resources:
 
 ---
 
-## 🧩 Conceptual Model
+## Conceptual Model
 The GeoPackage schema is a **relational transposition** of the INSPIRE Soil conceptual model (UML), preserving the core “soil investigation chain” and relationships:
 
 - **SoilSite** → context/area of investigation  
@@ -41,14 +36,14 @@ The GeoPackage schema is a **relational transposition** of the INSPIRE Soil conc
 
 In addition, the model includes an **observational component** aligned with **STA2** concepts (e.g., Things, Datastreams, Observations, Sensors, ObservedProperties) to support time‑series exposure via standards‑based services.
 
-### 🖼️ Data model diagram
-Interactive model diagram: https://dbdiagram.io/d/SoilWise_Geopackage-69399847e877c6307451317a
-
-> Tip: for GitHub rendering, prefer embedding a **static image (PNG/SVG)** committed in this repository (see “How to add the diagram image” below).
+<p>
+  <img src="documentation/assets/db_structure.webp"
+     style="width: 100%; height: auto; display: block;">
+</p>
 
 ---
 
-## 🗺️ Overview of the INSPIRE‑SOIL GeoPackage
+## Overview of the INSPIRE‑SOIL GeoPackage
 The SoilWise GeoPackage is designed to be:
 
 - **GIS‑native**: editable and viewable directly in QGIS and other GeoPackage‑capable GIS tools.
@@ -58,6 +53,58 @@ The SoilWise GeoPackage is designed to be:
   - **GeoPackage** provides structured “data‑at‑rest” soil datasets.
   - **STA2 alignment** provides a pathway to “data‑in‑motion” observation streams.
 
+---
+## Installation / Access
+No installation is required. A GeoPackage is a single, portable file (.gpkg) that you simply download and open. GeoPackage is an SQLite database container, so its content can be accessed and updated directly without intermediate format conversions.
+
+### Recommended usage (GIS)
+The GeoPackage can be used in any GIS that supports the GeoPackage format. We recommend QGIS as the reference GIS, and this repository provides custom QGIS forms and styles to facilitate data entry and visualization. 
+
+### Programmatic access (R / Python)
+Because a GeoPackage is an SQLite database file, it can also be accessed programmatically using standard SQLite tooling in R or Python (e.g., via SQLite drivers / bindings). 
+In R, GeoPackage workflows are commonly supported via GDAL-backed packages and SQLite interfaces (e.g., terra/RSQLite-based tooling).
+
+### Recreating the GeoPackage from scratch (optional)
+It is also possible to rebuild your own GeoPackage from zero by starting from an empty GeoPackage and executing the SQL scripts shipped with this repository (DDL/DML and metadata population). 
+
+Open the empty GeoPackage model: http://www.geopackage.org/data/empty.gpkg (e.g., with a DB manager like DBeaver).
+Execute the SQL instructions using the provided SQL files (located in geopackage_ddl/):
+
+- DDL_SO.sql — creates the full SoilWise database structure (tables + relationships).
+- META_SO.sql — populates GeoPackage metadata (non‑INSPIRE format) to support read/write operations.
+- DML_SO.sql — populates the codelist support table required for correct functionality.
+- DML_SO_PPU_Glosis.sql — imports GLOSIS-compliant soil properties/procedures and related units of measure.
+
+> [!NOTE]
+> The SQL scripts required to recreate the GeoPackage are available in this repository under the geopackage_ddl/ folder
+
+---
+
+## Repository Contents
+```
+.
+├── README.md
+├── Gemfile
+├── documentation/            # Living technical documentation (model, guides, table reference)
+├── geopackage/               # Example output .gpkg files for testing/validation
+├── geopackage_ddl/           # SQL scripts: DDL/DML for schema creation and codelist/metadata population
+└── .github/workflows/        # Automation (if applicable)
+```
+
+Key documentation entry point:
+- `documentation/index.md` — overview, modelling rationale, loading guide, QGIS manual, and database tables reference.
+
+---
+
+## Soilwise-he project
+This work has been initiated as part of the [Soilwise-he](https://soilwise-he.eu) project. The project receives
+funding from the European Union’s HORIZON Innovation Actions 2022 under grant agreement No.
+101112838. Views and opinions expressed are however those of the author(s) only and do not necessarily
+reflect those of the European Union or Research Executive Agency. Neither the European Union nor the
+granting authority can be held responsible for them.
+
+---
+---
 ---
 
 ## 🛠️ Pipeline (From model → GeoPackage → services)
@@ -83,20 +130,7 @@ This repository aims to support:
 
 ---
 
-## 📦 Repository Contents
-```
-.
-├── README.md
-├── Gemfile
-├── documentation/            # Living technical documentation (model, guides, table reference)
-├── geopackage/               # Example output .gpkg files for testing/validation
-├── geopackage_ddl/           # SQL scripts: DDL/DML for schema creation and codelist/metadata population
-├── qgis_style/               # QGIS forms and styles for data entry and visualization
-└── .github/workflows/        # Automation (if applicable)
-```
 
-Key documentation entry point:
-- `documentation/index.md` — overview, modelling rationale, loading guide, QGIS manual, and database tables reference.
 
 ---
 
@@ -201,4 +235,4 @@ GitHub README pages do **not** render interactive embeds (e.g., iframes). Instea
 [![SoilWise GeoPackage data model](documentation/assets/SoilWise_Geopackage.png)](https://dbdiagram.io/d/SoilWise_Geopackage-69399847e877c6307451317a)
 ```
 
-This shows a static preview and links to the interactive diagram.
+
