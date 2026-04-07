@@ -1,1 +1,25 @@
-
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Andrea"
+  given-names: "Lachi"
+  orcid: "https://orcid.org/0009-0005-4789-6267"
+- family-names: "Giovanni"
+  given-names: "L’Abate"
+  orcid: "https://orcid.org/0000-0003-4018-7570"
+- family-names: "Stefania"
+  given-names: "Morrone"
+  orcid: "https://orcid.org/0000-0002-7277-7404"
+- family-names: "Katharina"
+  given-names: "Schleidt"
+  orcid: "https://orcid.org/0000-0002-8011-7350"
+- family-names: "Paul"
+  given-names: "van Genuchten"
+  orcid: "https://orcid.org/0000-0002-4789-174X"
+- family-names: "Maria"
+  given-names: "Fantappiè"
+  orcid: "https://orcid.org/0000-0001-6223-1099"
+title: "SoilWise GeoPackage"
+version: 1.0.0
+doi: 10.5281/zenodo.19334897
+date-released: 2026-03-31
+url: "https://github.com/soilwise-he/Geopackage-so"
