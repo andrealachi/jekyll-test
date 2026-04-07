@@ -81,7 +81,7 @@ Execute the SQL instructions using the provided SQL files (located in geopackage
 ---
 
 ## Usage
-This repository is meant to be used together with its online technical documentation, - https://soilwise-he.github.io/Geopackage-so/ - which explains how the GeoPackage is structured and how it behaves as a database, before you start editing or importing data. The documentation (published as GitHub Pages) provides an overview of the SoilWise GeoPackage design, the INSPIRE‑derived relational model, and the practical guidance needed to populate the database correctly—especially where constraints, triggers, and cross‑table dependencies matter.
+This repository is meant to be used together with its [online technical documentation](https://soilwise-he.github.io/Geopackage-so/), which explains how the GeoPackage is structured and how it behaves as a database, before you start editing or importing data. The documentation (published as GitHub Pages) provides an overview of the SoilWise GeoPackage design, the INSPIRE‑derived relational model, and the practical guidance needed to populate the database correctly—especially where constraints, triggers, and cross‑table dependencies matter.
 
 In particular, the Data Loading & Modelling Guide describes a deterministic loading order and data‑entry rules (e.g., the logical flow Site → Plot → Profile → Elements, observed vs derived objects, horizon vs layer behavior, and STA2 integration), and points you to the authoritative SQL/DDL definition for constraints and triggers. 
 Complementary summaries (e.g., cascade behavior) help you understand what happens when rows are deleted or updated across related tables—useful when maintaining integrity in a relational GeoPackage. 
@@ -93,12 +93,12 @@ The primary operational workflow is to open the .gpkg in QGIS and work with it a
 - Load the GeoPackage into QGIS and apply the provided custom forms/styles from this repository.
 - Use the forms for consistent data entry and to reduce errors caused by missing required fields or invalid code‑list values.
 
-You can find the QGIS‑specific guide here: https://soilwise-he.github.io/Geopackage-so/qgis/. 
+You can find the QGIS‑specific guide [here](https://soilwise-he.github.io/Geopackage-so/qgis/). 
 
 ### Field survey workflow with QField
 For field campaigns, the same GeoPackage‑based workflow can be taken into the field using QField, which is designed to consume fully configured QGIS projects (including customized feature forms) and work with SQLite‑based GeoPackages on mobile devices. 
 The intended approach is to prepare and validate the project in QGIS first (with the custom forms and database constraints), then deploy it to QField for in‑situ observations and editing, and finally synchronize or bring edits back into the desktop environment—keeping the GeoPackage as the single source of truth for both office and field. 
-You can find the QField field‑survey guide here: https://soilwise-he.github.io/Geopackage-so/qfield/.
+You can find the QField field‑survey guide [here](https://soilwise-he.github.io/Geopackage-so/qfield/). 
 
 ---
 
