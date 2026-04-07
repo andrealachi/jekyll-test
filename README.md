@@ -1,4 +1,4 @@
-# SoilWise INSPIRE‑SOIL GeoPackage (GPKG)
+# SoilWise Geopackage-so
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Zenodo DOI](https://zenodo.org/badge/doi/10.5281/zenodo.18246824.svg)](https://doi.org/10.5281/zenodo.18246824)
@@ -9,7 +9,13 @@
 
 
 ## Abstract
-This repository delivers a streamlined **INSPIRE‑aligned soil database** in **GeoPackage (SQLite)** format, designed to improve interoperability and usability of soil datasets across Europe. Building on the EJP SOIL INSPIRE‑SO template, SoilWise provides an updated logical model that remains faithful to the INSPIRE Soil conceptual model while being practical for GIS workflows. A key novelty is the integration pathway toward **OGC SensorThings API 2.0 (STA2)** to complement “data‑at‑rest” soil datasets with “data‑in‑motion” observation time series, enabling near‑real‑time interoperability for soil monitoring networks and services. Overall, the combined approach supports **FAIR** soil information sharing by reducing provider burden and improving consumer usability in support of EU soil policies and monitoring needs.
+This repository provides resources for working with the **INSPIRE Soil (SO)** data model in **GeoPackage** format.  
+It also includes an implementation based on the **OGC SensorThings API 2.0 (draft)** to expose soil observations and related metadata as interoperable time‑series via HTTP and MQTT. SensorThings 2.0 provides an open, geospatial‑enabled and unified way to interconnect sensor‑data‑producing devices, data, and applications over the Web. It defines a core data model aligned with OGC/ISO **Observations, Measurements and Samples (ISO 19156:2023)**, an abstract REST API, and protocol bindings for **HTTP** and **MQTT**, supporting CRUD operations, advanced filtering, customizable responses, and push notifications for data changes (via MQTT). *Note: SensorThings API 2.0 is currently a draft standard under development.*  
+References: [STA 2.0 draft (OGC 23‑019)](https://hylkevds.github.io/23-019/23-019.html#_13d7055erThings overview (OGC)](https://www.ogc.org/standards/sensorthings/)
+
+Updates previous versions developed within the **EJP SOIL** project (https://github.com/ejpsoil/inspire_soil_gpkg_template), with the goal of conforming to both **OMS** (https://docs.ogc.org/as/20-082r4/20-082r4.html) and **SensorThings API** (https://www.ogc.org/standards/sensorthings/) standards.
+
+The **first version** of the INSPIRE Soil (SO) GeoPackage was developed under the H2020 **European Joint Research Programme EJP SOIL** (https://ejpsoil.eu/), the work package 6 aimed at supporting harmonised soil information and reporting. A so‑called “Software framework for a shared agricultural soil information system”, deliverable **EJP SOIL_D6.4**, was produced to enable transcoding and streamlining of interoperable and harmonised national agricultural soil data into **ESDAC** (https://esdac.jrc.ec.europa.eu/), as foreseen in the Grant Agreement, and in general to enable **INSPIRE‑compliant** soil data sharing.
 
 ---
 
@@ -124,137 +130,4 @@ funding from the European Union’s HORIZON Innovation Actions 2022 under grant 
 101112838. Views and opinions expressed are however those of the author(s) only and do not necessarily
 reflect those of the European Union or Research Executive Agency. Neither the European Union nor the
 granting authority can be held responsible for them.
-
----
----
----
-
-## 🛠️ Pipeline (From model → GeoPackage → services)
-Instead of a single “build pipeline”, this repository provides **repeatable assets** to implement and maintain the database consistently:
-
-1. **Schema definition (DDL)** — SQL scripts to create the GeoPackage schema and supporting tables.
-2. **Codelist and metadata population (DML)** — SQL scripts to populate codelist tables and field‑level metadata.
-3. **Templates & example outputs** — sample `.gpkg` files for testing and validation.
-4. **QGIS user experience layer** — custom forms and styles to support editing and reduce errors.
-5. **STA2 exposure (implementation pathway)** — structural alignment enabling transfer between GeoPackage tables and STA2 entities.
-
----
-
-## 📊 Quality, Validation & Compliance
-This repository aims to support:
-
-- INSPIRE‑faithful modelling derived from the INSPIRE conceptual model and feature catalogue.
-- INSPIRE GeoPackage publishing good practice.
-- STA2 readiness for observations/time series.
-- Operational usability in GIS through QGIS forms.
-
-> **QGIS requirement**: QGIS **3.44.0 “Solothurn”** (or higher) is required to fully use the provided custom forms and workflows.
-
----
-
-
-
----
-
-## 🚀 Quick Start
-
-### 1) Clone the repository
-```bash
-git clone https://github.com/soilwise-he/Geopackage-so.git
-cd Geopackage-so
-```
-
-### 2) Open a sample GeoPackage in QGIS
-- Start QGIS (>= 3.44.0)
-- **Layer → Add Layer → Add Vector Layer…**
-- Browse to `geopackage/` and open a `.gpkg` file
-
-### 3) Create a fresh empty database (optional)
-- Create a new empty `.gpkg` in your GIS or with SQLite tooling
-- Run the schema scripts from `geopackage_ddl/`:
-  - **DDL**: create tables/constraints
-  - **DML**: populate codelists and field metadata (where provided)
-
-### 4) Enable the QGIS forms and styles
-- Import/apply assets in `qgis_style/`
-- Use the guided forms for consistent data entry (dropdowns, validation rules, grouped tabs)
-
-### 5) Follow the loading order and constraints
-If you need to populate or update a database, start from the **Data Loading & Modelling Guide** referenced in `documentation/index.md`.
-
----
-
-## 🔗 Resource Availability
-- Repository: https://github.com/soilwise-he/Geopackage-so
-- Model diagram (dbdiagram): https://dbdiagram.io/d/SoilWise_Geopackage-69399847e877c6307451317a
-- SoilWise data & knowledge hub (context): https://repository.soilwise-he.eu/
-
----
-
-## 🔗 Imported Schemas & Standards
-- INSPIRE Soil conceptual model (UML) and feature catalogue
-- INSPIRE GeoPackage encoding good practice
-- OGC GeoPackage
-- OGC SensorThings API 2.0 (STA2, draft)
-- OMS / ISO 19156:2023
-
----
-
-## 🔗 Linked Vocabularies & Codelists
-The GeoPackage includes (or is designed to include) reference tables supporting controlled vocabularies such as INSPIRE code lists, horizon/layer notations, WRB qualifiers, and units of measure.
-
----
-
-## 💡 Use Cases
-- INSPIRE‑aligned soil dataset exchange in a GIS‑friendly container (GeoPackage/SQLite).
-- Operational data entry and curation in QGIS using guided forms and styles.
-- Soil monitoring workflows where structured datasets (“data‑at‑rest”) are complemented with STA2‑aligned observation time series (“data‑in‑motion”).
-- Testing and validation of harmonized soil datasets against a consistent relational schema.
-
----
-
-## 🗣️ Feedback
-- Please open a GitHub Issue for bugs, enhancements, or missing elements.
-
----
-
-## 🧾 How to Cite
-> SoilWise HE (2026). *INSPIRE‑SOIL GeoPackage (GPKG) with STA2 alignment*. GitHub repository: https://github.com/soilwise-he/Geopackage-so
-
----
-
-## 🙏 Acknowledgements
-This work was developed in the context of the **SoilWise** Horizon Europe project (grant agreement **101112838**).
-
----
-
-## 🧾 To‑do
-See **Issues** for planned tasks and enhancements.
-
----
-
-## 📄 License (recommended)
-A practical dual‑license approach (commonly used for mixed repositories) is recommended:
-
-- **Code / scripts** (SQL, automation, helper scripts): **MIT License**
-- **Data / schema / documentation / GeoPackage templates & examples**: **CC BY 4.0**
-
-Suggested setup:
-- Add `LICENSE` (MIT)
-- Add `LICENSE-CC-BY-4.0` (CC BY 4.0)
-- Keep this section in the README to clarify which assets fall under which license.
-
----
-
-## How to add the diagram image (recommended for GitHub)
-GitHub README pages do **not** render interactive embeds (e.g., iframes). Instead:
-
-1. Export the diagram from dbdiagram as **PNG** (or **PDF** / **SVG** if available).
-2. Commit it to this repository, e.g. `documentation/assets/SoilWise_Geopackage.png`
-3. Embed it in the README with:
-
-```markdown
-[![SoilWise GeoPackage data model](documentation/assets/SoilWise_Geopackage.png)](https://dbdiagram.io/d/SoilWise_Geopackage-69399847e877c6307451317a)
-```
-
 
