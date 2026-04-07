@@ -82,7 +82,7 @@ Execute the SQL instructions using the provided SQL files (located in geopackage
 - DML_SO_PPU_Glosis.sql — imports GLOSIS-compliant soil properties/procedures and related units of measure.
 
 > [!NOTE]
-> The SQL scripts required to recreate the GeoPackage are available in this repository under the [geopackage_ddl folder](geopackage/geopackage_ddl/).
+> The SQL scripts required to recreate the GeoPackage are available in this repository under the [geopackage_ddl folder](geopackage_ddl/).
 
 ---
 
