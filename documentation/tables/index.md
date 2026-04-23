@@ -11,11 +11,11 @@ This page provides a **technical entry point**: how the schema is organised, whi
 [^2]: [**OGC – SensorThings API 2.0 (draft 23‑019)**.](https://hylkevds.github.io/23-019/23-019.html)
 
 
-# Relational Structure of the GeoPackage (INSPIRE UML + STA2 Transposition)
+## Relational Structure of the GeoPackage (INSPIRE UML + STA2 Transposition)
 
 <p>
   <a href="../assets/db_structure.web" target="_blank">
-    <img src="assets/db_structure.webp"
+    <img src="../assets/db_structure.webp"
          alt="Fig.1"
          style="width: 100%; height: auto; display: block;">
   </a>
@@ -24,6 +24,7 @@ This page provides a **technical entry point**: how the schema is organised, whi
 
 > [!TIP]
 > Click the image to see it full‑size for better viewing.
+
 ## Quick index (main tables)
 
 > Links are **relative** to the current directory (`documentation/tables/`).  
