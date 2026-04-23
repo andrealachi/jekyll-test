@@ -1,4 +1,4 @@
-# SO GeoPackage (SQLite3) — Tables & Schema Overview
+# SoilWise Geopackage-so (SQLite3) — Tables & Schema Overview
 
 This folder documents the **database tables** of the *SoilWise INSPIRE Soil (SO) GeoPackage*, delivered as an **OGC GeoPackage** implemented on top of **SQLite3**. [^1]
 The schema combines:
