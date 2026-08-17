@@ -57,9 +57,13 @@ To avoid loading the `.model3` file manually every time the tool is required, co
 Follow these steps:
 
 <p>
-  <img src="../assets/gtg_01.webp"
-       alt="Fig.1" align="left" width="500">
+  <a href="../assets/gtg_01.webp" target="_blank">
+    <img src="../assets/gtg_01.webp"
+         alt="Fig.1" align="left" width="500">
+  </a>
+  
 Start QGIS. <br>
+<br>
 ① Open the <strong>Settings</strong> menu. <br>
 ② Select <strong>Options</strong>.<br>
 In the <strong>Options</strong> dialog, select ③ <strong>Processing</strong> from the panel on the left.<br>
@@ -101,9 +105,12 @@ If the model does not appear immediately, refresh the Processing Toolbox or rest
 Double-click **GpkgToGpkg** in the Processing Toolbox.
 
 <p>
-  <img src="../assets/gtg_02.webp"
-       alt="Fig.1" align="left" width="500">
+    <a href="../assets/gtg_02.webp" target="_blank">
+    <img src="../assets/gtg_02.webp"
+         alt="Fig.2" align="left" width="500">
+  </a>
 QGIS opens the model execution dialog. In this dialog, specify: <br>
+<br>
 ⑦ The source GeoPackage. <br>
 ⑧ The target GeoPackage. <br>
 ⑨ The optional log folder. <br>
@@ -445,9 +452,12 @@ The Model Designer represents a sequence of processing algorithms as a single wo
 After downloading the `.model3` file:
 
 <p>
-  <img src="../assets/gtg_03.webp"
-       alt="Fig.1" align="left" width="500">
-Start QGIS.
+  <a href="../assets/gtg_03.webp" target="_blank">
+    <img src="../assets/gtg_03.webp"
+         alt="Fig.3" align="left" width="500">
+  </a>
+Start QGIS.<br>
+<br>
 Open the <strong>Processing</strong> menu. <br>
 ⑫ select <strong>Model Designer</strong>. <br>
 ⑬ in the Model Designer window, select <strong>Open Model</strong>. <br>
