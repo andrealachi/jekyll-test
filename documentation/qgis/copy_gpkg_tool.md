@@ -8,7 +8,8 @@ The **GpkgToGpkg** model is a QGIS Model Designer workflow developed to compare 
 
 The model has a modular structure. Some core blocks are used regardless of the selected thematic options, whereas the blocks associated with Soil Sites, observed or derived Soil Profiles, Soil Bodies, and Soil Derived Objects are enabled through Boolean parameters and Conditional Branch algorithms.
 
-> **Key principle**  
+> [!NOTE]
+>  **Key principle**  
 > Synchronization is incremental: the SOURCE is read, the TARGET is queried to determine whether the relevant keys already exist, and only missing records are passed to the GDAL append operations.
 
 ## 2. General workflow
@@ -48,7 +49,8 @@ Conditional Branch algorithms produce named branches that can be referenced as d
 | **Cond Derived** | `@copy_derived_soil_profile = true` | Enables workflow sections specific to derived Soil Profiles. |
 | **LOG** | `@log_folder IS NOT NULL AND trim(@log_folder) <> ''` | Enables log export only when a non-null, non-empty folder has been provided. |
 
-> **Important semantic detail**  
+> [!NOTE]
+>  **Important semantic detail**  
 > A condition controls only the components that explicitly declare the relevant branch as a dependency. It does not automatically behave like an `if` block surrounding an entire area of the graphical model.
 
 ## 5. Execution scenarios
