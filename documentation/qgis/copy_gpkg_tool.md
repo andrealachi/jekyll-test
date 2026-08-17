@@ -2,7 +2,7 @@
 
 > Selective synchronization of data between GeoPackages
 
-## 1. Introduction
+## Introduction
 
 The **GpkgToGpkg** model is a QGIS Model Designer workflow developed to compare a source GeoPackage with a target GeoPackage, identify records that are missing from the target, and append them to the target database. The model does not perform a full overwrite. Instead, it processes each table individually and uses existence checks to prevent records that are already present from being copied again.
 
@@ -12,7 +12,7 @@ The model has a modular structure. Some core blocks are used regardless of the s
 >  **Key principle**  
 > Synchronization is incremental: the SOURCE is read, the TARGET is queried to determine whether the relevant keys already exist, and only missing records are passed to the GDAL append operations.
 
-## 2. General workflow
+## General workflow
 
 1. **Input selection.** The user specifies the SOURCE, the TARGET, an optional log folder, and the functional data groups to be copied.
 2. **Condition evaluation.** Eight Conditional Branch algorithms evaluate named branches. A component that explicitly depends on a branch is executed only when the corresponding expression evaluates to `true`.
@@ -21,7 +21,7 @@ The model has a modular structure. Some core blocks are used regardless of the s
 5. **Append to the TARGET.** GDAL Convert format uses `-update` and `-append`, assigns the destination layer name with `-nln`, and uses `-nlt NONE` for non-spatial tables. The `-unsetFid` option prevents the internal feature ID from being transferred.
 6. **Optional logging.** When `log_folder` is provided, the QGIS Processing log is written to a dated file in the selected folder.
 
-## 3. Input parameters
+## Input parameters
 
 | Parameter | Type / default | Description |
 |---|---|---|
@@ -37,7 +37,7 @@ The model has a modular structure. Some core blocks are used regardless of the s
 
 
 
-## 4. Conditional branches
+## Conditional branches
 
 Conditional Branch algorithms produce named branches that can be referenced as dependencies by other algorithms.
 
@@ -56,7 +56,7 @@ Conditional Branch algorithms produce named branches that can be referenced as d
 >  **Important semantic detail**  
 > A condition controls only the components that explicitly declare the relevant branch as a dependency. It does not automatically behave like an `if` block surrounding an entire area of the graphical model.
 
-## 5. Execution scenarios
+## Execution scenarios
 
 | User selection | True branches | Main result |
 |---|---|---|
@@ -68,11 +68,11 @@ Conditional Branch algorithms produce named branches that can be referenced as d
 | Soil Derived Objects and observed profiles | Cond Soil Der Obj enabled; Cond Observed | Copies derived objects, `isbasedonsoilderivedobject`, `isbasedonobservedsoilprofile`, datastreams, and observations. |
 | Log folder provided | LOG | Saves the log. If the field is null or empty, Save log to file is skipped. |
 
-## 6. Functional execution flows
+## Functional execution flows
 
 Internal model identifiers are intentionally omitted. The display names used in QGIS Model Designer provide a clearer operational description.
 
-### 6.1 Shared reference data
+### Shared reference data
 
 This flow completes the shared tables used by datastreams and observations.
 
@@ -87,7 +87,7 @@ This flow completes the shared tables used by datastreams and observations.
 
 Each check returns only records whose key does not already exist in the TARGET.
 
-### 6.2 Soil Profile: common workflow
+### Soil Profile: common workflow
 
 This flow is enabled when at least one group, observed or derived Soil Profiles, is requested.
 
@@ -104,7 +104,7 @@ This flow is enabled when at least one group, observed or derived Soil Profiles,
 
 The Join SP DS / Join SP DS OBS and Join PE DS / Join PE DS OBS chains also select the datastreams and observations associated with profiles and profile elements.
 
-### 6.3 Observed Soil Profiles
+### Observed Soil Profiles
 
 This flow is enabled by **Copy Observed Soil Profile** and includes records where `isderived = 0`.
 
@@ -112,14 +112,14 @@ This flow is enabled by **Copy Observed Soil Profile** and includes records wher
 - Copy Soil Plot appends their geometries to the TARGET.
 - If Soil Derived Objects are also enabled, the Is Based On Observed Soil Profile relationship is copied.
 
-### 6.4 Derived Soil Profiles
+### Derived Soil Profiles
 
 This flow is enabled by **Copy Derived Soil Profile** and includes records where `isderived = 1`.
 
 - It uses the common Profile Element, classification, datastream, and observation workflow.
 - If Soil Bodies are also enabled, Derived Profile Presence in Soil Body is copied.
 
-### 6.5 Relationship between observed and derived profiles
+### Relationship between observed and derived profiles
 
 The `isderivedfrom` relationship requires both profile categories.
 
@@ -130,7 +130,7 @@ The `isderivedfrom` relationship requires both profile categories.
 > **Why an AND condition is required**  
 > Copying `isderivedfrom` when only one profile group is included could create a relationship that references a profile not present in the TARGET.
 
-### 6.6 Soil Sites
+### Soil Sites
 
 This flow is enabled by **Copy Soil Site**.
 
@@ -140,7 +140,7 @@ This flow is enabled by **Copy Soil Site**.
 
 The joins restrict datastreams and observations to the Soil Sites included in the current synchronization.
 
-### 6.7 Soil Bodies
+### Soil Bodies
 
 This flow is enabled by **Copy Soil Body**.
 
@@ -149,7 +149,7 @@ This flow is enabled by **Copy Soil Body**.
 - Derived Profile Presence in Soil Body is appended when derived Soil Profiles are also enabled.
 - Is Based On Soil Body is appended when Soil Derived Objects are also enabled.
 
-### 6.8 Soil Derived Objects
+### Soil Derived Objects
 
 This flow is enabled by **Copy Soil Derived Object**.
 
@@ -160,7 +160,7 @@ This flow is enabled by **Copy Soil Derived Object**.
 - Is Based On Observed Soil Profile also requires observed Soil Profiles.
 - Is Based On Soil Body also requires Soil Bodies.
 
-### 6.9 Log export
+### Log export
 
 This flow is independent of the thematic data domains.
 
@@ -168,9 +168,9 @@ This flow is independent of the thematic data domains.
 - Save log to file writes the QGIS Processing log to the selected folder.
 - If `log_folder` is null or empty, log export is skipped.
 
-## 7. Types of components used
+## Types of components used
 
-### 7.1 Check for missing…
+### Check for missing…
 
 These components perform the SOURCE/TARGET comparison:
 
@@ -178,7 +178,7 @@ These components perform the SOURCE/TARGET comparison:
 - apply a `NOT EXISTS` query;
 - return a temporary layer containing only missing records.
 
-### 7.2 Subset and Join…
+### Subset and Join…
 
 These components select relevant records:
 
@@ -186,14 +186,14 @@ These components select relevant records:
 - Join components follow table relationships and retain only data linked to the selected entities;
 - unmatched records are discarded.
 
-### 7.3 Table…
+### Table…
 
 These components clean and restore the output schema:
 
 - retain fields required by the destination table;
 - remove auxiliary attributes introduced by joins.
 
-### 7.4 Copy…
+### Copy…
 
 These components modify the TARGET:
 
@@ -202,14 +202,14 @@ These components modify the TARGET:
 - do not transfer the temporary FID;
 - use a non-spatial output layer for non-spatial tables.
 
-### 7.5 Conditional… and Log path
+### Conditional… and Log path
 
 These components control execution:
 
 - evaluate Boolean parameters and the availability of the log folder;
 - produce named branches used as dependencies by other components.
 
-## 8. Consistency, assumptions, and points to consider
+## Consistency, assumptions, and points to consider
 
 - The TARGET must already exist and contain the expected tables with a compatible schema. The model appends records; it does not create the complete schema.
 - Duplicate prevention depends on the key defined in each query. Most tables use `guid`, `codelist` uses `id + collection`, and several junction tables use pairs of foreign keys.
@@ -218,7 +218,7 @@ These components control execution:
 - Referential integrity depends on the selected combination. The model explicitly handles sensitive cases, such as copying `isderivedfrom` only when both observed and derived Soil Profiles are enabled.
 - The model does not update existing records with different values and does not delete records from the TARGET. It is an incremental synchronization of missing records, not bidirectional replication or full data alignment.
 
-## 9. Recommended operating procedure
+## Recommended operating procedure
 
 1. Confirm that the SOURCE and TARGET use the same SoilWise schema version and that the TARGET contains all required tables.
 2. Create a backup of the TARGET before the first run and after any modification to the model.
@@ -226,6 +226,6 @@ These components control execution:
 4. Set `log_folder` during testing and large-scale operations to retain an execution record.
 5. After execution, review the number of appended records and check for orphaned references in relationship tables.
 
-## 10. Final summary
+## Final summary
 
 GpkgToGpkg implements a three-stage pipeline: identification of missing records through SQL, selection of dependent records through joins and field retention, and writing to the TARGET through GDAL append operations. Conditional branches make the model configurable without duplicating complete workflows, but their effect must be interpreted through the dependencies declared by individual components. Parameter selection therefore determines not only which main entities are copied, but also which relationships, datastreams, and observations are retained in the target GeoPackage.
