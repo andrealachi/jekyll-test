@@ -1,6 +1,6 @@
 # Installing and Using the GpkgToGpkg Model in QGIS
 
-## 1. Introduction
+## Introduction
 
 **GpkgToGpkg** is a QGIS Processing model designed to transfer data from a source GeoPackage, referred to as the **SOURCE**, to a destination GeoPackage, referred to as the **TARGET**.
 
@@ -23,9 +23,9 @@ This selection is managed through QGIS **Conditional Branch** algorithms. Based 
 > [!IMPORTANT]
 > The TARGET GeoPackage must already exist and must use a structure that is compatible with the SOURCE. In particular, it must contain the tables expected by the model.
 
----
 
-## 2. Available Methods for Running the Model
+
+## Available Methods for Running the Model
 
 The model can be used in QGIS in two ways:
 
@@ -34,11 +34,11 @@ The model can be used in QGIS in two ways:
 
 Installing the model in the Processing Toolbox is the recommended approach for routine use. The Model Designer is more appropriate when the internal structure of the model needs to be examined or when changes must be made to the processing workflow.
 
----
+
 
 # Part I. Installing the Model in the Processing Toolbox
 
-## 3. Downloading the Model
+## Downloading the Model
 
 Download the model file from the GitHub repository. The file uses the following extension:
 
@@ -48,9 +48,9 @@ Download the model file from the GitHub repository. The file uses the following 
 
 Keep the original file extension unchanged.
 
----
 
-## 4. Locating the QGIS Models Folder
+
+## Locating the QGIS Models Folder
 
 To avoid loading the `.model3` file manually every time the tool is required, copy it to the folder used by QGIS to store Processing models.
 
@@ -70,9 +70,8 @@ Copy the downloaded `GpkgToGpkg.model3` file into this folder.
 > [!NOTE]
 > The folder path may vary depending on the operating system, QGIS version, and active QGIS user profile. For this reason, use the path displayed in the QGIS options instead of relying on a predefined system path.
 
----
 
-## 5. Displaying the Model in the Processing Toolbox
+## Displaying the Model in the Processing Toolbox
 
 After copying the file to the models folder, return to the main QGIS window.
 
@@ -90,9 +89,8 @@ The following model should be available in this subgroup:
 
 If the model does not appear immediately, refresh the Processing Toolbox or restart QGIS.
 
----
 
-## 6. Opening the Model Execution Dialog
+## Opening the Model Execution Dialog
 
 Double-click **GpkgToGpkg** in the Processing Toolbox.
 
@@ -109,9 +107,9 @@ The right-hand side of the dialog also contains the model help panel. This panel
 
 # Part II. Configuring the Parameters
 
-## 7. Main Parameters
+## Main Parameters
 
-### 7.1 Source GeoPackage
+### Source GeoPackage
 
 The **Source GeoPackage** parameter identifies the source dataset.
 
@@ -130,7 +128,7 @@ To set this parameter, select the source file with the `.gpkg` extension.
 Example: database_source.gpkg
 ```
 
-### 7.2 Target GeoPackage
+### Target GeoPackage
 
 The **Target GeoPackage** parameter identifies the destination dataset.
 
@@ -153,7 +151,7 @@ Example: database_target.gpkg
 > [!WARNING]
 > The model does not create a complete copy of the SOURCE file and does not automatically create the full TARGET schema. Its purpose is to append missing records to a target GeoPackage that has already been prepared.
 
-### 7.3 Log Folder
+### Log Folder
 
 The **Log Folder** parameter identifies the directory in which the execution log will be saved.
 
@@ -177,13 +175,13 @@ Log export is controlled by the **LOG** conditional branch, which checks that th
 
 ---
 
-## 8. Data Selection Parameters
+## Data Selection Parameters
 
 The following parameters allow the transfer to be restricted to specific data groups.
 
 They can be enabled individually or in combination. The selected combination determines which sections of the model are executed.
 
-### 8.1 Copy Soil Site
+### Copy Soil Site
 
 The **Copy Soil Site** parameter controls the transfer of data related to Soil Sites.
 
@@ -207,7 +205,7 @@ The model does not copy:
 
 Disabling this parameter does not prevent other selected data groups from being processed.
 
-### 8.2 Copy Observed Soil Profile
+### Copy Observed Soil Profile
 
 The **Copy Observed Soil Profile** parameter controls the transfer of observed Soil Profiles.
 
@@ -235,7 +233,7 @@ Profiles where `isderived = 0` are not appended to the TARGET.
 
 Workflow sections that specifically depend on observed profiles, such as Soil Plots and some relationships with Soil Derived Objects, are also skipped.
 
-### 8.3 Copy Derived Soil Profile
+### Copy Derived Soil Profile
 
 The **Copy Derived Soil Profile** parameter controls the transfer of derived Soil Profiles.
 
@@ -262,7 +260,7 @@ Profiles where `isderived = 1` are not appended to the TARGET.
 
 Relationships that require derived profiles are also not copied.
 
-### 8.4 Relationship Between Observed and Derived Profiles
+### Relationship Between Observed and Derived Profiles
 
 When both of the following parameters are enabled:
 
@@ -282,7 +280,7 @@ The possible combinations are therefore:
 - **observed and derived profiles:** both groups and `isderivedfrom` are copied;
 - **neither group selected:** the Soil Profile workflow is not executed.
 
-### 8.5 Copy Soil Body
+### Copy Soil Body
 
 The **Copy Soil Body** parameter controls the transfer of data related to Soil Bodies.
 
@@ -305,7 +303,7 @@ The model does not copy:
 
 This parameter can be combined with **Copy Derived Soil Profile** and **Copy Soil Derived Object** to preserve relationships between the corresponding domains.
 
-### 8.6 Copy Soil Derived Object
+### Copy Soil Derived Object
 
 The **Copy Soil Derived Object** parameter controls the transfer of Soil Derived Objects.
 
@@ -330,9 +328,8 @@ The model does not copy:
 - linked observations;
 - relationships that depend on the presence of Soil Derived Objects.
 
----
 
-## 9. Selecting Parameter Combinations
+## Selecting Parameter Combinations
 
 The parameters can be used independently, but some combinations preserve a more complete set of relationships.
 
@@ -399,9 +396,8 @@ The model can also copy the `isbasedonsoilbody` relationship.
 > [!TIP]
 > To preserve all relationships between two domains, enable both relevant parameters. Otherwise, the model may omit the relationship table to avoid references to entities that are not present in the TARGET.
 
----
 
-## 10. Running the Model from the Processing Toolbox
+## Running the Model from the Processing Toolbox
 
 After configuring all parameters:
 
@@ -424,11 +420,10 @@ After the model has finished, it is good practice to:
 > [!TIP]
 > Before running the model on production data for the first time, create a backup copy of the TARGET GeoPackage.
 
----
 
 # Part III. Opening and Running the Model in the Model Designer
 
-## 11. When to Use the Model Designer
+## When to Use the Model Designer
 
 The model can be opened directly in the Model Designer without first installing it in the models folder.
 
@@ -445,9 +440,8 @@ This method is useful when you need to:
 
 The Model Designer represents a sequence of processing algorithms as a single workflow that can later be executed with different input data.
 
----
 
-## 12. Opening the Model
+## Opening the Model
 
 After downloading the `.model3` file:
 
@@ -469,9 +463,8 @@ The model is displayed in the Model Designer workspace, where the following elem
 - dependencies between algorithms;
 - Conditional Branch algorithms.
 
----
 
-## 13. Running the Model from the Model Designer
+## Running the Model from the Model Designer
 
 To run the model from the Model Designer:
 
@@ -490,9 +483,8 @@ The following keyboard shortcuts are also available:
 
 Running selected steps is particularly useful when developing, testing, or troubleshooting the model.
 
----
 
-## 14. Modifying the Model
+## Modifying the Model
 
 Opening the model in the Model Designer allows any of its components to be modified, including:
 
@@ -517,36 +509,8 @@ Before saving a modified version, it is advisable to:
 > [!WARNING]
 > Changes to SQL queries, comparison keys, or conditional dependencies may affect duplicate prevention or produce incomplete relationships. Refer to the model's technical documentation for a detailed explanation of its internal structure and workflow logic.
 
----
 
-## 15. Comparison of the Two Methods
-
-### Running the Model from the Processing Toolbox
-
-This is the recommended method for routine use.
-
-**Advantages:**
-
-- the model remains available in QGIS;
-- the `.model3` file does not need to be selected for every run;
-- the model can be launched more quickly;
-- the user interacts only with the parameter dialog.
-
-### Running the Model from the Model Designer
-
-This is the recommended method for inspection and customization.
-
-**Advantages:**
-
-- the complete workflow is visible;
-- algorithms and parameters can be modified;
-- Conditional Branch algorithms can be reviewed;
-- the complete model or selected steps can be run;
-- customized versions can be developed more easily.
-
----
-
-## 16. Conclusion
+## Conclusion
 
 The **GpkgToGpkg** model can be integrated into the QGIS Processing Toolbox so that it remains permanently available and can be accessed as a standard Processing tool.
 
@@ -554,7 +518,6 @@ The execution dialog allows the user to specify the source and target GeoPackage
 
 For routine use, installing the `.model3` file in the QGIS models folder is the recommended approach. The Model Designer is the more appropriate environment for inspecting, validating, or modifying the structure of the model.
 
----
 
 ## References
 
