@@ -25,14 +25,17 @@ The model has a modular structure. Some core blocks are used regardless of the s
 
 | Parameter | Type / default | Description |
 |---|---|---|
-| **Copy Derived Soil Profile** | Boolean / `True` | Copies derived Soil Profiles, where `isderived = 1`, together with related `profileelement` records, descriptive tables, datastreams, and observations. The `isderivedfrom` table is copied only when both derived and observed Soil Profiles are enabled. |
-| **Copy Observed Soil Profile** | Boolean / `True` | Copies observed Soil Profiles, where `isderived = 0`, together with related `profileelement` records, descriptive tables, datastreams, and observations. |
-| **Copy Soil Body** | Boolean / `True` | Copies `soilbody` and `soilbody_geom` records. It also copies `derivedprofilepresenceinsoilbody` when derived Soil Profiles are enabled, and `isbasedonsoilbody` when Soil Derived Objects are enabled. |
-| **Copy Soil Derived Object** | Boolean / `True` | Copies `soilderivedobject`, `isbasedonsoilderivedobject`, related datastreams and observations, and conditionally copies `isbasedonobservedsoilprofile` and `isbasedonsoilbody`. |
-| **Copy Soil Site** | Boolean / `True` | Copies `soilsite` records and the related datastream and observation records. |
-| **LOG FOLDER** | Folder | Folder in which the QGIS Processing log file will be saved. |
 | **SOURCE_GPKG** | File | Source GeoPackage from which records are read, checked, and copied when required. |
 | **TARGET_GPKG** | File | Target GeoPackage to which missing records are appended. It must contain the tables expected by the model and use a schema consistent with the SOURCE. |
+| **LOG FOLDER** | Folder | Folder in which the QGIS Processing log file will be saved. |
+| **Copy Soil Site** | Boolean / `True` | Copies `soilsite` records and the related datastream and observation records. |
+| **Copy Observed Soil Profile** | Boolean / `True` | Copies observed Soil Profiles, where `isderived = 0`, together with related `profileelement` records, descriptive tables, datastreams, and observations. |
+| **Copy Derived Soil Profile** | Boolean / `True` | Copies derived Soil Profiles, where `isderived = 1`, together with related `profileelement` records, descriptive tables, datastreams, and observations. The `isderivedfrom` table is copied only when both derived and observed Soil Profiles are enabled. |
+| **Copy Soil Body** | Boolean / `True` | Copies `soilbody` and `soilbody_geom` records. It also copies `derivedprofilepresenceinsoilbody` when derived Soil Profiles are enabled, and `isbasedonsoilbody` when Soil Derived Objects are enabled. |
+| **Copy Soil Derived Object** | Boolean / `True` | Copies `soilderivedobject`, `isbasedonsoilderivedobject`, related datastreams and observations, and conditionally copies `isbasedonobservedsoilprofile` and `isbasedonsoilbody`. |
+
+
+
 
 ## 4. Conditional branches
 
@@ -123,6 +126,7 @@ The `isderivedfrom` relationship requires both profile categories.
 - Check for missing isderivedfrom compares `guid_base` and `guid_related`.
 - Copy Is Derived From appends only missing relationships.
 
+> [!NOTE]
 > **Why an AND condition is required**  
 > Copying `isderivedfrom` when only one profile group is included could create a relationship that references a profile not present in the TARGET.
 
