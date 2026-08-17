@@ -57,7 +57,7 @@ To avoid loading the `.model3` file manually every time the tool is required, co
 Follow these steps:
 
 <p>
-  <img src="../assets/form_01.webp"
+  <img src="../assets/gtg_01.webp"
        alt="Fig.1" align="left" width="500">
 Start QGIS. <br>
 ① Open the <strong>Settings</strong> menu. <br>
@@ -101,7 +101,7 @@ If the model does not appear immediately, refresh the Processing Toolbox or rest
 Double-click **GpkgToGpkg** in the Processing Toolbox.
 
 <p>
-  <img src="../assets/form_01.webp"
+  <img src="../assets/gtg_02.webp"
        alt="Fig.1" align="left" width="500">
 QGIS opens the model execution dialog. In this dialog, specify: <br>
 ⑦ The source GeoPackage. <br>
@@ -132,10 +132,6 @@ The SOURCE:
 
 To set this parameter, select the source file with the `.gpkg` extension.
 
-```text
-Example: database_source.gpkg
-```
-
 ### Target GeoPackage
 
 The **Target GeoPackage** parameter identifies the destination dataset.
@@ -151,10 +147,6 @@ The TARGET must:
 - not be locked by another application.
 
 If a record with the same key is already present in the TARGET, it is not copied again.
-
-```text
-Example: database_target.gpkg
-```
 
 > [!WARNING]
 > The model does not create a complete copy of the SOURCE file and does not automatically create the full TARGET schema. Its purpose is to append missing records to a target GeoPackage that has already been prepared.
@@ -181,7 +173,6 @@ If the parameter is left empty:
 
 Log export is controlled by the **LOG** conditional branch, which checks that the path is not null and is not an empty string.
 
----
 
 ## Data Selection Parameters
 
@@ -453,13 +444,20 @@ The Model Designer represents a sequence of processing algorithms as a single wo
 
 After downloading the `.model3` file:
 
-1. start QGIS;
-2. open the **Processing** menu;
-3. select **Model Designer**;
-4. in the Model Designer window, select **Open Model**;
-5. use the file browser to locate the downloaded model;
-6. select `GpkgToGpkg.model3`;
-7. confirm the selection.
+<p>
+  <img src="../assets/gtg_03.webp"
+       alt="Fig.1" align="left" width="500">
+Start QGIS.
+Open the <strong>Processing</strong> menu. <br>
+⑫ select <strong>Model Designer</strong>. <br>
+⑬ in the Model Designer window, select <strong>Open Model</strong>. <br>
+Use the file browser to locate the downloaded model. <br>
+Select `GpkgToGpkg.model3`. <br>
+Confirm the selection. <br>
+⑭  Run the model.
+</p>
+<br clear="all"><br> 
+
 
 The model is displayed in the Model Designer workspace, where the following elements are visible:
 
@@ -483,12 +481,6 @@ To run the model from the Model Designer:
 5. click **Run**.
 
 The parameter dialog is the same as the one displayed when the model is launched from the Processing Toolbox.
-
-The following keyboard shortcuts are also available:
-
-- **F5** runs the entire model;
-- **Shift + F5** runs only the selected model steps.
-
 Running selected steps is particularly useful when developing, testing, or troubleshooting the model.
 
 
@@ -517,17 +509,3 @@ Before saving a modified version, it is advisable to:
 > [!WARNING]
 > Changes to SQL queries, comparison keys, or conditional dependencies may affect duplicate prevention or produce incomplete relationships. Refer to the model's technical documentation for a detailed explanation of its internal structure and workflow logic.
 
-
-## Conclusion
-
-The **GpkgToGpkg** model can be integrated into the QGIS Processing Toolbox so that it remains permanently available and can be accessed as a standard Processing tool.
-
-The execution dialog allows the user to specify the source and target GeoPackages and to select only the required data groups. Conditional Branch algorithms interpret these selections and enable the relevant sections of the model.
-
-For routine use, installing the `.model3` file in the QGIS models folder is the recommended approach. The Model Designer is the more appropriate environment for inspecting, validating, or modifying the structure of the model.
-
-
-## References
-
-- [QGIS User Guide: The Model Designer](https://docs.qgis.org/latest/en/docs/user_manual/processing/modeler.html)
-- [QGIS User Guide: Processing Framework](https://docs.qgis.org/latest/en/docs/user_manual/processing/index.html)
