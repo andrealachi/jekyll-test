@@ -71,8 +71,6 @@ The path displayed under <strong>Models folder</strong> identifies the directory
 
 
 
-
-
 Copy the downloaded `GpkgToGpkg.model3` file into this folder.
 
 > [!NOTE]
@@ -102,16 +100,18 @@ If the model does not appear immediately, refresh the Processing Toolbox or rest
 
 Double-click **GpkgToGpkg** in the Processing Toolbox.
 
-QGIS opens the model execution dialog. In this dialog, specify:
+<p>
+  <img src="../assets/form_01.webp"
+       alt="Fig.1" align="left" width="500">
+QGIS opens the model execution dialog. In this dialog, specify: <br>
+⑦ The source GeoPackage. <br>
+⑧ The target GeoPackage. <br>
+⑨ The optional log folder. <br>
+⑩ The data groups to be copied. <br>
+⑪ The right-hand side of the dialog also contains the model help panel. This panel provides a brief description of the tool and explains the purpose of the available parameters.
+</p>
+<br clear="all"><br> 
 
-- the source GeoPackage;
-- the target GeoPackage;
-- the optional log folder;
-- the data groups to be copied.
-
-The right-hand side of the dialog also contains the model help panel. This panel provides a brief description of the tool and explains the purpose of the available parameters.
-
----
 
 # Part II. Configuring the Parameters
 
