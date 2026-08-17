@@ -56,14 +56,22 @@ To avoid loading the `.model3` file manually every time the tool is required, co
 
 Follow these steps:
 
-1. start QGIS;
-2. open the **Settings** menu;
-3. select **Options**;
-4. in the **Options** dialog, select **Processing** from the panel on the left;
-5. on the right-hand side of the dialog, expand the **Models** section;
-6. locate the **Models folder** setting.
+<p>
+  <img src="../assets/form_01.webp"
+       alt="Fig.1" align="left" width="500">
+Start QGIS. <br>
+① Open the <strong>Settings</strong> menu. <br>
+② Select <strong>Options</strong>.<br>
+In the <strong>Options</strong> dialog, select ③ <strong>Processing</strong> from the panel on the left.<br>
+On the right-hand side of the dialog, expand the <strong>Models</strong> section.<br>
+Locate the ④ <strong>Models folder</strong> setting.<br>
+The path displayed under <strong>Models folder</strong> identifies the directory in which QGIS searches for user-installed Processing models.
+</p>
+<br clear="all"><br> 
 
-The path displayed under **Models folder** identifies the directory in which QGIS searches for user-installed Processing models.
+
+
+
 
 Copy the downloaded `GpkgToGpkg.model3` file into this folder.
 
@@ -81,11 +89,11 @@ If the **Processing Toolbox** is not visible, open it from:
 
 In the Processing Toolbox, expand:
 
-**Models → SoilWise Geopackage Tools**
+⑤ **Models → SoilWise Geopackage Tools**
 
 The following model should be available in this subgroup:
 
-**GpkgToGpkg**
+⑥ **GpkgToGpkg**
 
 If the model does not appear immediately, refresh the Processing Toolbox or restart QGIS.
 
