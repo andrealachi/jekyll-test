@@ -507,5 +507,5 @@ Before saving a modified version, it is advisable to:
 5. verify the referential integrity of the output.
 
 > [!WARNING]
-> Changes to SQL queries, comparison keys, or conditional dependencies may affect duplicate prevention or produce incomplete relationships. Refer to the model's technical documentation for a detailed explanation of its internal structure and workflow logic.
+> Changes to SQL queries, comparison keys, or conditional dependencies may affect duplicate prevention or produce incomplete relationships. Refer to the [model's technical documentation](./gpkg_to_gpkg_documentation.md) for a detailed explanation of its internal structure and workflow logic.
 
