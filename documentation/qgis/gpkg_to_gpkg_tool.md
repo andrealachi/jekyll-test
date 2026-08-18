@@ -40,7 +40,7 @@ Installing the model in the Processing Toolbox is the recommended approach for r
 
 ## Downloading the Model
 
-Download the model file from the GitHub repository. The file uses the following extension:
+Download the [model](https://github.com/andrealachi/jekyll-test/blob/main/models/ph/GpkgToGpkg.model3) file from the GitHub repository. The file uses the following extension:
 
 ```text
 .model3
@@ -449,7 +449,7 @@ The Model Designer represents a sequence of processing algorithms as a single wo
 
 ## Opening the Model
 
-After downloading the `.model3` file:
+After [downloading](https://github.com/andrealachi/jekyll-test/blob/main/models/ph/GpkgToGpkg.model3)  the `.model3` file:
 
 <p>
   <a href="../assets/gtg_03.webp" target="_blank">
