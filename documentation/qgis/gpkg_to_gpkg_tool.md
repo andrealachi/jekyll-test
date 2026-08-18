@@ -69,13 +69,12 @@ Start QGIS. <br>
 In the <strong>Options</strong> dialog, select ③ <strong>Processing</strong> from the panel on the left.<br>
 On the right-hand side of the dialog, expand the <strong>Models</strong> section.<br>
 Locate the ④ <strong>Models folder</strong> setting.<br>
-The path displayed under <strong>Models folder</strong> identifies the directory in which QGIS searches for user-installed Processing models.
+The path displayed under <strong>Models folder</strong> identifies the directory in which QGIS searches for user-installed Processing models.<br>
+<br>
+Copy the downloaded `GpkgToGpkg.model3` file into this folder.
 </p>
 <br clear="all"><br> 
 
-
-
-Copy the downloaded `GpkgToGpkg.model3` file into this folder.
 
 > [!NOTE]
 > The folder path may vary depending on the operating system, QGIS version, and active QGIS user profile. For this reason, use the path displayed in the QGIS options instead of relying on a predefined system path.
@@ -93,7 +92,7 @@ In the Processing Toolbox, expand:
 
 ⑤ **Models → SoilWise Geopackage Tools**
 
-The following model should be available in this subgroup:
+The model should be available in this subgroup:
 
 ⑥ **GpkgToGpkg**
 
@@ -111,11 +110,13 @@ Double-click **GpkgToGpkg** in the Processing Toolbox.
   </a>
 QGIS opens the model execution dialog. In this dialog, specify: <br>
 <br>
-⑦ The source GeoPackage. <br>
-⑧ The target GeoPackage. <br>
-⑨ The optional log folder. <br>
-⑩ The data groups to be copied. <br>
-⑪ The right-hand side of the dialog also contains the model help panel. This panel provides a brief description of the tool and explains the purpose of the available parameters.
+⑦ The <strong>source</strong> GeoPackage. <br>
+⑧ The <strong>target</strong> GeoPackage. <br>
+⑨ The optional <strong>log</strong> folder. <br>
+⑩ The <strong>data groups</strong> to be copied. <br>
+⑪ The right-hand side of the dialog also contains the model <strong>help</strong> panel. This panel provides a brief description of the tool and explains the purpose of the available parameters.<br>
+<br>
+Click the <strong>RUN</strong> button to execute the model
 </p>
 <br clear="all"><br> 
 
