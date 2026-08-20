@@ -309,38 +309,36 @@ LEFT JOIN soilsite AS sp_parent_site
 > [!NOTE]
 > Column aliases containing spaces are enclosed in double quotation marks. This ensures that they are interpreted correctly as SQL identifiers and improves SQL standards compliance.
 
-## Adding the View to a QGIS Project with DB Manager
+## Adding a View to a QGIS Project with DB Manager
 
 The following procedure adds the query to a QGIS project without creating a persistent view in the database.
 
-1. Open the QGIS project.
-2. If necessary, verify that the GeoPackage or database connection is available in the **Browser** panel.
-3. Open **Database > DB Manager**.
-4. In the left-hand panel, locate and open the GeoPackage or database connection containing the source tables.
-5. Select the database and open **SQL Window**.
-6. Paste the `SELECT` statement provided in the previous section.
-7. Execute the query to verify that it completes without errors and returns one row per observation.
-8. Enable **Load as new layer**.
-9. Select `Observation_id` as the **Column with unique values**.
-10. Do not specify a geometry column, because this query returns a non-spatial attribute layer.
-11. Set the layer name to `view_observation`.
-12. Load the result into the QGIS project.
-13. Save the QGIS project so that the query and layer definition are stored in the project file.
+Open the QGIS project.
+If necessary, verify that the GeoPackage or database connection is available in the **Browser** panel.
+
+<p>
+  <img src="../assets/view_01.webp"
+       alt="voew" align="left" width="500">
+① Open <strong>Database > DB Manager</strong>. <br>
+② In the left-hand panel, locate and open the GeoPackage or database connection containing the source tables.<br>
+Select the database and ③ open <strong>SQL Window</strong> .<br>
+④ Paste the `SELECT` statement that you want to use to create the layer.<br>
+⑤ Execute the query to verify that it completes without errors and returns one row per observation.<br>
+⑥ Enable <strong>Load as new layer</strong>.<br>
+⑦ Select the unique identifier column under <strong>Column with unique values</strong>.<br>
+⑧ Do not specify a geometry column, because this query returns a non-spatial attribute layer.<br>
+⑨ Set the name of the new layer you want to create.<br>
+⑩ Enable <strong>Avoid selecting by feature id</strong>.<br>
+⑩ Load the result into the QGIS project.<br>
+Save the QGIS project so that the query and layer definition are stored in the project file.
+</p>
+<br clear="all"><br> 
+
+
 
 > [!NOTE]
 > Command names may vary slightly depending on the QGIS version and the user-interface language.
 
-### Recommended Validation Checks
-
-After adding the layer:
-
-- open its attribute table;
-- verify that `Observation_id` is unique and never null;
-- compare the row count with the result of `SELECT COUNT(*) FROM observation`;
-- validate at least one record for each supported Feature of Interest type;
-- verify how `Quantity Value` and `Count Value` are populated;
-- verify that `Upper Limit` and `Lower Limit` are populated only when a Profile Element is available;
-- save, close, and reopen the project to verify that the layer configuration is preserved.
 
 ## Creating a Persistent View Through a DBMS
 
@@ -373,43 +371,6 @@ When implemented as a persistent database view:
 - the results remain dynamic and are computed from current source data whenever the view is queried;
 - QGIS can connect directly to the view as a regular database object.
 
-### DBMS Compatibility
-
-The `SELECT` statement uses common SQL constructs, including `JOIN`, `LEFT JOIN`, `CASE`, and `COALESCE`, and can therefore be reused across different database management systems. Some adaptations may nevertheless be required for:
-
-- identifier delimiters;
-- Boolean data types;
-- date and timestamp handling;
-- schema names;
-- table qualification;
-- DBMS-specific `CREATE VIEW` syntax;
-- geometry-column management and registration, where applicable.
-
-For SQLite or a GeoPackage, for example:
-
-```sql
-DROP VIEW IF EXISTS view_observation;
-
-CREATE VIEW view_observation AS
-SELECT
-    -- Insert the complete SELECT statement provided above
-    ...
-;
-```
-
-For a schema-based DBMS such as PostgreSQL, both the view and source tables may need to be schema-qualified:
-
-```sql
-CREATE VIEW schema_name.view_observation AS
-SELECT
-    -- Use schema_name.observation, schema_name.datastream, and so on
-    ...
-;
-```
-
-> [!IMPORTANT]
-> Creating a persistent view requires the appropriate database privileges. If the source-table structure changes, the view definition must be reviewed and updated where necessary.
-
 ## QGIS SQL Layer Compared with a Persistent DBMS View
 
 | Aspect | SQL layer in the QGIS project | Persistent view in the DBMS |
@@ -421,29 +382,3 @@ SELECT
 | Portability | Requires the project or manual layer recreation | Requires access to the database |
 | View-creation privileges | Not required | Generally required |
 
-## Performance Considerations
-
-Because the result is calculated dynamically, indexes should be available on the columns used in joins, particularly:
-
-- `observation.guid_datastream`;
-- `datastream.guid`;
-- `datastream.guid_observedproperty`;
-- the Feature of Interest `guid_*` foreign keys;
-- `profileelement.ispartof`;
-- `soilprofile.location`;
-- `soilplot.locatedon`;
-- the `guid` columns of the related tables.
-
-> [!NOTE]
-> Indexes must be defined on the source tables. A SQL layer stored in a QGIS project does not automatically create database indexes.
-
-## Limitations and Requirements
-
-- The query assumes that all referenced tables and columns are available.
-- The inner joins to `datastream` and `observedproperty` exclude observations for which no valid matching record exists in those tables.
-- Optional relationships use `LEFT JOIN`; therefore, a missing unit of measure, observing procedure, or Feature of Interest does not remove the observation from the result.
-- `Observation_id` must contain unique, non-null values to be used as the QGIS layer identifier.
-- The query does not return a geometry column. To create a spatial layer, an appropriate geometry column must be added to the query and configured in the QGIS SQL Window.
-
-> [!WARNING]
-> The recommended name is `view_observation`. Any occurrence of `wiew_observation` should be treated as a typographical error and corrected consistently in both the QGIS project and the documentation.
