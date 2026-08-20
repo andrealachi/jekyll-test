@@ -313,19 +313,28 @@ LEFT JOIN soilsite AS sp_parent_site
 
 The following procedure adds the query to a QGIS project without creating a persistent view in the database.
 
-1. Open the QGIS project.
-2. If necessary, verify that the GeoPackage or database connection is available in the **Browser** panel.
-3. Open **Database > DB Manager**.
-4. In the left-hand panel, locate and open the GeoPackage or database connection containing the source tables.
-5. Select the database and open **SQL Window**.
-6. Paste the `SELECT` statement provided in the previous section.
-7. Execute the query to verify that it completes without errors and returns one row per observation.
-8. Enable **Load as new layer**.
-9. Select `Observation_id` as the **Column with unique values**.
-10. Do not specify a geometry column, because this query returns a non-spatial attribute layer.
-11. Set the layer name to `view_observation`.
-12. Load the result into the QGIS project.
-13. Save the QGIS project so that the query and layer definition are stored in the project file.
+Open the QGIS project.
+If necessary, verify that the GeoPackage or database connection is available in the **Browser** panel.
+
+<p>
+  <img src="../assets/view_01.webp"
+       alt="voew" align="left" width="500">
+① Open <strong>Database > DB Manager</strong>. <br>
+② In the left-hand panel, locate and open the GeoPackage or database connection containing the source tables.<br>
+Select the database and ③ open <strong>SQL Window</strong> .<br>
+④ Paste the `SELECT` statement that you want to use to create the layer.<br>
+⑤ Execute the query to verify that it completes without errors and returns one row per observation.<br>
+⑥ Enable <strong>Load as new layer</strong>.<br>
+⑦ Select the unique identifier column under <strong>Column with unique values</strong>.<br>
+⑧ Do not specify a geometry column, because this query returns a non-spatial attribute layer.<br>
+⑨ Set the name of the new layer you want to create.<br>
+⑩ Enable <strong>Avoid selecting by feature id</strong>.<br>
+⑩ Load the result into the QGIS project.<br>
+Save the QGIS project so that the query and layer definition are stored in the project file.
+</p>
+<br clear="all"><br> 
+
+
 
 > [!NOTE]
 > Command names may vary slightly depending on the QGIS version and the user-interface language.
