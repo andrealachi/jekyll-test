@@ -1,4 +1,4 @@
-# View Observation
+# Observation View
 
 ## Purpose
 
