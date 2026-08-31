@@ -99,7 +99,7 @@ Open the <strong>Processing</strong> menu. <br>
 ⑫ select <strong>Model Designer</strong>. <br>
 ⑬ in the Model Designer window, select <strong>Open Model</strong>. <br>
 Use the file browser to locate the downloaded model. <br>
-Select a file in `.model3 format.` <br>
+Select a file in `.model3`  format. <br>
 Confirm the selection. <br>
 ⑭  Run the model.
 </p>
@@ -123,9 +123,8 @@ To run the model from the Model Designer:
 
 1. select **Run Model** or click the **Run** button;
 2. wait for the parameter dialog to open;
-3. set the Source GeoPackage, Target GeoPackage, and Log Folder parameters;
-4. select the data groups to be copied;
-5. click **Run**.
+3. set the parameters;
+4. click **Run**.
 
 The parameter dialog is the same as the one displayed when the model is launched from the Processing Toolbox.
 Running selected steps is particularly useful when developing, testing, or troubleshooting the model.
