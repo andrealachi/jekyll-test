@@ -1,6 +1,6 @@
 # How to Use Processing Models in QGIS
 
-## Installing the Model in the Processing Toolbox
+## Adding the Model to the Processing Toolbox
 
 ### Downloading the Model
 
