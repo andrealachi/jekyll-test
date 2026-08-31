@@ -35,11 +35,11 @@ Double-click **GpkgToGpkg** in the Processing Toolbox, or click the **Run button
   </a>
 QGIS opens the model execution dialog. In this dialog, specify: <br>
 <br>
-⑦ The <strong>source</strong> GeoPackage. <br>
-⑧ The <strong>target</strong> GeoPackage. <br>
-⑨ The optional <strong>log</strong> folder. <br>
-⑩ The <strong>data groups</strong> to be copied. <br>
-⑪ The right-hand side of the dialog also contains the model <strong>help</strong> panel. This panel provides a brief description of the tool and explains the purpose of the available parameters.<br>
+① The <strong>source</strong> GeoPackage. <br>
+② The <strong>target</strong> GeoPackage. <br>
+③ The optional <strong>log</strong> folder. <br>
+④ The <strong>data groups</strong> to be copied. <br>
+⑤ The right-hand side of the dialog also contains the model <strong>help</strong> panel. This panel provides a brief description of the tool and explains the purpose of the available parameters.<br>
 <br>
 Click the <strong>RUN</strong> button to execute the model
 </p>
