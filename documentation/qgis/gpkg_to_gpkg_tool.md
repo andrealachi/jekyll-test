@@ -24,20 +24,9 @@ This selection is managed through QGIS **Conditional Branch** algorithms. Based 
 > The TARGET GeoPackage must already exist and must use a structure that is compatible with the SOURCE. In particular, it must contain the tables expected by the model.
 
 
-
-## Available Methods for Running the Model
-
-The model can be used in QGIS in two ways:
-
-1. by installing it in the **Processing Toolbox**, so that it remains permanently available;
-2. by opening it directly in the **Model Designer**, where it can be run, inspected, or modified.
-
-Installing the model in the Processing Toolbox is the recommended approach for routine use. The Model Designer is more appropriate when the internal structure of the model needs to be examined or when changes must be made to the processing workflow.
-
-
 ## Opening the Model Execution Dialog
 
-Double-click **GpkgToGpkg** in the Processing Toolbox.
+Double-click **GpkgToGpkg** in the Processing Toolbox, or click the **Run button** in the Model Designer.
 
 <p>
     <a href="../assets/gtg_02.webp" target="_blank">
@@ -339,120 +328,6 @@ The model can also copy the `isbasedonsoilbody` relationship.
 > [!TIP]
 > To preserve all relationships between two domains, enable both relevant parameters. Otherwise, the model may omit the relationship table to avoid references to entities that are not present in the TARGET.
 
-
-## Running the Model from the Processing Toolbox
-
-After configuring all parameters:
-
-1. verify that the correct SOURCE and TARGET have been selected;
-2. confirm that the selected TARGET is the GeoPackage that should be modified;
-3. select a log folder if a saved execution log is required;
-4. enable the data groups to be copied;
-5. click **Run**.
-
-During execution, QGIS displays information about the algorithms being run in the Processing log panel.
-
-After the model has finished, it is good practice to:
-
-- verify that processing completed without errors;
-- review the saved log, if requested;
-- check the number of records in the TARGET tables;
-- confirm that relationships between tables have been preserved;
-- check for orphaned references.
-
-> [!TIP]
-> Before running the model on production data for the first time, create a backup copy of the TARGET GeoPackage.
-
-
-# Part III. Opening and Running the Model in the Model Designer
-
-## When to Use the Model Designer
-
-The model can be opened directly in the Model Designer without first installing it in the models folder.
-
-This method is useful when you need to:
-
-- run the model occasionally;
-- inspect its structure;
-- review dependencies between algorithms;
-- inspect the SQL expressions;
-- modify parameters;
-- modify Conditional Branch algorithms;
-- add or remove workflow steps;
-- create a customized version of the model.
-
-The Model Designer represents a sequence of processing algorithms as a single workflow that can later be executed with different input data.
-
-
-## Opening the Model
-
-After [downloading](https://github.com/andrealachi/jekyll-test/blob/main/models/gpkg_data_transfer/GpkgToGpkg.model3)  the `.model3` file:
-
-<p>
-  <a href="../assets/gtg_03.webp" target="_blank">
-    <img src="../assets/gtg_03.webp"
-         alt="Fig.3" align="left" width="500">
-  </a>
-Start QGIS.<br>
-<br>
-Open the <strong>Processing</strong> menu. <br>
-⑫ select <strong>Model Designer</strong>. <br>
-⑬ in the Model Designer window, select <strong>Open Model</strong>. <br>
-Use the file browser to locate the downloaded model. <br>
-Select `GpkgToGpkg.model3`. <br>
-Confirm the selection. <br>
-⑭  Run the model.
-</p>
-<br clear="all"><br> 
-
-
-The model is displayed in the Model Designer workspace, where the following elements are visible:
-
-- input parameters;
-- comparison algorithms;
-- join operations;
-- field selection operations;
-- copy operations;
-- dependencies between algorithms;
-- Conditional Branch algorithms.
-
-
-## Running the Model from the Model Designer
-
-To run the model from the Model Designer:
-
-1. select **Run Model** or click the **Run** button;
-2. wait for the parameter dialog to open;
-3. set the Source GeoPackage, Target GeoPackage, and Log Folder parameters;
-4. select the data groups to be copied;
-5. click **Run**.
-
-The parameter dialog is the same as the one displayed when the model is launched from the Processing Toolbox.
-Running selected steps is particularly useful when developing, testing, or troubleshooting the model.
-
-
-## Modifying the Model
-
-Opening the model in the Model Designer allows any of its components to be modified, including:
-
-- the SQL queries used to identify missing records;
-- the keys used for comparisons;
-- the tables included in the workflow;
-- the fields retained in intermediate outputs;
-- the conditions that enable individual workflow sections;
-- the GDAL options used for append operations;
-- dependencies between algorithms;
-- parameters displayed to the user;
-- the model's internal help documentation.
-
-Before saving a modified version, it is advisable to:
-
-1. use a different file name;
-2. retain a copy of the original model;
-3. validate the model;
-4. test it on copies of the GeoPackages;
-5. verify the referential integrity of the output.
-
-> [!WARNING]
-> Changes to SQL queries, comparison keys, or conditional dependencies may affect duplicate prevention or produce incomplete relationships. Refer to the [model's technical documentation](./gpkg_to_gpkg_documentation.md) for a detailed explanation of its internal structure and workflow logic.
+> [!NOTE]
+>  Refer to the [model's technical documentation](./gpkg_to_gpkg_documentation.md) for a detailed explanation of its internal structure and workflow logic.
 
