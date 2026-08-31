@@ -46,7 +46,7 @@ Click the <strong>RUN</strong> button to execute the model
 <br clear="all"><br> 
 
 
-# Part II. Configuring the Parameters
+# Configuring the Parameters
 
 ## Main Parameters
 
