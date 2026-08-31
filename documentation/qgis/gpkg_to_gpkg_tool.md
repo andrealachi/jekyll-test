@@ -1,4 +1,4 @@
-# Installing and Using the GpkgToGpkg Model in QGIS
+# Incremental GeoPackage Data Transfer
 
 ## Introduction
 
@@ -33,70 +33,6 @@ The model can be used in QGIS in two ways:
 2. by opening it directly in the **Model Designer**, where it can be run, inspected, or modified.
 
 Installing the model in the Processing Toolbox is the recommended approach for routine use. The Model Designer is more appropriate when the internal structure of the model needs to be examined or when changes must be made to the processing workflow.
-
-
-
-# Part I. Installing the Model in the Processing Toolbox
-
-## Downloading the Model
-
-Download the [model](https://github.com/andrealachi/jekyll-test/blob/main/models/gpkg_data_transfer/GpkgToGpkg.model3) file from the GitHub repository. The file uses the following extension:
-
-```text
-.model3
-```
-
-Keep the original file extension unchanged.
-
-
-
-## Locating the QGIS Models Folder
-
-To avoid loading the `.model3` file manually every time the tool is required, copy it to the folder used by QGIS to store Processing models.
-
-Follow these steps:
-
-<p>
-  <a href="../assets/gtg_01.webp" target="_blank">
-    <img src="../assets/gtg_01.webp"
-         alt="Fig.1" align="left" width="500">
-  </a>
-  
-Start QGIS. <br>
-<br>
-① Open the <strong>Settings</strong> menu. <br>
-② Select <strong>Options</strong>.<br>
-In the <strong>Options</strong> dialog, select ③ <strong>Processing</strong> from the panel on the left.<br>
-On the right-hand side of the dialog, expand the <strong>Models</strong> section.<br>
-Locate the ④ <strong>Models folder</strong> setting.<br>
-The path displayed under <strong>Models folder</strong> identifies the directory in which QGIS searches for user-installed Processing models.<br>
-<br>
-Copy the downloaded `GpkgToGpkg.model3` file into this folder.
-</p>
-<br clear="all"><br> 
-
-
-> [!NOTE]
-> The folder path may vary depending on the operating system, QGIS version, and active QGIS user profile. For this reason, use the path displayed in the QGIS options instead of relying on a predefined system path.
-
-
-## Displaying the Model in the Processing Toolbox
-
-After copying the file to the models folder, return to the main QGIS window.
-
-If the **Processing Toolbox** is not visible, open it from:
-
-**Processing → Toolbox**
-
-In the Processing Toolbox, expand:
-
-⑤ **Models → SoilWise Geopackage Tools**
-
-The model should be available in this subgroup:
-
-⑥ **GpkgToGpkg**
-
-If the model does not appear immediately, refresh the Processing Toolbox or restart QGIS.
 
 
 ## Opening the Model Execution Dialog
