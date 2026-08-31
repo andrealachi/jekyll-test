@@ -1,4 +1,4 @@
-# How to use Models
+# How to Use Processing Models in QGIS
 
 ## Installing the Model in the Processing Toolbox
 
@@ -57,31 +57,11 @@ In the Processing Toolbox, expand:
 
 ⑤ **Models → SoilWise Geopackage Tools**
 
-The following model should be available in this subgroup:
+⑥ Click the **model name** in the Processing Toolbox to open the **Model Execution Dialog**.
 
-⑥ **GpkgToGpkg**
+> [!NOTE]
+> If the model does not appear immediately, refresh the Processing Toolbox or restart QGIS.
 
-If the model does not appear immediately, refresh the Processing Toolbox or restart QGIS.
-
-
-### Opening the Model Execution Dialog
-
-Double-click **GpkgToGpkg** in the Processing Toolbox.
-
-<p>
-    <a href="../assets/gtg_02.webp" target="_blank">
-    <img src="../assets/gtg_02.webp"
-         alt="Fig.2" align="left" width="500">
-  </a>
-QGIS opens the model execution dialog. In this dialog, specify: <br>
-<br>
-⑦ The source GeoPackage. <br>
-⑧ The target GeoPackage. <br>
-⑨ The optional log folder. <br>
-⑩ The data groups to be copied. <br>
-⑪ The right-hand side of the dialog also contains the model help panel. This panel provides a brief description of the tool and explains the purpose of the available parameters.
-</p>
-<br clear="all"><br> 
 
 
 ## Opening and Running the Model in the Model Designer
@@ -106,7 +86,7 @@ The Model Designer represents a sequence of processing algorithms as a single wo
 
 ### Opening the Model
 
-After [downloading](https://github.com/soilwise-he/Geopackage-so/tree/main/geopackage/Models/gpkg_data_transfer/GpkgToGpkg.model3)  the `.model3` file:
+After [downloading](https://github.com/soilwise-he/Geopackage-so/tree/main/geopackage/Models/)  the `.model3` file:
 
 <p>
   <a href="../assets/gtg_03.webp" target="_blank">
