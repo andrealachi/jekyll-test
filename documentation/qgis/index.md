@@ -36,6 +36,8 @@ Below is the index of the technical documentation available in this repository:
 [Profile Element Form](./profileelement.md)  
 [Datastream Form](./datastream.md)  
 [Observation Form](./observation.md)  
+[Observation View](./view_observation.md)  
+
 
 
 # QGIS Model Designer: GeoPackage Toolkit
