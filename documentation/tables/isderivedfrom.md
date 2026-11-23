@@ -37,8 +37,8 @@ The relationship is therefore **many-to-many (N:M)** between derived and observe
 | Name | Type | Constraints | Description |
 |------|------|-------------|-------------|
 | `id` | `INTEGER` | PRIMARY KEY | Primary Key of the Table. |
-| `guid_base` | `TEXT` | NOT NULL | Foreign key to the SoilProfile table, guid field. - Observed Soil Profile. |
-| `guid_related` | `TEXT` | NOT NULL | Foreign key to the SoilProfile table, guid field. - Derived Soil Profile. |
+| `guid_base` | `TEXT` | NOT NULL | Foreign key to the SoilProfile table, guid field. - Derived Soil Profile. |
+| `guid_related` | `TEXT` | NOT NULL | Foreign key to the SoilProfile table, guid field. - Observed Soil Profile. |
 
 ### Relationships (as child)
 - `isderivedfrom.guid_related` → `soilprofile.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
