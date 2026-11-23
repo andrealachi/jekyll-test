@@ -25,16 +25,16 @@ The boolean field **`profileelement.profileelementtype`** determines the special
 - `0` → **Horizon**  
 - `1` → **Layer**
 
-This behaviour is enforced by database triggers. See the DDL for details.[^6]
+
 
 ## Behavior of the `profileelement` table per type
 
-> **Depth range & validity (applies to both types).** At least one of `profileelementdepthrange_uppervalue` or `profileelementdepthrange_lowervalue` must be non‑null; if both are provided, `uppervalue` must be **less than** `lowervalue` (i.e., depth increases downward).[^6]
+> **Depth range & validity (applies to both types).** At least one of `profileelementdepthrange_uppervalue` or `profileelementdepthrange_lowervalue` must be non‑null; if both are provided, `uppervalue` must be **less than** `lowervalue` (i.e., depth increases downward).
 
 ### Horizon (`profileelementtype = 0`)
-- **Layer‑specific fields must be NULL**: the attributes intended for *Layer* (e.g., `layertype`, `layerrocktype`, `layergenesisprocess`, `layergenesisenviroment`, `layergenesisprocessstate`) are **forbidden** on Horizons; triggers reject inserts/updates that set them.[^6]  
-- **Horizon notation is enabled**: only Horizons can be linked to horizon‑notation records (e.g., **FAO** horizon notation via `faohorizonnotationtype`, and other horizon notation via `otherhorizon_profileelement`); triggers enforce that the associated `profileelement` is a Horizon.[^6]  
-- **Belongs to a SoilProfile**: every `profileelement` (Horizon or Layer) references its parent profile via **`ispartof` → `soilprofile.guid`**.[^1][^6]
+- **Layer‑specific fields must be NULL**: the attributes intended for *Layer* (e.g., `layertype`, `layerrocktype`, `layergenesisprocess`, `layergenesisenviroment`, `layergenesisprocessstate`) are **forbidden** on Horizons; triggers reject inserts/updates that set them.
+- **Horizon notation is enabled**: only Horizons can be linked to horizon‑notation records (e.g., **FAO** horizon notation via `faohorizonnotationtype`, and other horizon notation via `otherhorizon_profileelement`); triggers enforce that the associated `profileelement` is a Horizon.  
+- **Belongs to a SoilProfile**: every `profileelement` (Horizon or Layer) references its parent profile via **`ispartof` → `soilprofile.guid`**.[^1]
 
 ### Layer (`profileelementtype = 1`)
 - **Layer attributes allowed + domain rules**:  
@@ -43,10 +43,10 @@ This behaviour is enforced by database triggers. See the DDL for details.[^6]
   - `layergenesisprocess` from **EventProcessValue**;  
   - `layergenesisenviroment` from **EventEnvironmentValue**;  
   - `layergenesisprocessstate` from **LayerGenesisProcessStateValue**.  
-  Triggers validate all assignments against the corresponding codelists.[^6]  
-- **Geogenic guardrails**: when `layertype` is **not** “geogenic”, the genesis‑related fields (`layerrocktype`, `layergenesis*`) **must be NULL**; dedicated triggers enforce this consistency.[^6]  
-- **Horizon notation not applicable**: links to FAO/other horizon notation are **blocked** for Layers by triggers that require `profileelementtype = 0` on the target element.[^6]  
-- **Belongs to a SoilProfile**: like Horizons, Layers are related to their parent profile through **`ispartof`**.[^1][^6]
+  Triggers validate all assignments against the corresponding codelists.  
+- **Geogenic guardrails**: when `layertype` is **not** “geogenic”, the genesis‑related fields (`layerrocktype`, `layergenesis*`) **must be NULL**; dedicated triggers enforce this consistency.
+- **Horizon notation not applicable**: links to FAO/other horizon notation are **blocked** for Layers by triggers that require `profileelementtype = 0` on the target element.
+- **Belongs to a SoilProfile**: like Horizons, Layers are related to their parent profile through **`ispartof`**.[^1]
 
 >[!WARNING]
 > Records that do not comply with the defined constraints **shall be rejected by the system and shall not be persisted** in the GeoPackage.
@@ -65,8 +65,7 @@ https://inspire.ec.europa.eu/featureconcept/ProfileElement:1
 [^5]: **INSPIRE Soil — Overview slide deck (Site–Plot–Profile–Horizon/Layer)**.  
 https://zenodo.org/records/13970777/files/II3-INSPIRE-Soil.pdf
 
-[^6]: **Database schema (DDL) — tables, constraints & triggers for `profileelement`**.  
-./DDL_SO_14.sql
+
 
 
 <p>
