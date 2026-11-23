@@ -125,8 +125,7 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
 
 | Name | Unique | Columns | Origin | Partial |
 |------|--------|---------|--------|---------|
-| `sqlite_autoindex_observation_2` | Yes | `phenomenontime_start`, `guid_datastream` | `u` | No |
-| `sqlite_autoindex_observation_1` | Yes | `guid` | `u` | No |
+| `idx_observation_guid_datastream` | No | `guid_datastream` | `c` | No |
 
 ### Triggers
 For every trigger you will find:

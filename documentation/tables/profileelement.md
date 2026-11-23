@@ -163,7 +163,7 @@ The semantic and syntactic validation of the inserted values is enforced at the 
 
 | Name | Unique | Columns | Origin | Partial |
 |------|--------|---------|--------|---------|
-| `sqlite_autoindex_profileelement_1` | Yes | `guid` | `u` | No |
+| `idx_profileelement_ispartof` | No | `ispartof` | `c` | No |
 
 ### Triggers
 For every trigger you will find:

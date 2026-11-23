@@ -41,10 +41,7 @@ This relationship allows soil-derived objects to be based on one or more soil pr
 - None
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_isbasedonobservedsoilprofile_1` | Yes | `guid_soilderivedobject`, `guid_soilprofile` | `u` | No |
+- None
 
 ### Triggers
 

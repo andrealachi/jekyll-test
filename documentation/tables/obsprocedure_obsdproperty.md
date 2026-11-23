@@ -51,10 +51,7 @@ This constraint **shall be enforced** by triggers that verify pair membership **
 - None
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_obsprocedure_obsdproperty_1` | Yes | `guid_observingprocedure`, `guid_observedproperty` | `u` | No |
+- None
 
 ### Triggers
 - None

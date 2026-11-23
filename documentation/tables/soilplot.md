@@ -94,7 +94,7 @@ The semantic and syntactic validation of the inserted values is enforced at the 
 | Name | Unique | Columns | Origin | Partial |
 |------|--------|---------|--------|---------|
 | `idx_soilplot_geom` | No | `soilplotlocation` | `c` | No |
-| `sqlite_autoindex_soilplot_1` | Yes | `guid` | `u` | No |
+| `idx_soilplot_locatedon` | No | `locatedon` | `c` | No |
 
 ### Triggers
 For every trigger you will find:

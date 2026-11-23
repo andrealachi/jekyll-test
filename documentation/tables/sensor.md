@@ -53,10 +53,7 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
 - `obsprocedure_sensor.guid_sensor` → `sensor.guid` (**ON UPDATE** CASCADE, **ON DELETE** RESTRICT)
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_sensor_1` | Yes | `guid` | `u` | No |
+- None
 
 ### Triggers
 For every trigger you will find:

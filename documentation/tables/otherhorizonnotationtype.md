@@ -86,10 +86,7 @@ The semantic and syntactic validation of the inserted values is enforced at the 
 - `otherhorizon_profileelement.guid_otherhorizonnotationtype` → `otherhorizonnotationtype.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_otherhorizonnotationtype_1` | Yes | `guid` | `u` | No |
+- None
 
 ### Triggers
 For every trigger you will find:

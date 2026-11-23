@@ -39,10 +39,7 @@
 - None
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_obsprocedure_sensor_1` | Yes | `guid_observingprocedure`, `guid_sensor` | `u` | No |
+- None
 
 ### Triggers
 - None

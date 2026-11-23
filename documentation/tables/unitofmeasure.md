@@ -49,10 +49,7 @@ The unitOfMeasure is part of the SWE-Common structure description found in resul
 - `datastream.code_unitofmeasure` → `unitofmeasure.code` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_unitofmeasure_1` | Yes | `code` | `u` | No |
+- None
 
 ### Triggers
 - None

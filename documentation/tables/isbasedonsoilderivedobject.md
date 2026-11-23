@@ -54,10 +54,7 @@ This approach improves both:
 - None
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_isbasedonsoilderivedobject_1` | Yes | `guid_base`, `guid_related` | `u` | No |
+- None
 
 ### Triggers
 - None

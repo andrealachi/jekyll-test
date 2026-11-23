@@ -14,7 +14,7 @@ This page provides a **technical entry point**: how the schema is organised, whi
 ## Relational Structure of the GeoPackage (INSPIRE UML + STA2 Transposition)
 
 <p>
-  <a href="../assets/db_structure.web" target="_blank">
+  <a href="../assets/db_structure.webp" target="_blank">
     <img src="../assets/db_structure.webp"
          alt="Fig.1"
          style="width: 100%; height: auto; display: block;">
@@ -123,10 +123,6 @@ Stores individual results for a datastream:
   - **Text:** `result_text` NOT NULL; other result fields NULL. 
 
 Additionally, observation triggers keep `datastream.phenomenontime_start/end` synchronised to the MIN/MAX of linked observations. 
-
-### 4.3 Convenience view: `view_observation`
-A dedicated view joins observations to their FOI context (site/plot/profile/element), and standardises output fields such as property name, procedure, UoM symbol, and type-specific numeric values. This is intended for reporting and extraction without re-implementing complex joins.  
-
 
 
 ## 5) Minimal SQL examples

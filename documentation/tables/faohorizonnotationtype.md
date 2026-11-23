@@ -99,11 +99,7 @@ The semantic and syntactic validation of the inserted values is enforced at the 
 - None
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_faohorizonnotationtype_2` | Yes | `guid_profileelement` | `u` | No |
-| `sqlite_autoindex_faohorizonnotationtype_1` | Yes | `guid` | `u` | No |
+- None
 
 ### Triggers
 For every trigger you will find:

@@ -61,10 +61,7 @@ and their **order and role** within the WRB classification system.
 - None
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_wrbqualifiergroup_profile_1` | Yes | `guid_soilprofile`, `guid_wrbqualifiergrouptype` | `u` | No |
+- None
 
 ### Triggers
 For every trigger you will find:

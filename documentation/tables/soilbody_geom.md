@@ -60,7 +60,6 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
 | Name | Unique | Columns | Origin | Partial |
 |------|--------|---------|--------|---------|
 | `idx_soiBody_geom` | No | `geom` | `c` | No |
-| `sqlite_autoindex_soilbody_geom_1` | Yes | `guid` | `u` | No |
 
 ### Triggers
 For every trigger you will find:

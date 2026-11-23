@@ -97,7 +97,6 @@ The semantic and syntactic validation of the inserted values is enforced at the 
 | Name | Unique | Columns | Origin | Partial |
 |------|--------|---------|--------|---------|
 | `idx_soilsite_geom` | No | `geometry` | `c` | No |
-| `sqlite_autoindex_soilsite_1` | Yes | `guid` | `u` | No |
 
 ### Triggers
 

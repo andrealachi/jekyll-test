@@ -50,10 +50,7 @@ The relationship is therefore **many-to-many (N:M)** between derived and observe
 - None
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_isderivedfrom_1` | Yes | `guid_base`, `guid_related` | `u` | No |
+- None
 
 ### Triggers
 For every trigger you will find:

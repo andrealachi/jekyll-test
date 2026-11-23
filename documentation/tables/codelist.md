@@ -87,7 +87,10 @@ https://www.w3.org/TR/vocab-ssn/
 - None
 
 ### Indexes
-- None
+
+| Name | Unique | Columns | Origin | Partial |
+|------|--------|---------|--------|---------|
+| `idx_codelist_collection_id` | No | `collection`, `id` | `c` | No |
 
 ### Triggers
 - None

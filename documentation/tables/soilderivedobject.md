@@ -77,7 +77,6 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
 | Name | Unique | Columns | Origin | Partial |
 |------|--------|---------|--------|---------|
 | `idx_soilderivedobject_geom` | No | `geometry` | `c` | No |
-| `sqlite_autoindex_soilderivedobject_1` | Yes | `guid` | `u` | No |
 
 ### Triggers
 For every trigger you will find:

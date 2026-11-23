@@ -55,10 +55,7 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
 - `obsprocedure_sensor.guid_observingprocedure` → `observingprocedure.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `sqlite_autoindex_observingprocedure_1` | Yes | `guid` | `u` | No |
+- None
 
 ### Triggers
 For every trigger you will find:
