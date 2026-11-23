@@ -14,7 +14,7 @@
 ## Result Compliance Based on `datastream.type`
 Two BEFORE triggers (INSERT and UPDATE) apply expected structure and domain rules to the observation’s `result`, according to the type defined in the linked datastream row:
 - `observation_bi_type_constraints` (BEFORE INSERT)
-- `observation_bu_type_constraints` (BEFORE UPDATE OF result_*, iddatastream)
+- `observation_bu_type_constraints` (BEFORE UPDATE OF result_*, guid_datastream)
 
 The rules by type are:
 
@@ -54,12 +54,12 @@ This family therefore guarantees semantic stability: you cannot tighten a series
 
 ## Alignment of the Datastream Time Window
 To maintain in `datastream` a consistent summary of the temporal coverage of its observations, there are three triggers that recompute the fields `datastream.phenomenontime_start` (MIN) and `datastream.phenomenontime_end` (MAX) with respect to all related rows in `observation`:
-- `observation_ai_recalc_ds_times` (AFTER INSERT): upon a new insert, recomputes MIN/MAX on the datastream of `NEW.iddatastream`.
-- `observation_au_recalc_ds_times` (AFTER UPDATE OF phenomenontime_*, iddatastream): recomputes for the new datastream; if the observation has been moved across series, it also recomputes for the old datastream.
-- `observation_ad_recalc_ds_times` (AFTER DELETE): upon deletion, recomputes MIN/MAX on the datastream of `OLD.iddatastream`.
+- `observation_ai_recalc_ds_times` (AFTER INSERT): upon a new insert, recomputes MIN/MAX on the datastream of `NEW.guid_datastream`.
+- `observation_au_recalc_ds_times` (AFTER UPDATE OF phenomenontime_*, guid_datastream): recomputes for the new datastream; if the observation has been moved across series, it also recomputes for the old datastream.
+- `observation_ad_recalc_ds_times` (AFTER DELETE): upon deletion, recomputes MIN/MAX on the datastream of `OLD.guid_datastream`.
 
 To support these recurring aggregations, recommended indexes are defined:
-- `idx_observation_ds_times (iddatastream, phenomenontime_start, phenomenontime_end)`
+- `idx_observation_ds_times (guid_datastream, phenomenontime_start, phenomenontime_end)`
   
 >[!WARNING]
 > Records that do not comply with the defined constraints **shall be rejected by the system and shall not be persisted** in the GeoPackage.
