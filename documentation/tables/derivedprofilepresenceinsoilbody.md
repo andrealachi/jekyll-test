@@ -30,8 +30,11 @@
 | `id` | `INTEGER` | PRIMARY KEY | Primary Key of the Table. |
 | `guid_soilbody` | `TEXT` | NOT NULL | Foreign key to the SoilBody table. |
 | `guid_soilprofile` | `TEXT` | NOT NULL | Foreign key to the SoilProfile table, guid field. |
-| `lowervalue` | `REAL` |  | Upper value. |
-| `uppervalue` | `REAL` |  | Lower value. |
+| `lowervalue` | `REAL` |  | Lower value. |
+| `uppervalue` | `REAL` |  | Upper value. |
+
+> [!WARNING]
+> If both `lowervalue` and `uppervalue` are provided, `lowervalue` must be less than or equal to `uppervalue`.
 
 ### Relationships (as child)
 - `derivedprofilepresenceinsoilbody.guid_soilprofile` → `soilprofile.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
