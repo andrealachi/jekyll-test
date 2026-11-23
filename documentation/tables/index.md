@@ -43,6 +43,15 @@ This page provides a **technical entry point**: how the schema is organised, whi
 - **[datastream](datastream.md)** — observation “channel”: what is observed (ObservedProperty), how (Procedure/Sensor), and on which Feature of Interest (FOI). 
 - **[observation](observation.md)** — time-stamped results, constrained by `datastream.type` (Quantity/Category/Boolean/Count/Text). 
 
+### Sampling model
+
+The GeoPackage also includes a sampling model composed of:
+- **[Sampler](sampler.md)**, describing the device, tool, organisation or agent used to obtain a sample;
+- **[Sampling Procedure](sampling_procedure.md)**, describing the sampling method;
+- **[Sample](sample.md)**, describing the material specimen;
+- **[Sampling](sampling.md)**, linking the sample to its sampling time, sampler, procedure and either a SoilPlot or a ProfileElement.
+
+A `sample` may also be used as the Feature of Interest of a `datastream`.
 
 ## 1) GeoPackage as a technical container (SQLite + OGC metadata)
 
@@ -123,7 +132,6 @@ Stores individual results for a datastream:
   - **Text:** `result_text` NOT NULL; other result fields NULL. 
 
 Additionally, observation triggers keep `datastream.phenomenontime_start/end` synchronised to the MIN/MAX of linked observations. 
-
 
 ## 5) Minimal SQL examples
 
