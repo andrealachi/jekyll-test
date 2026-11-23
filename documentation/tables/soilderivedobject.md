@@ -45,8 +45,7 @@ https://inspire-mif.github.io/technical-guidelines/data/so/dataspecification_so.
 | `inspireid_localid` | `TEXT` |  | A local identifier, assigned by the data provider. The local identifier is unique within the namespace, that is no other spatial object carries the same unique identifier. |
 | `inspireid_namespace` | `TEXT` |  | Namespace uniquely identifying the data source of the spatial object. |
 | `inspireid_versionid` | `TEXT` |  | The identifier of the particular version of the spatial object, with a maximum length of 25 characters. If the specification of a spatial object type with an external object identifier includes life-cycle information, the version identifier is used to distinguish between the different versions of a spatial object. Within the set of all versions of a spatial object, the version identifier is unique. |
-| `accessuri` | `TEXT` |  | SoilDerivedObject URI. |
-| `geometry` | `POLYGON` |  | Geometry. |
+
 
 ### Table Identifiers
 In this table, the primary key is the *id* field (integer, auto-incrementing).  
@@ -71,12 +70,10 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
 - `isbasedonsoilbody.guid_soilderivedobject` → `soilderivedobject.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
 - `isbasedonsoilderivedobject.guid_related` → `soilderivedobject.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
 - `isbasedonsoilderivedobject.guid_base` → `soilderivedobject.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
+- `soilderivedobject_geom.guid_soilderivedobject` → `soilderivedobject.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
 
 ### Indexes
-
-| Name | Unique | Columns | Origin | Partial |
-|------|--------|---------|--------|---------|
-| `idx_soilderivedobject_geom` | No | `geometry` | `c` | No |
+- None
 
 ### Triggers
 For every trigger you will find:
