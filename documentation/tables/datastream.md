@@ -13,31 +13,31 @@ The JSON object `resultType` (SWE-Common AbstractDataComponent), which represent
 
 To simplify management, it has been defined that each Datastream can have only one result type (one-to-one relationship), avoiding the complexity of a one-to-many relationship as in OGC models. This choice allows mapping the fields directly into the `datastream` table.
 
-Specifically, the fields **Label** and **Definition** are not duplicated in the `datastream` table because they are already defined in the `ObservedProperty` entity. Both are retrieved through the foreign key `idobservedproperty` present in `datastream`:
+Specifically, the fields **Label** and **Definition** are not duplicated in the `datastream` table because they are already defined in the `ObservedProperty` entity. Both are retrieved through the foreign key `guid_observedproperty` present in `datastream`:
 - `label` corresponds to the `name` field of `ObservedProperty`.
 - `definition` corresponds to the `definition` field of `ObservedProperty`.
 
-Since both `idobservedproperty` in `datastream` and the fields `name` and `definition` in `ObservedProperty` are mandatory, no data loss occurs, and it is always possible to correctly reconstruct the JSON `resultType` object.
+Since both `guid_observedproperty` in `datastream` and the fields `name` and `definition` in `ObservedProperty` are mandatory, no data loss occurs, and it is always possible to correctly reconstruct the JSON `resultType` object.
 
 ## Allowed Values of ResultType are: (listed constraints of each Type)
 1. **type = Quantity**
-   - Required: `iduom` (unit of measure).
+   - Required: `code_unitofmeasure` (unit of measure).
    - Forbidden: `codespace`.
    - Optional: `value_min` and `value_max`.
    - Additional constraint: if both are present, `value_max > value_min`.
 
 2. **type = Category**
-   - Forbidden: `iduom`, `value_min`, and `value_max`.
+   - Forbidden: `code_unitofmeasure`, `value_min`, and `value_max`.
    - Required: `codespace`.
 
 3. **type = Boolean**
-   - Forbidden: `iduom`, `codespace`, `value_min`, `value_max`.
+   - Forbidden: `code_unitofmeasure`, `codespace`, `value_min`, `value_max`.
 
 4. **type = Text**
-   - Forbidden: `iduom`, `codespace`, `value_min`, `value_max`.
+   - Forbidden: `code_unitofmeasure`, `codespace`, `value_min`, `value_max`.
 
 5. **type = Count**
-   - Forbidden: `iduom`, `codespace`.
+   - Forbidden: `code_unitofmeasure`, `codespace`.
    - Optional: `value_min` and `value_max`.
    - Additional constraint: if both are present, `value_max > value_min`.
 <p>&nbsp;</p>
@@ -108,6 +108,7 @@ In this way, the `datastream` always reflects the **earliest** phenomenon start 
 | `guid_soilprofile` | `TEXT` |  | Foreign key to the Soil Profile table, guid field. |
 | `guid_profileelement` | `TEXT` |  | Foreign key to the Profile Elemen table, guid field. |
 | `guid_soilderivedobject` | `TEXT` |  | Foreign key to the Soil Derived Object table, guid field. |
+| `guid_sample` | `TEXT` |  | Foreign key to the Sample table, guid field. |
 
 
 ### Table Identifiers
@@ -132,6 +133,8 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
   - *Note:* delete on `soilprofile` cascades to `datastream`.
 - `datastream.guid_soilsite` → `soilsite.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
   - *Note:* delete on `soilsite` cascades to `datastream`.
+- `datastream.guid_sample` → `sample.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
+  - *Note:* delete on `sample` cascades to `datastream`.
 - `datastream.guid_observingprocedure` → `observingprocedure.guid` (**ON UPDATE** CASCADE, **ON DELETE** SET NULL)
 - `datastream.guid_observedproperty` → `observedproperty.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
   - *Note:* delete on `observedproperty` cascades to `datastream`.
@@ -141,6 +144,7 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
   - *Note:* delete on `thing` cascades to `datastream`.
 - `datastream.code_unitofmeasure` → `unitofmeasure.code` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
   - *Note:* delete on `unitofmeasure` cascades to `datastream`.
+
 
 ### Referenced by (as parent)
 - `observation.guid_datastream` → `datastream.guid` (**ON UPDATE** CASCADE, **ON DELETE** CASCADE)
@@ -155,6 +159,7 @@ Any foreign keys (FK) from other tables reference this table’s GUID field rath
 | `idx_ds_guid_profileelement` | No | `guid_profileelement` | `c` | No |
 | `idx_ds_guid_soilderivedobject` | No | `guid_soilderivedobject` | `c` | No |
 | `idx_datastream_type` | No | `type` | `c` | No |
+| `idx_datastream_guid_sample` | No | `guid_sample` | `c` | No |
 
 ### Triggers
 For every trigger you will find:
