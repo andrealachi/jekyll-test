@@ -31,7 +31,7 @@ The `soilbody_geom` table therefore enables multi-scale spatial visualization an
 |------|------|-------------|-------------|
 | `id` | `INTEGER` | PRIMARY KEY | Primary Key of the Table. |
 | `guid` | `TEXT` |  | Universally unique identifier. |
-| `geom` | `MULTIPOLYGON` | NOT NULL | Geometry. |
+| `geometry` | `MULTIPOLYGON` | NOT NULL | Geometry. |
 | `guid_soilbody` | `TEXT` | NOT NULL | Foreign key to the SoilBody table. |
 
 ### Table Identifiers
