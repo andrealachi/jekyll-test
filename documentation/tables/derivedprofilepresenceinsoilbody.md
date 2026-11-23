@@ -46,7 +46,10 @@
 - None
 
 ### Indexes
-- None
+| Name | Unique | Columns | Origin | Partial |
+|------|--------|---------|--------|---------|
+| `sqlite_autoindex_derivedprofilepresenceinsoilbody_1` | Yes | `guid_soilbody`, `guid_soilprofile` | `u` | No |
+| `idx_derivedprofilepresenceinsoilbody_guid_soilprofile` | No | `guid_soilprofile` | `c` | No |
 
 ### Triggers
 For every trigger you will find:
