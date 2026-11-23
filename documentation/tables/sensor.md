@@ -29,7 +29,7 @@ A Sensor entity in an OGC SensorThings API deployment can represent either a spe
 | `name` | `TEXT` | NOT NULL | A property provides a label for Sensor entity, commonly a descriptive name. |
 | `definition` | `TEXT` |  | The URI linking the Thing to an external definition. Dereferencing this URI SHOULD result in a representation of the definition of the Thing. |
 | `description` | `TEXT` |  | The description of the Sensor entity. |
-| `encodingtype` | `TEXT` |  | The encoding type of the metadata property. If the metadata field is present, an encodingType must be specified. |
+| `encodingtype` | `TEXT` |  | The encoding type of the metadata property. If the metadata field is present, an encodingType must be specified and must be `PDF` or `HTML`. If metadata is NULL, encodingtype must also be NULL. |
 | `metadata` | `TEXT` |  | The detailed description of the Sensor or system. The metadata type is defined by encodingType. |
 | `properties` | `TEXT` |  | mime type: 'application/json'. A JSON Object containing user-annotated properties as key-value pairs. |
 
@@ -75,6 +75,16 @@ For every trigger you will find:
 **If the check passes:** Insert writes GUID; unchanged updates proceed.
 
 **If the check fails:** On change, abort with: `Cannot update guid column.`
+
+#### `sensor_bi_metadata_encoding` / `sensor_bu_metadata_encoding`
+
+**When they run:** BEFORE INSERT / BEFORE UPDATE  
+
+**What they do:** If `metadata` is NULL, `encodingtype` must also be NULL. If `metadata` is not NULL, `encodingtype` must be either `PDF` or `HTML`.
+
+**If the check passes:** Statement proceeds.  
+
+**If the check fails:** The statement is aborted with the corresponding metadata or encoding type error.
 
 ---
 <a id="soilbody"></a>
