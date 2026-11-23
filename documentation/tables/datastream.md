@@ -110,6 +110,8 @@ In this way, the `datastream` always reflects the **earliest** phenomenon start 
 | `guid_soilderivedobject` | `TEXT` |  | Foreign key to the Soil Derived Object table, guid field. |
 | `guid_sample` | `TEXT` |  | Foreign key to the Sample table, guid field. |
 
+> [!NOTE]
+> Exactly one Feature of Interest must be specified for each Datastream by populating one, and only one, of the following fields: `guid_soilsite`, `guid_soilprofile`, `guid_profileelement`, `guid_soilderivedobject`, or `guid_sample`.
 
 ### Table Identifiers
 In this table, the primary key is the *id* field (integer, auto-incrementing).  
