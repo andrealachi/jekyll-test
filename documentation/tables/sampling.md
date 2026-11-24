@@ -4,6 +4,16 @@
 
 > *A Sampling record describes the event through which a Sample was obtained, including the sampling time, location or ProfileElement, Sampler and Sampling Procedure.*
 
+<p>&nbsp;</p>
+<p>
+  <img src="../assets/sampling.svg"
+     alt="TABELLA SOILSITE EXP"
+     align="left"
+     width="420">
+</p>
+<br clear="all">
+<p>&nbsp;</p>
+
 ## Table: `sampling`
 
 ### Columns
