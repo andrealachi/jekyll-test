@@ -4,6 +4,16 @@
 
 > *A Sampler describes the device, tool, organisation or agent used to obtain a Sample.*
 
+<p>&nbsp;</p>
+<p>
+  <img src="../assets/sampler.svg"
+     alt="TABELLA SOILSITE EXP"
+     align="left"
+     width="420">
+</p>
+<br clear="all">
+<p>&nbsp;</p>
+
 ## Table: `sampler`
 
 ### Columns
