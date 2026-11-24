@@ -4,13 +4,15 @@
 
 > *A Sample describes a material specimen obtained through a Sampling event. A Sample may also be used as the Feature of Interest of a Datastream.*
 
+<p>&nbsp;</p>
 <p>
   <img src="../assets/sample.svg"
      alt="TABELLA SOILSITE EXP"
      align="left"
      width="420">
 </p>
-
+<br clear="all">
+<p>&nbsp;</p>
 
 ## Table: `sample`
 
