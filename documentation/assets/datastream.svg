@@ -1,2 +1,59 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="582" version="1.1" width="440" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#F9FBFF" height="582" stroke="#334155" stroke-width="1.2" width="440" x="0" y="0" /><rect fill="#2F4F6F" height="34" width="440" x="0" y="0" /><text fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" x="10" y="22.0">datastream</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="58">🔑 id : INTEGER</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="80">guid : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="102">name : text</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="124">definition : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="146">description : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="168">type : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="190">codespace : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="212">🔗 code_unitofmeasure : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="234">value_min : REAL</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="256">value_max : REAL</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="278">observedarea : POLYGON</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="300">phenomenontime_start : DATETIME</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="322">phenomenontime_end : DATETIME</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="344">resulttime_start : DATETIME</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="366">resulttime_end : DATETIME</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="388">properties : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="410">🔗 guid_thing : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="432">🔗 guid_sensor : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="454">🔗 guid_observedproperty : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="476">🔗 guid_observingprocedure : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="498">🔗 guid_soilsite : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="520">🔗 guid_soilprofile : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="542">🔗 guid_profileelement : TEXT</text><text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="564">🔗 guid_soilderivedobject : TEXT</text></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<svg baseProfile="full" height="606" version="1.1" width="440" xmlns="http://www.w3.org/2000/svg"
+    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs />
+    <rect fill="#F9FBFF" height="606" stroke="#334155" stroke-width="1.2" width="440" x="0" y="0" />
+    <rect fill="#2F4F6F" height="34" width="440" x="0" y="0" />
+    <text fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold"
+        x="10" y="22.0">datastream</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="58">🔑
+        id : INTEGER</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="80">guid
+        : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="102">name
+        : text</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="124">definition
+        : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="146">description
+        : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="168">type
+        : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="190">codespace
+        : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="212">🔗
+        code_unitofmeasure : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="234">value_min
+        : REAL</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="256">value_max
+        : REAL</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="278">observedarea
+        : POLYGON</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="300">phenomenontime_start
+        : DATETIME</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="322">phenomenontime_end
+        : DATETIME</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="344">resulttime_start
+        : DATETIME</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="366">resulttime_end
+        : DATETIME</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="388">properties
+        : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="410">🔗
+        guid_thing : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="432">🔗
+        guid_sensor : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="454">🔗
+        guid_observedproperty : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="476">🔗
+        guid_observingprocedure : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="498">🔗
+        guid_soilsite : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="520">🔗
+        guid_soilprofile : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="542">🔗
+        guid_profileelement : TEXT</text>
+    <text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="564">🔗
+        guid_soilderivedobject : TEXT</text>
+    ì<text fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="13" x="10" y="586">🔗
+        guid_sample : TEXT</text>
+</svg>
