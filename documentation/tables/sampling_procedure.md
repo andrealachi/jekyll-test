@@ -4,6 +4,16 @@
 
 > *A Sampling Procedure describes the method or process used to obtain a Sample.*
 
+<p>&nbsp;</p>
+<p>
+  <img src="../assets/sampling_procedure.svg"
+     alt="TABELLA Sampling Procedure"
+     align="left"
+     width="420">
+</p>
+<br clear="all">
+<p>&nbsp;</p>
+
 ## Table: `sampling_procedure`
 
 ### Columns
